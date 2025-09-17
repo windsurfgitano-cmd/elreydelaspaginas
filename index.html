@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El Rey de las Páginas — Digital Design & Web Experience</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+
+    :root {
+      --gold: #D4AF37;
+      --gold-dark: #C59F2E;
+      --gold-light: #F4E4A6;
+      --bg: #FFFFFF;
+      --text-dark: #2C2C2C;
+      --text-gray: #666666;
+      --marble-light: #F8F6F0;
+      --marble-medium: #F0EDE5;
+    }
+
+    /* Layout safety */
+    * , *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: var(--bg);
+      color: var(--text-dark);
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 20% 80%, rgba(212,175,55,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(212,175,55,0.06) 0%, transparent 50%),
+        linear-gradient(135deg, var(--marble-light) 0%, var(--bg) 25%, var(--marble-medium) 50%, var(--bg) 75%, var(--marble-light) 100%);
+    }
+
+    /* Container (márgenes laterales consistentes y safe-area) */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; padding-left: calc(24px + env(safe-area-inset-left, 0px)); padding-right: calc(24px + env(safe-area-inset-right, 0px)); }
+    @media (max-width: 768px){ .container { padding: 0 20px; padding-left: calc(20px + env(safe-area-inset-left, 0px)); padding-right: calc(20px + env(safe-area-inset-right, 0px)); } }
+    @media (max-width: 480px){ .container { padding: 0 16px; padding-left: calc(16px + env(safe-area-inset-left, 0px)); padding-right: calc(16px + env(safe-area-inset-right, 0px)); } }
+
+    h1,h2,h3 { font-family: 'Oswald', sans-serif; font-weight: 600; line-height: .95; letter-spacing: -0.02em; }
+    .glow { text-shadow: 0 0 8px rgba(212,175,55,0.4), 0 0 16px rgba(212,175,55,0.2); color: var(--gold-dark); }
+
+    /* Secciones */
+    .section { padding: 100px 0; }
+    @media (max-width: 768px){ .section { padding: 60px 0; } }
+    @media (max-width: 480px){ .section { padding: 40px 0; } }
+
+    /* Cards genéricas */
+    .card { 
+      background: rgba(255,255,255,0.9); 
+      border: 2px solid rgba(212,175,55,0.2); 
+      border-radius: 15px; 
+      padding: 24px; 
+      transition: border .25s ease, transform .25s ease, box-shadow .25s ease;
+      box-shadow: 0 4px 20px rgba(212,175,55,0.1);
+    }
+    .card:hover { 
+      border-color: var(--gold); 
+      transform: translateY(-4px); 
+      box-shadow: 0 8px 30px rgba(212,175,55,0.2);
+    }
+
+    /* Botones */
+    .btn-gold { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: #000; padding: 0.9rem 1.6rem; border-radius: 12px; font-weight: 700; text-decoration: none; box-shadow: 0 8px 30px rgba(212,175,55,0.25); transition: transform .2s, box-shadow .2s; display: inline-block; }
+    .btn-gold:hover, .btn-gold:focus { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(212,175,55,0.35); outline: 2px solid var(--gold); outline-offset: 2px; }
+
+    .btn-outline { border: 2px solid var(--gold); padding: 0.9rem 1.4rem; border-radius: 12px; color: var(--gold-dark); text-decoration: none; transition: all .2s; display: inline-block; background: rgba(255,255,255,0.8); }
+    .btn-outline:hover, .btn-outline:focus { border-color: var(--gold-dark); transform: translateY(-2px); background: var(--gold-light); color: var(--text-dark); }
+
+    /* Unificación de botones amarillos */
+    .btn-yellow { background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: var(--text-dark); padding: 0.9rem 1.4rem; border-radius: 12px; font-weight: 700; text-decoration: none; box-shadow: 0 8px 30px rgba(212,175,55,0.2); transition: transform .2s; display: inline-block; }
+    .btn-yellow:hover, .btn-yellow:focus { transform: translateY(-2px); outline: 2px solid var(--gold); outline-offset: 2px; }
+
+    /* HERO */
+    header { 
+      position: relative; 
+      min-height: 100vh; 
+      padding: 80px 0; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      text-align: center; 
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--marble-light) 0%, var(--bg) 50%, var(--marble-medium) 100%);
+    }
+    header .overlay { 
+      position: absolute; 
+      inset: 0; 
+      background: radial-gradient(ellipse at center, rgba(212,175,55,0.1) 0%, rgba(212,175,55,0.05) 40%, transparent 70%); 
+      opacity: .7; 
+      z-index: 0; 
+    }
+    header::before { 
+      content: ''; 
+      position: absolute; 
+      left: 50%; 
+      top: 45%; 
+      width: 1200px; 
+      height: 1200px; 
+      transform: translate(-50%, -50%); 
+      background: radial-gradient(ellipse at center, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.08) 20%, rgba(0,0,0,0) 60%); 
+      filter: blur(3px); 
+      pointer-events: none; 
+      z-index: 1; 
+    }
+    header .content { position: relative; z-index: 2; width: 100%; }
+    
+    .logo-container {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .logo-container img {
+      max-width: 200px;
+      height: auto;
+      filter: drop-shadow(0 0 15px rgba(212,175,55,0.3));
+    }
+    
+    header h1 { 
+      font-size: clamp(2.8rem, 8vw, 5.5rem); 
+      margin: 10px 0 16px; 
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    header p { max-width: 720px; margin: 16px auto 0; color: var(--text-gray); font-size: 1.15rem; line-height: 1.6; }
+
+    .hero-cta { margin: 30px 0 16px; }
+    /* CTA con aro glow exclusivo */
+    .btn-cta { 
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark)); 
+      color: #000; 
+      padding: 1rem 1.6rem; 
+      border-radius: 16px; 
+      font-weight: 800; 
+      text-decoration: none; 
+      text-transform: uppercase; 
+      letter-spacing: .5px; 
+      display: inline-block; 
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.4), 0 12px 42px rgba(212,175,55,0.3); 
+      filter: drop-shadow(0 0 12px rgba(212,175,55,0.4)); 
+      transition: transform .2s, box-shadow .2s; 
+    }
+    .btn-cta:hover, .btn-cta:focus { 
+      transform: translateY(-2px); 
+      box-shadow: 0 0 0 4px rgba(212,175,55,0.6), 0 18px 56px rgba(212,175,55,0.4); 
+      outline: none; 
+    }
+
+    .hero-actions { margin-top: 10px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    @media (max-width: 768px){
+      header { min-height: 100vh; padding: 72px 0; }
+      header h1 { font-size: 2.8rem; }
+      header p { font-size: 1.08rem; }
+      .hero-actions a, .btn-cta { width: 100%; max-width: 380px; }
+      .logo-container img { max-width: 150px; }
+    }
+    @media (max-width: 480px){
+      header { padding: 64px 0; }
+      header h1 { font-size: 2.5rem; }
+      header p { font-size: 1rem; }
+      .btn-cta { padding: .9rem 1.2rem; border-radius: 12px; font-size: .98rem; }
+      .logo-container img { max-width: 120px; }
+    }
+
+    .section-header { color: var(--text-gray); max-width: 720px; margin: 12px auto 40px; text-align: center; }
+
+    /* Expertise */
+    .expertise-grid { display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .expertise-card { 
+      background: rgba(255,255,255,0.95); 
+      border: 2px solid rgba(212,175,55,0.2); 
+      border-radius: 15px; 
+      padding: 28px 22px; 
+      text-align: center; 
+      transition: transform .25s, border .25s, box-shadow .25s;
+      box-shadow: 0 4px 20px rgba(212,175,55,0.1);
+    }
+    .expertise-card:hover { 
+      transform: translateY(-6px); 
+      border-color: var(--gold); 
+      box-shadow: 0 8px 30px rgba(212,175,55,0.2);
+    }
+    .expertise-icon { font-size: 2.4rem; margin-bottom: 10px; filter: drop-shadow(0 0 10px rgba(212,175,55,.4)); }
+    .expertise-card h3 { color: var(--gold-dark); margin: 10px 0 8px; }
+    .expertise-card p { color: var(--text-gray); margin: 0 0 14px; line-height: 1.6; }
+    .expertise-card ul { list-style: none; margin: 0; padding: 0; text-align: left; }
+    .expertise-card li { padding-left: 14px; position: relative; margin: 6px 0; color: var(--text-dark); }
+    .expertise-card li::before { content: '✦'; position: absolute; left: 0; color: var(--gold); }
+
+    /* Grid helpers */
+    .grid { display: grid; gap: 22px; }
+    @media (min-width: 768px){ .grid-2{ grid-template-columns: repeat(2,1fr);} .grid-3{ grid-template-columns: repeat(3,1fr);} }
+
+    /* Portfolio */
+    .portfolio-items { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .portfolio-card { text-decoration: none; color: var(--text-dark); }
+    .portfolio-thumb { 
+      height: 180px; 
+      border-radius: 12px; 
+      margin-bottom: 12px; 
+      background-size: cover; 
+      background-position: center; 
+      position: relative; 
+      overflow: hidden; 
+      display: flex; 
+      align-items: flex-end; 
+      padding: 10px;
+      border: 2px solid rgba(212,175,55,0.2);
+    }
+    .portfolio-thumb::after { 
+      content: ''; 
+      position: absolute; 
+      inset: 0; 
+      background: linear-gradient(to top, rgba(212,175,55,0.3), transparent); 
+    }
+    .portfolio-thumb span { 
+      position: relative; 
+      z-index: 2; 
+      font-size: .8rem; 
+      background: rgba(212,175,55,0.9); 
+      color: #000;
+      padding: 4px 8px; 
+      border-radius: 6px; 
+      font-weight: 600;
+    }
+
+    /* Footer */
+    footer { 
+      border-top: 2px solid rgba(212,175,55,0.3); 
+      padding: 34px 0; 
+      font-size: .95rem; 
+      color: var(--text-gray); 
+      background: var(--marble-light);
+    }
+    .footer-content { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .footer-brand { font-family: 'Oswald', sans-serif; font-size: 1.4rem; color: var(--gold-dark); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="overlay"></div>
+    <div class="content">
+      <div class="container">
+        <div class="logo-container">
+          <img src="reylogo.png" alt="El Rey de las Páginas Logo" />
+        </div>
+        <h1 class="glow">EL REY DE LAS PÁGINAS</h1>
+        <p>Transformamos tu negocio con diseño digital integral. Estrategias visuales, web, redes y contenido para un impacto total.</p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn-cta">Contáctanos y llevamos tu marca al siguiente nivel</a>
+        </div>
+        <div class="hero-actions">
+          <a href="#services" class="btn-gold">Obtener acceso</a>
+          <a href="#services" class="btn-yellow">Ver Packs</a>
+          <a href="#community" class="btn-outline">Comunidad / Promos</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="expertise" class="section">
+    <div class="container">
+      <h2 class="glow" style="text-align:center">Nuestro Enfoque Integral</h2>
+      <p class="section-header">Tres pilares especializados para transformar tu presencia digital</p>
+      <div class="expertise-grid">
+        <div class="expertise-card">
+          <div class="expertise-icon">🎨</div>
+          <h3>Diseño Digital</h3>
+          <p>Branding visual impactante que cuenta tu historia. Fotografía de producto que vende. Modelado 3D y gráficos para presentaciones memorables.</p>
+          <ul>
+            <li>Branding & Sistemas Visuales</li>
+            <li>Fotografía de Producto y Lifestyle</li>
+            <li>Gráficos 3D y Motion</li>
+          </ul>
+        </div>
+        <div class="expertise-card">
+          <div class="expertise-icon">💻</div>
+          <h3>Desarrollo Web</h3>
+          <p>Websites rápidos, modernos y optimizados para SEO, con foco en conversión y rendimiento en móviles.</p>
+          <ul>
+            <li>Landing Pages y Sitios Corporativos</li>
+            <li>Optimización SEO & Performance</li>
+            <li>E-commerce escalable</li>
+          </ul>
+        </div>
+        <div class="expertise-card">
+          <div class="expertise-icon">📲</div>
+          <h3>Contenido & Social</h3>
+          <p>Estrategias, producción de contenido y campañas para redes sociales con foco en crecimiento y venta.</p>
+          <ul>
+            <li>Gestión y Estrategia de Redes</li>
+            <li>Producción de Video & Reels</li>
+            <li>Publicidad y Funnels</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="section">
+    <div class="container">
+      <h2 class="glow" style="text-align:center">Servicios</h2>
+      <p class="section-header">Soluciones end‑to‑end para marcas que necesitan brillar en digital.</p>
+      <div class="grid grid-2">
+        <div class="card"><h3>Creación de páginas web</h3><p>Sitios rápidos, accesibles y con identidad.</p></div>
+        <div class="card"><h3>Desarrollo de aplicaciones</h3><p>Apps móviles y web con arquitectura escalable.</p></div>
+        <div class="card"><h3>Análisis & revisión</h3><p>Auditorías técnicas y mejoras de rendimiento.</p></div>
+        <div class="card"><h3>Imágenes para redes</h3><p>Diseños pensados para vender y convertir.</p></div>
+        <div class="card"><h3>Videos para redes</h3><p>Contenido snackable con estética premium.</p></div>
+        <div class="card"><h3>Estrategia & planes</h3><p>Roadmaps de redes para marcas y emprendimientos.</p></div>
+        <div class="card"><h3>Manejo completo de redes</h3><p>Contenido + comunidad + crecimiento orgánico.</p></div>
+        <div class="card"><h3>Packs para rubros</h3><p>Paquetes para moda, uñas, automotoras y más.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="whatsapp-cta" class="section">
+    <div class="container" style="text-align:center">
+      <a class="btn-cta" style="display:inline-flex;align-items:center;justify-content:center;gap:.6rem" href="https://wa.me/56981734039?text=HOLA%20EL%20REY%20DE%20LAS%20PÁGINAS%20,%20QUIERO%20CRECER%21" target="_blank" rel="noopener" aria-label="Hablar por WhatsApp con El Rey de las Páginas">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+          <path d="M20.5 3.5A11 11 0 0 0 3.1 18.7L2 22l3.4-1.1A11 11 0 1 0 20.5 3.5Zm-8.4 16.4a9 9 0 0 1-4.6-1.3l-.3-.2-2.7.9.9-2.6-.2-.3a9 9 0 1 1 7 3.5Zm5-6.6c-.3-.1-1.6-.8-1.8-.9s-.4-.1-.6.1c-.2.3-.7.9-.9 1-.2.2-.3.2-.6.1-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.5-1.8-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.6.1-.2 0-.4 0-.5 0-.1-.6-1.5-.8-2.1-.2-.5-.4-.4-.6-.4h-.6c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1 0 1.2.9 2.4 1 2.6.1.2 1.8 2.7 4.3 3.8 2.6 1.1 2.6.7 3.1.7.5 0 1.6-.6 1.9-1.3.2-.7.2-1.2.1-1.3-.1-.1-.3-.2-.6-.3Z"/>
+        </svg>
+        HABLAR POR WHATSAPP
+      </a>
+    </div>
+  </section>
+
+  <section id="portfolio" class="section">
+    <div class="container">
+      <h2 class="glow" style="text-align:center">Portafolio</h2>
+      <p class="section-header">Selección curada de proyectos recientes.</p>
+      <div class="portfolio-items">
+        <a href="#" class="card portfolio-card">
+          <div class="portfolio-thumb" style="background-image:url('reylogo.png')">
+            <span>E-commerce</span>
+          </div>
+          <h3>Proyecto: EL REY DE LAS PÁGINAS</h3>
+        </a>
+        <a href="http://www.banana-company.com" class="card portfolio-card" aria-label="Ver proyecto BANANA COMPANY">
+          <div class="portfolio-thumb" style="background-image:url('banana.png')">
+            <span>E-commerce</span>
+          </div>
+          <h3>Proyecto BANANA COMPANY</h3>
+        </a>
+        <a href="http://www-titansoul.cl" class="card portfolio-card" aria-label="Ver proyecto TITAN SOUL">
+          <div class="portfolio-thumb" style="background-image:url('titan.png'); background-size: contain; background-repeat:no-repeat; background-color:#000;">
+            <span>E-commerce</span>
+          </div>
+          <h3>Proyecto: TITAN SOUL</h3>
+        </a>
+        <a href="#" class="card portfolio-card">
+          <div class="portfolio-thumb" style="background-image:url('unas.png')">
+            <span>Social / Video</span>
+          </div>
+          <h3>Proyecto — Uñas</h3>
+        </a>
+        <a href="#" class="card portfolio-card">
+          <div class="portfolio-thumb" style="background-image:url('automotora.png')">
+            <span>Landing</span>
+          </div>
+          <h3>Proyecto — Automotora</h3>
+        </a>
+        <a href="#" class="card portfolio-card">
+          <div class="portfolio-thumb" style="background-image:url('moda.png')">
+            <span>Mobile App</span>
+          </div>
+          <h3>Proyecto — Moda</h3>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="community" class="section">
+    <div class="container">
+      <h2 class="glow" style="text-align:center">Comunidad Privada</h2>
+      <p class="section-header">Acceso exclusivo a recursos, networking y oportunidades.</p>
+      <div class="grid grid-3">
+        <div class="card"><h3>Mentoring directo</h3><p>Sesiones 1:1 y soporte personalizado.</p></div>
+        <div class="card"><h3>Packs & Promos</h3><p>Descuentos exclusivos y recursos listos.</p></div>
+        <div class="card"><h3>Acceso VIP</h3><p>Primero en enterarte de lanzamientos y upgrades.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-content">
+      <div>
+        <div class="footer-brand">EL REY DE LAS PÁGINAS</div>
+        <div>Desde 2005 — Underground & Premium</div>
+      </div>
+      <div>Contacto: hola@elreydelaspaginas.com</div>
+    </div>
+  </footer>
+</body>
+</html>
