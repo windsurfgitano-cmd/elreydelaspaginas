@@ -10,12 +10,8 @@
     :root {
       --gold: #D4AF37;
       --gold-dark: #C59F2E;
-      --gold-light: #F4E4A6;
-      --bg: #FFFFFF;
-      --text-dark: #2C2C2C;
-      --text-gray: #666666;
-      --marble-light: #F8F6F0;
-      --marble-medium: #F0EDE5;
+      --bg: #0D0D0D;
+      --zgray: #BDBDBD;
     }
 
     /* Layout safety */
@@ -25,12 +21,8 @@
       margin: 0;
       font-family: 'Roboto', sans-serif;
       background: var(--bg);
-      color: var(--text-dark);
+      color: #f5f5f5;
       overflow-x: hidden;
-      background-image: 
-        radial-gradient(circle at 20% 80%, rgba(212,175,55,0.08) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(212,175,55,0.06) 0%, transparent 50%),
-        linear-gradient(135deg, var(--marble-light) 0%, var(--bg) 25%, var(--marble-medium) 50%, var(--bg) 75%, var(--marble-light) 100%);
     }
 
     /* Container (márgenes laterales consistentes y safe-area) */
@@ -39,73 +31,109 @@
     @media (max-width: 480px){ .container { padding: 0 16px; padding-left: calc(16px + env(safe-area-inset-left, 0px)); padding-right: calc(16px + env(safe-area-inset-right, 0px)); } }
 
     h1,h2,h3 { font-family: 'Oswald', sans-serif; font-weight: 600; line-height: .95; letter-spacing: -0.02em; }
-    .glow { text-shadow: 0 0 8px rgba(212,175,55,0.4), 0 0 16px rgba(212,175,55,0.2); color: var(--gold-dark); }
+    .glow { text-shadow: 0 0 6px rgba(212,175,55,0.25), 0 0 12px rgba(212,175,55,0.12); }
 
     /* Secciones */
     .section { padding: 100px 0; }
     @media (max-width: 768px){ .section { padding: 60px 0; } }
     @media (max-width: 480px){ .section { padding: 40px 0; } }
 
-    /* Cards genéricas */
+    /* Glass Effects - Solo efectos sutiles de vidrio */
+    .glass-effect {
+      backdrop-filter: blur(10px) saturate(120%);
+      -webkit-backdrop-filter: blur(10px) saturate(120%);
+    }
+
+    .glass-border {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .glass-subtle {
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+
+    /* Cards genéricas con efecto de vidrio sutil */
     .card { 
-      background: rgba(255,255,255,0.9); 
-      border: 2px solid rgba(212,175,55,0.2); 
-      border-radius: 15px; 
+      background: rgba(255,255,255,0.02); 
+      border: 1px solid rgba(212,175,55,0.08); 
+      border-radius: 10px; 
       padding: 24px; 
-      transition: border .25s ease, transform .25s ease, box-shadow .25s ease;
-      box-shadow: 0 4px 20px rgba(212,175,55,0.1);
+      transition: border .25s ease, transform .25s ease, backdrop-filter .25s ease;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
     }
     .card:hover { 
       border-color: var(--gold); 
-      transform: translateY(-4px); 
-      box-shadow: 0 8px 30px rgba(212,175,55,0.2);
+      transform: translateY(-2px);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
-    /* Botones */
-    .btn-gold { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: #000; padding: 0.9rem 1.6rem; border-radius: 12px; font-weight: 700; text-decoration: none; box-shadow: 0 8px 30px rgba(212,175,55,0.25); transition: transform .2s, box-shadow .2s; display: inline-block; }
-    .btn-gold:hover, .btn-gold:focus { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(212,175,55,0.35); outline: 2px solid var(--gold); outline-offset: 2px; }
+    /* Botones con efecto de vidrio */
+    .btn-gold { 
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark)); 
+      color: #000; 
+      padding: 0.9rem 1.6rem; 
+      border-radius: 10px; 
+      font-weight: 700; 
+      text-decoration: none; 
+      box-shadow: 0 8px 30px rgba(212,175,55,0.12); 
+      transition: transform .2s, box-shadow .2s, backdrop-filter .2s; 
+      display: inline-block;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .btn-gold:hover, .btn-gold:focus { 
+      transform: translateY(-2px); 
+      box-shadow: 0 12px 40px rgba(212,175,55,0.2); 
+      outline: 2px solid var(--gold); 
+      outline-offset: 2px; 
+    }
 
-    .btn-outline { border: 2px solid var(--gold); padding: 0.9rem 1.4rem; border-radius: 12px; color: var(--gold-dark); text-decoration: none; transition: all .2s; display: inline-block; background: rgba(255,255,255,0.8); }
-    .btn-outline:hover, .btn-outline:focus { border-color: var(--gold-dark); transform: translateY(-2px); background: var(--gold-light); color: var(--text-dark); }
+    .btn-outline { 
+      border: 1px solid rgba(255,255,255,0.25); 
+      padding: 0.9rem 1.4rem; 
+      border-radius: 10px; 
+      color: #fff; 
+      text-decoration: none; 
+      transition: border .2s, transform .2s, backdrop-filter .2s; 
+      display: inline-block;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .btn-outline:hover, .btn-outline:focus { 
+      border-color: var(--gold); 
+      transform: translateY(-2px); 
+    }
 
     /* Unificación de botones amarillos */
-    .btn-yellow { background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: var(--text-dark); padding: 0.9rem 1.4rem; border-radius: 12px; font-weight: 700; text-decoration: none; box-shadow: 0 8px 30px rgba(212,175,55,0.2); transition: transform .2s; display: inline-block; }
-    .btn-yellow:hover, .btn-yellow:focus { transform: translateY(-2px); outline: 2px solid var(--gold); outline-offset: 2px; }
+    .btn-yellow { 
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark)); 
+      color: #000; 
+      padding: 0.9rem 1.4rem; 
+      border-radius: 10px; 
+      font-weight: 700; 
+      text-decoration: none; 
+      box-shadow: 0 8px 30px rgba(212,175,55,0.12); 
+      transition: transform .2s, backdrop-filter .2s; 
+      display: inline-block;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .btn-yellow:hover, .btn-yellow:focus { 
+      transform: translateY(-2px); 
+      outline: 2px solid var(--gold); 
+      outline-offset: 2px; 
+    }
 
-    /* HERO */
-    header { 
-      position: relative; 
-      min-height: 100vh; 
-      padding: 80px 0; 
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      text-align: center; 
-      overflow: hidden;
-      background: linear-gradient(135deg, var(--marble-light) 0%, var(--bg) 50%, var(--marble-medium) 100%);
-    }
-    header .overlay { 
-      position: absolute; 
-      inset: 0; 
-      background: radial-gradient(ellipse at center, rgba(212,175,55,0.1) 0%, rgba(212,175,55,0.05) 40%, transparent 70%); 
-      opacity: .7; 
-      z-index: 0; 
-    }
-    header::before { 
-      content: ''; 
-      position: absolute; 
-      left: 50%; 
-      top: 45%; 
-      width: 1200px; 
-      height: 1200px; 
-      transform: translate(-50%, -50%); 
-      background: radial-gradient(ellipse at center, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.08) 20%, rgba(0,0,0,0) 60%); 
-      filter: blur(3px); 
-      pointer-events: none; 
-      z-index: 1; 
-    }
+    /* HERO (recupera la "grandeza") */
+    header { position: relative; min-height: 100vh; padding: 80px 0; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
+    header .overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, #0D0D0D 5%, rgba(0,0,0,0) 40%, #0D0D0D 95%); opacity: .85; z-index: 0; }
+    header::before { content: ''; position: absolute; left: 50%; top: 45%; width: 1200px; height: 1200px; transform: translate(-50%, -50%); background: radial-gradient(ellipse at center, rgba(212,175,55,0.12) 0%, rgba(212,175,55,0.06) 20%, rgba(0,0,0,0) 60%); filter: blur(2px); pointer-events: none; z-index: 1; }
     header .content { position: relative; z-index: 2; width: 100%; }
     
+    /* Logo container */
     .logo-container {
       margin-bottom: 20px;
       display: flex;
@@ -114,23 +142,23 @@
     }
     
     .logo-container img {
-      max-width: 200px;
-      height: auto;
-      filter: drop-shadow(0 0 15px rgba(212,175,55,0.3));
-    }
+    max-width: 200px;
+    height: auto;
+    width: clamp(120px, 18vw, 200px);
+    aspect-ratio: 1 / 1; /* cuadrado responsivo */
+    height: auto;
+    border-radius: 50%; /* círculo perfecto */
+    object-fit: cover; /* rellena sin deformar */
+       filter: drop-shadow(0 0 15px rgba(212,175,55,0.3));
+       backdrop-filter: blur(2px);
+       -webkit-backdrop-filter: blur(2px);
+     }
     
-    header h1 { 
-      font-size: clamp(2.8rem, 8vw, 5.5rem); 
-      margin: 10px 0 16px; 
-      background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    header p { max-width: 720px; margin: 16px auto 0; color: var(--text-gray); font-size: 1.15rem; line-height: 1.6; }
+    header h1 { font-size: clamp(3.4rem, 10.5vw, 6.8rem); margin: 10px 0 16px; }
+    header p { max-width: 720px; margin: 16px auto 0; color: var(--zgray); font-size: 1.15rem; line-height: 1.6; }
 
     .hero-cta { margin: 30px 0 16px; }
-    /* CTA con aro glow exclusivo */
+    /* CTA con aro glow exclusivo y efecto de vidrio */
     .btn-cta { 
       background: linear-gradient(135deg, var(--gold), var(--gold-dark)); 
       color: #000; 
@@ -141,13 +169,15 @@
       text-transform: uppercase; 
       letter-spacing: .5px; 
       display: inline-block; 
-      box-shadow: 0 0 0 3px rgba(212,175,55,0.4), 0 12px 42px rgba(212,175,55,0.3); 
-      filter: drop-shadow(0 0 12px rgba(212,175,55,0.4)); 
-      transition: transform .2s, box-shadow .2s; 
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.55), 0 12px 42px rgba(212,175,55,0.28); 
+      filter: drop-shadow(0 0 12px rgba(212,175,55,0.35)); 
+      transition: transform .2s, box-shadow .2s, backdrop-filter .2s; 
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
     }
     .btn-cta:hover, .btn-cta:focus { 
       transform: translateY(-2px); 
-      box-shadow: 0 0 0 4px rgba(212,175,55,0.6), 0 18px 56px rgba(212,175,55,0.4); 
+      box-shadow: 0 0 0 4px rgba(212,175,55,0.65), 0 18px 56px rgba(212,175,55,0.34); 
       outline: none; 
     }
 
@@ -159,6 +189,7 @@
       header p { font-size: 1.08rem; }
       .hero-actions a, .btn-cta { width: 100%; max-width: 380px; }
       .logo-container img { max-width: 150px; }
+      .logo-container img { width: 150px; }
     }
     @media (max-width: 480px){
       header { padding: 64px 0; }
@@ -166,43 +197,46 @@
       header p { font-size: 1rem; }
       .btn-cta { padding: .9rem 1.2rem; border-radius: 12px; font-size: .98rem; }
       .logo-container img { max-width: 120px; }
+      .logo-container img { width: 120px; }
     }
 
-    .section-header { color: var(--text-gray); max-width: 720px; margin: 12px auto 40px; text-align: center; }
+    .section-header { color: var(--zgray); max-width: 720px; margin: 12px auto 40px; text-align: center; }
 
-    /* Expertise */
+    /* Expertise con efectos de vidrio */
     .expertise-grid { display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
     .expertise-card { 
-      background: rgba(255,255,255,0.95); 
-      border: 2px solid rgba(212,175,55,0.2); 
-      border-radius: 15px; 
+      background: rgba(255,255,255,0.03); 
+      border: 1px solid rgba(212,175,55,0.1); 
+      border-radius: 12px; 
       padding: 28px 22px; 
       text-align: center; 
-      transition: transform .25s, border .25s, box-shadow .25s;
-      box-shadow: 0 4px 20px rgba(212,175,55,0.1);
+      transition: transform .25s, border .25s, backdrop-filter .25s;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
     }
     .expertise-card:hover { 
-      transform: translateY(-6px); 
-      border-color: var(--gold); 
-      box-shadow: 0 8px 30px rgba(212,175,55,0.2);
+      transform: translateY(-4px); 
+      border-color: var(--gold);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
-    .expertise-icon { font-size: 2.4rem; margin-bottom: 10px; filter: drop-shadow(0 0 10px rgba(212,175,55,.4)); }
-    .expertise-card h3 { color: var(--gold-dark); margin: 10px 0 8px; }
-    .expertise-card p { color: var(--text-gray); margin: 0 0 14px; line-height: 1.6; }
+    .expertise-icon { font-size: 2.4rem; margin-bottom: 10px; filter: drop-shadow(0 0 10px rgba(212,175,55,.25)); }
+    .expertise-card h3 { color: var(--gold); margin: 10px 0 8px; }
+    .expertise-card p { color: var(--zgray); margin: 0 0 14px; line-height: 1.6; }
     .expertise-card ul { list-style: none; margin: 0; padding: 0; text-align: left; }
-    .expertise-card li { padding-left: 14px; position: relative; margin: 6px 0; color: var(--text-dark); }
+    .expertise-card li { padding-left: 14px; position: relative; margin: 6px 0; }
     .expertise-card li::before { content: '✦'; position: absolute; left: 0; color: var(--gold); }
 
     /* Grid helpers */
     .grid { display: grid; gap: 22px; }
     @media (min-width: 768px){ .grid-2{ grid-template-columns: repeat(2,1fr);} .grid-3{ grid-template-columns: repeat(3,1fr);} }
 
-    /* Portfolio */
+    /* Portfolio con efectos de vidrio */
     .portfolio-items { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-    .portfolio-card { text-decoration: none; color: var(--text-dark); }
+    .portfolio-card { text-decoration: none; color: #f5f5f5; }
     .portfolio-thumb { 
       height: 180px; 
-      border-radius: 12px; 
+      border-radius: 8px; 
       margin-bottom: 12px; 
       background-size: cover; 
       background-position: center; 
@@ -211,38 +245,84 @@
       display: flex; 
       align-items: flex-end; 
       padding: 10px;
-      border: 2px solid rgba(212,175,55,0.2);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
     }
-    .portfolio-thumb::after { 
-      content: ''; 
-      position: absolute; 
-      inset: 0; 
-      background: linear-gradient(to top, rgba(212,175,55,0.3), transparent); 
-    }
+    .portfolio-thumb::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.65), transparent); }
     .portfolio-thumb span { 
       position: relative; 
       z-index: 2; 
       font-size: .8rem; 
-      background: rgba(212,175,55,0.9); 
-      color: #000;
+      background: rgba(0,0,0,.45); 
       padding: 4px 8px; 
-      border-radius: 6px; 
-      font-weight: 600;
+      border-radius: 6px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
-    /* Footer */
+    /* Footer con efecto de vidrio sutil */
     footer { 
-      border-top: 2px solid rgba(212,175,55,0.3); 
+      border-top: 1px solid rgba(255,255,255,0.08); 
       padding: 34px 0; 
       font-size: .95rem; 
-      color: var(--text-gray); 
-      background: var(--marble-light);
+      color: var(--zgray);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
     }
     .footer-content { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
-    .footer-brand { font-family: 'Oswald', sans-serif; font-size: 1.4rem; color: var(--gold-dark); }
+    .footer-brand { font-family: 'Oswald', sans-serif; font-size: 1.4rem; }
+
+  /* ——— Liquid Glass (sutil, no intrusivo) ——— */
+  /* Capas inspiradas en: card, button, nav; usando filter + backdrop-filter con opacidades bajas */
+  .card, .expertise-card, .portfolio-thumb, .btn-gold, .btn-yellow, .btn-outline, .btn-cta {
+    position: relative;
+    overflow: hidden; /* no cambia proporciones, sólo asegura que las capas no se desborden */
+  }
+  /* Capa de distorsión + blur (equiv. .glass-filter) */
+  .card::before, .expertise-card::before, .portfolio-thumb::before, .btn-gold::before, .btn-yellow::before, .btn-outline::before, .btn-cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    filter: url(#glass-distortion) saturate(115%) brightness(1.06);
+    opacity: 0.14; /* sutil para no alterar tonos */
+    pointer-events: none;
+  }
+  /* Capa especular (equiv. .glass-specular) */
+  .card::after, .expertise-card::after, .portfolio-thumb::after, .btn-gold::after, .btn-yellow::after, .btn-outline::after, .btn-cta::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 1px 1px 1px rgba(255,255,255,0.16);
+    background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.04) 30%, rgba(255,255,255,0) 60%);
+    opacity: 0.35;
+    pointer-events: none;
+    transition: background 200ms ease;
+  }
+  /* Hover sutil (no cambia tamaño/espaciados) */
+  .card:hover::before, .expertise-card:hover::before, .portfolio-thumb:hover::before, .btn-gold:hover::before, .btn-yellow:hover::before, .btn-outline:hover::before, .btn-cta:hover::before {
+    opacity: 0.18;
+  }
+
+  /* Interacción de brillo siguiendo el cursor (setea variables --mx/--my) */
+  @media (hover:hover) {
+    .card:hover::after, .expertise-card:hover::after, .portfolio-thumb:hover::after, .btn-gold:hover::after, .btn-yellow:hover::after, .btn-outline:hover::after, .btn-cta:hover::after {
+      opacity: 0.42;
+    }
+  }
   </style>
 </head>
 <body>
+  <!-- Filtro SVG para distorsión de vidrio (súper sutil) -->
+  <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+    <filter id="glass-distortion">
+      <feTurbulence type="turbulence" baseFrequency="0.008" numOctaves="2" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="55" />
+    </filter>
+  </svg>
   <header>
     <div class="overlay"></div>
     <div class="content">
@@ -397,5 +477,25 @@
       <div>Contacto: hola@elreydelaspaginas.com</div>
     </div>
   </footer>
+
+  <script>
+    // Resalta suavemente la capa especular siguiendo el cursor (sin afectar medidas/colores)
+    document.addEventListener('DOMContentLoaded', function(){
+      const els = document.querySelectorAll('.card, .expertise-card, .portfolio-thumb, .btn-gold, .btn-yellow, .btn-outline, .btn-cta');
+      els.forEach((el)=>{
+        el.addEventListener('mousemove', (e)=>{
+          const r = el.getBoundingClientRect();
+          const x = e.clientX - r.left;
+          const y = e.clientY - r.top;
+          el.style.setProperty('--mx', x + 'px');
+          el.style.setProperty('--my', y + 'px');
+        });
+        el.addEventListener('mouseleave', ()=>{
+          el.style.removeProperty('--mx');
+          el.style.removeProperty('--my');
+        });
+      });
+    });
+  </script>
 </body>
 </html>
