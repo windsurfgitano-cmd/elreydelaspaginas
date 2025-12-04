@@ -983,11 +983,3 @@ export default function Home() {
   );
 }
 
-declare module "*.png";
-
-declare global {
-  // eslint-disable-next-line no-var
-  var __reydelaspaginas: boolean | undefined;
-}
-
-export const runtime = "edge";
