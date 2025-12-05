@@ -443,55 +443,146 @@ function HeroAurora() {
       scene.add(nebula);
     }
 
-    // ============ THE BLACK HOLE (Event Horizon) ============
+    // ============ THE BLACK HOLE - Realistic Event Horizon ============
     const blackHoleGroup = new THREE.Group();
+    const bhSize = cfg.horizonSize;
     
-    // Inner singularity - scaled by config
-    const singularitySize = cfg.orbSize * 0.5;
-    const singularityGeo = new THREE.SphereGeometry(singularitySize, 32, 32);
-    const singularityMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
-    const singularity = new THREE.Mesh(singularityGeo, singularityMat);
-    blackHoleGroup.add(singularity);
+    // 1. VOID - Pure black sphere (the singularity)
+    const voidGeo = new THREE.SphereGeometry(bhSize * 0.8, 64, 64);
+    const voidMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
+    const voidMesh = new THREE.Mesh(voidGeo, voidMat);
+    blackHoleGroup.add(voidMesh);
 
-    // Event horizon wireframe orb
-    const horizonSize = cfg.horizonSize;
-    const horizonGeo = new THREE.IcosahedronGeometry(horizonSize, 3);
-    const horizonMat = new THREE.MeshBasicMaterial({
-      color: 0xd4af37,
-      wireframe: true,
+    // 2. PHOTON RING - Bright thin ring of light around the void
+    const photonRingGeo = new THREE.TorusGeometry(bhSize * 1.1, 0.15, 16, 100);
+    const photonRingMat = new THREE.MeshBasicMaterial({
+      color: 0xffd700,
       transparent: true,
-      opacity: 0.6,
+      opacity: 0.9,
     });
-    const horizon = new THREE.Mesh(horizonGeo, horizonMat);
-    blackHoleGroup.add(horizon);
+    const photonRing = new THREE.Mesh(photonRingGeo, photonRingMat);
+    photonRing.rotation.x = Math.PI / 2;
+    blackHoleGroup.add(photonRing);
 
-    // Accretion disk
-    const diskGeo = new THREE.TorusGeometry(horizonSize * 2, horizonSize * 0.8, 2, 64);
-    const diskMat = new THREE.MeshBasicMaterial({
-      color: 0xd4af37,
+    // 3. ACCRETION DISK - Glowing matter spiraling in
+    const diskParticleCount = deviceType === 'mobile' ? 800 : 1500;
+    const diskPositions = new Float32Array(diskParticleCount * 3);
+    const diskColors = new Float32Array(diskParticleCount * 3);
+    const diskSizes = new Float32Array(diskParticleCount);
+
+    for (let i = 0; i < diskParticleCount; i++) {
+      // Spiral distribution
+      const angle = Math.random() * Math.PI * 2;
+      const radius = bhSize * 1.2 + Math.random() * bhSize * 2;
+      const thickness = (Math.random() - 0.5) * 2 * (1 - (radius - bhSize) / (bhSize * 2));
+      
+      diskPositions[i * 3] = Math.cos(angle) * radius;
+      diskPositions[i * 3 + 1] = thickness;
+      diskPositions[i * 3 + 2] = Math.sin(angle) * radius;
+      
+      // Color gradient: white/yellow near center, orange/red further out
+      const heat = 1 - (radius - bhSize * 1.2) / (bhSize * 2);
+      diskColors[i * 3] = 1;
+      diskColors[i * 3 + 1] = 0.6 + heat * 0.4;
+      diskColors[i * 3 + 2] = heat * 0.3;
+      
+      diskSizes[i] = (0.5 + heat * 1.5) * (deviceType === 'mobile' ? 1.5 : 1);
+    }
+
+    const diskGeo = new THREE.BufferGeometry();
+    diskGeo.setAttribute("position", new THREE.BufferAttribute(diskPositions, 3));
+    diskGeo.setAttribute("color", new THREE.BufferAttribute(diskColors, 3));
+    diskGeo.setAttribute("size", new THREE.BufferAttribute(diskSizes, 1));
+
+    const diskMat = new THREE.ShaderMaterial({
+      uniforms: { uTime: { value: 0 } },
+      vertexShader: `
+        attribute float size;
+        attribute vec3 color;
+        varying vec3 vColor;
+        varying float vDist;
+        uniform float uTime;
+        void main() {
+          vColor = color;
+          vec3 pos = position;
+          float dist = length(pos.xz);
+          vDist = dist;
+          // Rotate based on distance (inner = faster)
+          float speed = 0.3 / (dist * 0.1 + 0.5);
+          float angle = atan(pos.z, pos.x) + uTime * speed;
+          pos.x = cos(angle) * dist;
+          pos.z = sin(angle) * dist;
+          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+          gl_PointSize = size * (60.0 / -mvPosition.z);
+          gl_Position = projectionMatrix * mvPosition;
+        }
+      `,
+      fragmentShader: `
+        varying vec3 vColor;
+        varying float vDist;
+        void main() {
+          float d = length(gl_PointCoord - vec2(0.5));
+          if (d > 0.5) discard;
+          float alpha = (1.0 - smoothstep(0.2, 0.5, d)) * 0.8;
+          gl_FragColor = vec4(vColor, alpha);
+        }
+      `,
       transparent: true,
-      opacity: 0.15,
-      side: THREE.DoubleSide,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+      vertexColors: true,
     });
-    const disk = new THREE.Mesh(diskGeo, diskMat);
-    disk.rotation.x = Math.PI / 2;
+    const disk = new THREE.Points(diskGeo, diskMat);
     blackHoleGroup.add(disk);
 
-    // Outer rings - scaled by config
-    const ringCount = deviceType === 'mobile' ? 3 : 4;
-    for (let i = 0; i < ringCount; i++) {
-      const ringSize = horizonSize * (1.5 + i * 0.5) * cfg.ringScale;
-      const ringGeo = new THREE.TorusGeometry(ringSize, 0.08, 16, 80);
-      const ringMat = new THREE.MeshBasicMaterial({
-        color: i % 2 === 0 ? 0xd4af37 : 0xffffff,
-        transparent: true,
-        opacity: 0.4 - i * 0.08,
-      });
-      const ring = new THREE.Mesh(ringGeo, ringMat);
-      ring.rotation.x = Math.PI / 2 + (Math.random() - 0.5) * 0.3;
-      ring.rotation.y = Math.random() * Math.PI;
-      blackHoleGroup.add(ring);
-    }
+    // 4. OUTER GLOW - Soft halo around everything
+    const glowGeo = new THREE.RingGeometry(bhSize * 0.9, bhSize * 3.5, 64);
+    const glowMat = new THREE.ShaderMaterial({
+      uniforms: {},
+      vertexShader: `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        varying vec2 vUv;
+        void main() {
+          float dist = length(vUv - vec2(0.5)) * 2.0;
+          float alpha = smoothstep(1.0, 0.3, dist) * 0.15;
+          vec3 color = mix(vec3(1.0, 0.8, 0.3), vec3(1.0, 0.4, 0.1), dist);
+          gl_FragColor = vec4(color, alpha);
+        }
+      `,
+      transparent: true,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
+    const glow = new THREE.Mesh(glowGeo, glowMat);
+    glow.rotation.x = Math.PI / 2;
+    blackHoleGroup.add(glow);
+
+    // 5. GRAVITATIONAL LENSING RING - Light bending effect
+    const lensRingGeo = new THREE.TorusGeometry(bhSize * 1.3, 0.05, 8, 100);
+    const lensRingMat = new THREE.MeshBasicMaterial({
+      color: 0xffffff,
+      transparent: true,
+      opacity: 0.3,
+    });
+    const lensRing = new THREE.Mesh(lensRingGeo, lensRingMat);
+    lensRing.rotation.x = Math.PI / 2;
+    blackHoleGroup.add(lensRing);
+
+    // Second lens ring at different angle
+    const lensRing2 = new THREE.Mesh(
+      new THREE.TorusGeometry(bhSize * 1.25, 0.03, 8, 100),
+      new THREE.MeshBasicMaterial({ color: 0xd4af37, transparent: true, opacity: 0.2 })
+    );
+    lensRing2.rotation.x = Math.PI / 2.5;
+    lensRing2.rotation.z = 0.2;
+    blackHoleGroup.add(lensRing2);
 
     blackHoleGroup.position.set(0, 0, -50);
     scene.add(blackHoleGroup);
@@ -668,18 +759,22 @@ function HeroAurora() {
       dust.rotation.y = time * 0.02;
       dust.rotation.x = Math.sin(time * 0.1) * 0.05;
 
-      // Black hole animations - spins faster as you approach
-      const bhSpeed = 0.2 + progress * 0.5;
-      horizon.rotation.x = time * bhSpeed;
-      horizon.rotation.y = time * bhSpeed * 0.7;
-      disk.rotation.z = time * 0.3;
+      // Black hole animations
+      const bhSpeed = 0.15 + progress * 0.3;
       
-      // Rings spin at different speeds
-      blackHoleGroup.children.forEach((child, i) => {
-        if (i > 2) { // Outer rings
-          child.rotation.z = time * (0.1 + i * 0.05) * (i % 2 === 0 ? 1 : -1);
-        }
-      });
+      // Update accretion disk shader time (makes particles orbit)
+      diskMat.uniforms.uTime.value = time;
+      
+      // Photon ring pulses subtly
+      photonRing.scale.setScalar(1 + Math.sin(time * 3) * 0.02);
+      
+      // Lens rings rotate slowly
+      lensRing.rotation.z = time * 0.1;
+      lensRing2.rotation.z = -time * 0.08;
+      
+      // Whole black hole group rotates slightly based on approach
+      blackHoleGroup.rotation.y = time * bhSpeed * 0.1;
+      blackHoleGroup.rotation.x = Math.sin(time * 0.5) * 0.05;
 
       // Waypoint stars pulse
       waypointStars.forEach((star, i) => {
