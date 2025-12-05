@@ -443,50 +443,99 @@ function HeroAurora() {
       scene.add(nebula);
     }
 
-    // ============ THE BLACK HOLE - Realistic Event Horizon ============
+    // ============ GARGANTUA - Interstellar Style Black Hole ============
     const blackHoleGroup = new THREE.Group();
     const bhSize = cfg.horizonSize;
     
-    // 1. VOID - Pure black sphere (the singularity)
-    const voidGeo = new THREE.SphereGeometry(bhSize * 0.8, 64, 64);
-    const voidMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
+    // 1. THE VOID - Absolute darkness, the event horizon
+    const voidGeo = new THREE.SphereGeometry(bhSize, 64, 64);
+    const voidMat = new THREE.ShaderMaterial({
+      uniforms: { uTime: { value: 0 } },
+      vertexShader: `
+        varying vec3 vNormal;
+        void main() {
+          vNormal = normalize(normalMatrix * normal);
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        varying vec3 vNormal;
+        void main() {
+          // Pure black with subtle edge darkening
+          float edge = 1.0 - abs(dot(vNormal, vec3(0.0, 0.0, 1.0)));
+          gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
+        }
+      `,
+    });
     const voidMesh = new THREE.Mesh(voidGeo, voidMat);
     blackHoleGroup.add(voidMesh);
 
-    // 2. PHOTON RING - Bright thin ring of light around the void
-    const photonRingGeo = new THREE.TorusGeometry(bhSize * 1.1, 0.15, 16, 100);
-    const photonRingMat = new THREE.MeshBasicMaterial({
-      color: 0xffd700,
+    // 2. EINSTEIN RING - The iconic thin bright ring (light bent around from behind)
+    const einsteinRingGeo = new THREE.TorusGeometry(bhSize * 1.02, 0.08, 32, 200);
+    const einsteinRingMat = new THREE.ShaderMaterial({
+      uniforms: { uTime: { value: 0 } },
+      vertexShader: `
+        varying vec2 vUv;
+        uniform float uTime;
+        void main() {
+          vUv = uv;
+          vec3 pos = position;
+          // Subtle wobble
+          pos += normal * sin(uTime * 2.0 + uv.x * 20.0) * 0.02;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+        }
+      `,
+      fragmentShader: `
+        varying vec2 vUv;
+        void main() {
+          // Bright white/gold core with falloff
+          float intensity = 1.0;
+          vec3 color = mix(vec3(1.0, 1.0, 1.0), vec3(1.0, 0.9, 0.7), vUv.y);
+          gl_FragColor = vec4(color, intensity);
+        }
+      `,
       transparent: true,
-      opacity: 0.9,
+      blending: THREE.AdditiveBlending,
     });
-    const photonRing = new THREE.Mesh(photonRingGeo, photonRingMat);
-    photonRing.rotation.x = Math.PI / 2;
-    blackHoleGroup.add(photonRing);
+    const einsteinRing = new THREE.Mesh(einsteinRingGeo, einsteinRingMat);
+    einsteinRing.rotation.x = Math.PI / 2;
+    blackHoleGroup.add(einsteinRing);
 
-    // 3. ACCRETION DISK - Glowing matter spiraling in
-    const diskParticleCount = deviceType === 'mobile' ? 800 : 1500;
+    // 3. ACCRETION DISK - Tilted, with Doppler shift (blue approaching, red receding)
+    const diskParticleCount = deviceType === 'mobile' ? 2000 : 4000;
     const diskPositions = new Float32Array(diskParticleCount * 3);
     const diskColors = new Float32Array(diskParticleCount * 3);
     const diskSizes = new Float32Array(diskParticleCount);
 
     for (let i = 0; i < diskParticleCount; i++) {
-      // Spiral distribution
       const angle = Math.random() * Math.PI * 2;
-      const radius = bhSize * 1.2 + Math.random() * bhSize * 2;
-      const thickness = (Math.random() - 0.5) * 2 * (1 - (radius - bhSize) / (bhSize * 2));
+      // Disk extends from just outside event horizon
+      const radius = bhSize * 1.3 + Math.pow(Math.random(), 0.7) * bhSize * 3;
+      // Thinner disk, more concentrated
+      const thickness = (Math.random() - 0.5) * 0.8 * Math.exp(-radius / (bhSize * 2));
       
       diskPositions[i * 3] = Math.cos(angle) * radius;
       diskPositions[i * 3 + 1] = thickness;
       diskPositions[i * 3 + 2] = Math.sin(angle) * radius;
       
-      // Color gradient: white/yellow near center, orange/red further out
-      const heat = 1 - (radius - bhSize * 1.2) / (bhSize * 2);
-      diskColors[i * 3] = 1;
-      diskColors[i * 3 + 1] = 0.6 + heat * 0.4;
-      diskColors[i * 3 + 2] = heat * 0.3;
+      // Temperature gradient + Doppler effect simulation
+      const heat = Math.exp(-(radius - bhSize * 1.3) / (bhSize * 1.5));
+      // Left side blueshifted (approaching), right side redshifted (receding)
+      const doppler = Math.cos(angle);
       
-      diskSizes[i] = (0.5 + heat * 1.5) * (deviceType === 'mobile' ? 1.5 : 1);
+      if (doppler > 0) {
+        // Blueshifted - brighter, whiter
+        diskColors[i * 3] = 0.8 + heat * 0.2;
+        diskColors[i * 3 + 1] = 0.85 + heat * 0.15;
+        diskColors[i * 3 + 2] = 1.0;
+      } else {
+        // Redshifted - orange/red
+        diskColors[i * 3] = 1.0;
+        diskColors[i * 3 + 1] = 0.4 + heat * 0.4;
+        diskColors[i * 3 + 2] = heat * 0.2;
+      }
+      
+      diskSizes[i] = (0.3 + heat * 2) * (deviceType === 'mobile' ? 1.8 : 1.2);
     }
 
     const diskGeo = new THREE.BufferGeometry();
@@ -500,31 +549,32 @@ function HeroAurora() {
         attribute float size;
         attribute vec3 color;
         varying vec3 vColor;
-        varying float vDist;
         uniform float uTime;
         void main() {
           vColor = color;
           vec3 pos = position;
           float dist = length(pos.xz);
-          vDist = dist;
-          // Rotate based on distance (inner = faster)
-          float speed = 0.3 / (dist * 0.1 + 0.5);
+          // Keplerian rotation: inner orbits faster (v ∝ 1/√r)
+          float speed = 0.5 / sqrt(dist * 0.15 + 0.3);
           float angle = atan(pos.z, pos.x) + uTime * speed;
           pos.x = cos(angle) * dist;
           pos.z = sin(angle) * dist;
+          // Subtle vertical oscillation
+          pos.y += sin(uTime * 3.0 + angle * 2.0) * 0.1;
           vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-          gl_PointSize = size * (60.0 / -mvPosition.z);
+          gl_PointSize = size * (80.0 / -mvPosition.z);
           gl_Position = projectionMatrix * mvPosition;
         }
       `,
       fragmentShader: `
         varying vec3 vColor;
-        varying float vDist;
         void main() {
           float d = length(gl_PointCoord - vec2(0.5));
           if (d > 0.5) discard;
-          float alpha = (1.0 - smoothstep(0.2, 0.5, d)) * 0.8;
-          gl_FragColor = vec4(vColor, alpha);
+          float alpha = (1.0 - smoothstep(0.0, 0.5, d)) * 0.9;
+          // Add glow
+          float glow = exp(-d * 4.0) * 0.5;
+          gl_FragColor = vec4(vColor * (1.0 + glow), alpha);
         }
       `,
       transparent: true,
@@ -533,63 +583,102 @@ function HeroAurora() {
       vertexColors: true,
     });
     const disk = new THREE.Points(diskGeo, diskMat);
+    disk.rotation.x = 0.3; // Tilt the disk for that Interstellar look
     blackHoleGroup.add(disk);
 
-    // 4. OUTER GLOW - Soft halo around everything
-    const glowGeo = new THREE.RingGeometry(bhSize * 0.9, bhSize * 3.5, 64);
-    const glowMat = new THREE.ShaderMaterial({
-      uniforms: {},
+    // 4. GRAVITATIONAL LENSING - Light from behind warped around
+    // Top arc (light from behind, bent over the top)
+    const lensArcGeo = new THREE.TorusGeometry(bhSize * 1.15, 0.12, 16, 100, Math.PI);
+    const lensArcMat = new THREE.ShaderMaterial({
+      uniforms: { uTime: { value: 0 } },
       vertexShader: `
-        varying vec2 vUv;
+        varying float vAngle;
+        uniform float uTime;
         void main() {
-          vUv = uv;
+          vAngle = atan(position.y, position.x);
+          vec3 pos = position;
+          pos *= 1.0 + sin(uTime * 1.5 + vAngle * 3.0) * 0.01;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+        }
+      `,
+      fragmentShader: `
+        varying float vAngle;
+        void main() {
+          float brightness = 0.6 + 0.4 * sin(vAngle * 2.0);
+          vec3 color = vec3(1.0, 0.95, 0.8) * brightness;
+          gl_FragColor = vec4(color, 0.7);
+        }
+      `,
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      side: THREE.DoubleSide,
+    });
+    const lensArcTop = new THREE.Mesh(lensArcGeo, lensArcMat);
+    lensArcTop.rotation.z = Math.PI / 2;
+    lensArcTop.rotation.y = Math.PI / 2;
+    blackHoleGroup.add(lensArcTop);
+
+    // Bottom arc
+    const lensArcBottom = new THREE.Mesh(lensArcGeo, lensArcMat.clone());
+    lensArcBottom.rotation.z = -Math.PI / 2;
+    lensArcBottom.rotation.y = Math.PI / 2;
+    blackHoleGroup.add(lensArcBottom);
+
+    // 5. PHOTON SPHERE GLOW - Eerie light trapped at 1.5x Schwarzschild radius
+    const photonSphereGeo = new THREE.SphereGeometry(bhSize * 1.08, 64, 64);
+    const photonSphereMat = new THREE.ShaderMaterial({
+      uniforms: { uTime: { value: 0 } },
+      vertexShader: `
+        varying vec3 vNormal;
+        varying vec3 vPosition;
+        void main() {
+          vNormal = normalize(normalMatrix * normal);
+          vPosition = position;
           gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
         }
       `,
       fragmentShader: `
-        varying vec2 vUv;
+        varying vec3 vNormal;
+        varying vec3 vPosition;
+        uniform float uTime;
         void main() {
-          float dist = length(vUv - vec2(0.5)) * 2.0;
-          float alpha = smoothstep(1.0, 0.3, dist) * 0.15;
-          vec3 color = mix(vec3(1.0, 0.8, 0.3), vec3(1.0, 0.4, 0.1), dist);
+          float fresnel = pow(1.0 - abs(dot(vNormal, vec3(0.0, 0.0, 1.0))), 4.0);
+          // Shimmering effect
+          float shimmer = sin(vPosition.y * 10.0 + uTime * 2.0) * 0.5 + 0.5;
+          vec3 color = mix(vec3(1.0, 0.8, 0.5), vec3(1.0, 0.6, 0.2), shimmer);
+          float alpha = fresnel * 0.4 * (0.8 + shimmer * 0.2);
           gl_FragColor = vec4(color, alpha);
         }
       `,
       transparent: true,
-      side: THREE.DoubleSide,
       depthWrite: false,
       blending: THREE.AdditiveBlending,
+      side: THREE.BackSide,
     });
-    const glow = new THREE.Mesh(glowGeo, glowMat);
-    glow.rotation.x = Math.PI / 2;
-    blackHoleGroup.add(glow);
+    const photonSphere = new THREE.Mesh(photonSphereGeo, photonSphereMat);
+    blackHoleGroup.add(photonSphere);
 
-    // 5. GRAVITATIONAL LENSING RING - Light bending effect
-    const lensRingGeo = new THREE.TorusGeometry(bhSize * 1.3, 0.05, 8, 100);
-    const lensRingMat = new THREE.MeshBasicMaterial({
-      color: 0xffffff,
-      transparent: true,
-      opacity: 0.3,
-    });
-    const lensRing = new THREE.Mesh(lensRingGeo, lensRingMat);
-    lensRing.rotation.x = Math.PI / 2;
-    blackHoleGroup.add(lensRing);
-
-    // Second lens ring at different angle
-    const lensRing2 = new THREE.Mesh(
-      new THREE.TorusGeometry(bhSize * 1.25, 0.03, 8, 100),
-      new THREE.MeshBasicMaterial({ color: 0xd4af37, transparent: true, opacity: 0.2 })
-    );
-    lensRing2.rotation.x = Math.PI / 2.5;
-    lensRing2.rotation.z = 0.2;
-    blackHoleGroup.add(lensRing2);
+    // 6. OUTER DISTORTION FIELD - Subtle warping effect
+    const distortionRings: THREE.Mesh[] = [];
+    for (let i = 0; i < 3; i++) {
+      const ringGeo = new THREE.TorusGeometry(bhSize * (1.5 + i * 0.4), 0.02, 8, 150);
+      const ringMat = new THREE.MeshBasicMaterial({
+        color: i === 0 ? 0xffffff : 0xd4af37,
+        transparent: true,
+        opacity: 0.15 - i * 0.04,
+      });
+      const ring = new THREE.Mesh(ringGeo, ringMat);
+      ring.rotation.x = Math.PI / 2 + (Math.random() - 0.5) * 0.2;
+      distortionRings.push(ring);
+      blackHoleGroup.add(ring);
+    }
 
     blackHoleGroup.position.set(0, 0, -50);
+    blackHoleGroup.rotation.x = 0.15; // Slight tilt for drama
     scene.add(blackHoleGroup);
 
-    // ============ WAYPOINT STARS - positioned for device ============
-    const waypointStars: THREE.Mesh[] = [];
-    // Tighter positions on mobile so stars stay in view
+    // ============ WAYPOINT STARS - Real bloom effect ============
+    const waypointStars: THREE.Group[] = [];
     const posScale = deviceType === 'mobile' ? 0.4 : deviceType === 'tablet' ? 0.6 : 1;
     const waypointPositions = [
       { x: -30 * posScale, y: 10, z: 80 },
@@ -597,29 +686,66 @@ function HeroAurora() {
       { x: -18 * posScale, y: 5, z: 0 },
       { x: 22 * posScale, y: -6, z: -25 },
     ];
-    const starSize = deviceType === 'mobile' ? 2 : deviceType === 'tablet' ? 2.5 : 3;
+    const coreSize = deviceType === 'mobile' ? 0.8 : 1;
+    
     waypointPositions.forEach((pos) => {
-      const starGeo = new THREE.OctahedronGeometry(starSize, 0);
-      const starMat = new THREE.MeshBasicMaterial({
-        color: 0xffd700,
-        transparent: true,
-        opacity: 0.9,
-      });
-      const star = new THREE.Mesh(starGeo, starMat);
-      star.position.set(pos.x, pos.y, pos.z);
-      waypointStars.push(star);
-      scene.add(star);
+      const starGroup = new THREE.Group();
+      starGroup.position.set(pos.x, pos.y, pos.z);
       
-      // Glow around star
-      const glowGeo = new THREE.SphereGeometry(starSize * 1.5, 16, 16);
-      const glowMat = new THREE.MeshBasicMaterial({
-        color: 0xd4af37,
+      // Core - bright white center
+      const coreGeo = new THREE.SphereGeometry(coreSize, 16, 16);
+      const coreMat = new THREE.MeshBasicMaterial({
+        color: 0xffffff,
         transparent: true,
-        opacity: 0.1,
+        opacity: 1,
       });
-      const glow = new THREE.Mesh(glowGeo, glowMat);
-      glow.position.copy(star.position);
-      scene.add(glow);
+      const core = new THREE.Mesh(coreGeo, coreMat);
+      starGroup.add(core);
+      
+      // Bloom layers - multiple spheres with decreasing opacity
+      const bloomLayers = [
+        { scale: 2, opacity: 0.5, color: 0xfffaf0 },
+        { scale: 3.5, opacity: 0.25, color: 0xffd700 },
+        { scale: 6, opacity: 0.12, color: 0xd4af37 },
+        { scale: 10, opacity: 0.05, color: 0xb8860b },
+      ];
+      
+      bloomLayers.forEach(layer => {
+        const bloomGeo = new THREE.SphereGeometry(coreSize * layer.scale, 16, 16);
+        const bloomMat = new THREE.MeshBasicMaterial({
+          color: layer.color,
+          transparent: true,
+          opacity: layer.opacity,
+          depthWrite: false,
+        });
+        const bloom = new THREE.Mesh(bloomGeo, bloomMat);
+        starGroup.add(bloom);
+      });
+      
+      // Light rays (subtle cross flare)
+      const rayMat = new THREE.MeshBasicMaterial({
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.15,
+        side: THREE.DoubleSide,
+      });
+      
+      // Horizontal ray
+      const rayH = new THREE.Mesh(
+        new THREE.PlaneGeometry(coreSize * 20, coreSize * 0.3),
+        rayMat
+      );
+      starGroup.add(rayH);
+      
+      // Vertical ray
+      const rayV = new THREE.Mesh(
+        new THREE.PlaneGeometry(coreSize * 0.3, coreSize * 15),
+        rayMat
+      );
+      starGroup.add(rayV);
+      
+      waypointStars.push(starGroup);
+      scene.add(starGroup);
     });
 
     // ============ COMETS (shooting stars) ============
@@ -759,27 +885,45 @@ function HeroAurora() {
       dust.rotation.y = time * 0.02;
       dust.rotation.x = Math.sin(time * 0.1) * 0.05;
 
-      // Black hole animations
-      const bhSpeed = 0.15 + progress * 0.3;
+      // ============ GARGANTUA ANIMATIONS ============
       
-      // Update accretion disk shader time (makes particles orbit)
+      // Update all shader uniforms
       diskMat.uniforms.uTime.value = time;
+      einsteinRingMat.uniforms.uTime.value = time;
+      lensArcMat.uniforms.uTime.value = time;
+      photonSphereMat.uniforms.uTime.value = time;
       
-      // Photon ring pulses subtly
-      photonRing.scale.setScalar(1 + Math.sin(time * 3) * 0.02);
+      // Einstein ring pulses with an eerie rhythm
+      einsteinRing.scale.setScalar(1 + Math.sin(time * 2) * 0.015);
       
-      // Lens rings rotate slowly
-      lensRing.rotation.z = time * 0.1;
-      lensRing2.rotation.z = -time * 0.08;
+      // Lens arcs shimmer
+      lensArcTop.rotation.x += 0.001;
+      lensArcBottom.rotation.x -= 0.001;
       
-      // Whole black hole group rotates slightly based on approach
-      blackHoleGroup.rotation.y = time * bhSpeed * 0.1;
-      blackHoleGroup.rotation.x = Math.sin(time * 0.5) * 0.05;
+      // Distortion rings drift slowly
+      distortionRings.forEach((ring, i) => {
+        ring.rotation.z = time * (0.03 + i * 0.01) * (i % 2 === 0 ? 1 : -1);
+      });
+      
+      // Subtle black hole group rotation - ominous slow spin
+      blackHoleGroup.rotation.y = time * 0.02;
+      blackHoleGroup.rotation.x = 0.15 + Math.sin(time * 0.3) * 0.03;
 
-      // Waypoint stars pulse
-      waypointStars.forEach((star, i) => {
-        star.rotation.y = time * (1 + i * 0.2);
-        star.scale.setScalar(1 + Math.sin(time * 2 + i) * 0.2);
+      // ============ BLOOM STARS ANIMATION ============
+      waypointStars.forEach((starGroup, i) => {
+        // Gentle rotation
+        starGroup.rotation.y = time * 0.3;
+        
+        // Pulsing bloom effect
+        const pulse = 1 + Math.sin(time * 1.5 + i * 1.2) * 0.15;
+        starGroup.scale.setScalar(pulse);
+        
+        // Light rays always face camera (billboard effect approximation)
+        starGroup.children.forEach((child, j) => {
+          if (j >= 5) { // The ray planes
+            child.lookAt(camera.position);
+          }
+        });
       });
 
       // Nebulae drift
