@@ -191,7 +191,7 @@ const portfolio = [
     img: "/unas.png",
     badge: "Social/Video",
     quote:
-      "Videos GSAP style que reventaron TikTok/IG: agenda llena +50K views/mes.",
+      "Videos cinematográficos que reventaron TikTok/IG: agenda llena +50K views/mes.",
     metrics: ["+400% reservas", "+50K views", "+15K followers"],
   },
   {
@@ -1447,16 +1447,16 @@ export default function Home() {
               Motion Lab
             </p>
             <h2 className="text-3xl font-semibold text-white">
-              Escenas GSAP + Three.js listas para cautivar
+              Animaciones que capturan y convierten
             </h2>
             <p className="text-sm text-white/75">
-              Prototipamos efectos 3D en cuestión de horas: hero con partículas, fondos interactivos, productos holográficos.
-              Todo optimizado para mobile con `prefers-reduced-motion` y lazy hydration.
+              Creamos experiencias visuales inmersivas en cuestión de horas: fondos interactivos, efectos 3D, productos holográficos.
+              Todo optimizado para cargar rápido en cualquier dispositivo.
             </p>
             <ul className="space-y-3 text-sm text-white/80">
-              <li>• Hero con partículas físicas sincronizadas a GSAP timelines.</li>
-              <li>• Portafolios volumétricos (Three.js + regl + webgl2) con hover states.</li>
-              <li>• Visualizadores de producto en XR/AR listas para Shopify, Woo o headless.</li>
+              <li>• Heroes cinematográficos con partículas y efectos de profundidad.</li>
+              <li>• Portafolios interactivos que responden al movimiento del usuario.</li>
+              <li>• Visualizadores de producto en realidad aumentada para e-commerce.</li>
             </ul>
           </div>
           <div className="card-fade overflow-hidden rounded-3xl border border-white/10 bg-black/40 p-4">
