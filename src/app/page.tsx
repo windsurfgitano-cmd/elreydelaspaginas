@@ -470,38 +470,7 @@ function HeroAurora() {
     const voidMesh = new THREE.Mesh(voidGeo, voidMat);
     blackHoleGroup.add(voidMesh);
 
-    // 2. EINSTEIN RING - The iconic thin bright ring (light bent around from behind)
-    const einsteinRingGeo = new THREE.TorusGeometry(bhSize * 1.02, 0.08, 32, 200);
-    const einsteinRingMat = new THREE.ShaderMaterial({
-      uniforms: { uTime: { value: 0 } },
-      vertexShader: `
-        varying vec2 vUv;
-        uniform float uTime;
-        void main() {
-          vUv = uv;
-          vec3 pos = position;
-          // Subtle wobble
-          pos += normal * sin(uTime * 2.0 + uv.x * 20.0) * 0.02;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-        }
-      `,
-      fragmentShader: `
-        varying vec2 vUv;
-        void main() {
-          // Bright white/gold core with falloff
-          float intensity = 1.0;
-          vec3 color = mix(vec3(1.0, 1.0, 1.0), vec3(1.0, 0.9, 0.7), vUv.y);
-          gl_FragColor = vec4(color, intensity);
-        }
-      `,
-      transparent: true,
-      blending: THREE.AdditiveBlending,
-    });
-    const einsteinRing = new THREE.Mesh(einsteinRingGeo, einsteinRingMat);
-    einsteinRing.rotation.x = Math.PI / 2;
-    blackHoleGroup.add(einsteinRing);
-
-    // 3. ACCRETION DISK - Tilted, with Doppler shift (blue approaching, red receding)
+    // 2. ACCRETION DISK - Tilted, with Doppler shift (blue approaching, red receding)
     const diskParticleCount = deviceType === 'mobile' ? 2000 : 4000;
     const diskPositions = new Float32Array(diskParticleCount * 3);
     const diskColors = new Float32Array(diskParticleCount * 3);
@@ -835,11 +804,7 @@ function HeroAurora() {
       
       // Update shader uniforms
       diskMat.uniforms.uTime.value = time;
-      einsteinRingMat.uniforms.uTime.value = time;
       photonSphereMat.uniforms.uTime.value = time;
-      
-      // Einstein ring pulses subtly
-      einsteinRing.scale.setScalar(1 + Math.sin(time * 2) * 0.01);
       
       // Slow, ominous rotation
       blackHoleGroup.rotation.y = time * 0.015;
