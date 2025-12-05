@@ -44,7 +44,7 @@ const tickerItems = [
   "Shopify 2.0 desde $1.300.000",
   "WooCommerce desde $1.500.000",
   "Apps PWA desde $990.000",
-  "Contenido UGC premium",
+  "Contenido UGC · Cotizar",
   "Branding desde $490.000",
   "Marketing Digital desde $300.000"
 ];
@@ -135,13 +135,13 @@ const pains = [
 const packs = [
   {
     title: "Shopify 2.0",
-    price: "$1.300.000 + IVA",
+    price: "Desde $1.300.000 + IVA",
     desc:
       "E-commerce profesional con Shopify 2.0: theme custom, checkout optimizado, integraciones de pago y logística.",
   },
   {
     title: "WooCommerce Pro",
-    price: "$1.500.000 + IVA",
+    price: "Desde $1.500.000 + IVA",
     desc:
       "Tienda WordPress con WooCommerce: personalización total, SEO, pasarelas de pago y automatizaciones.",
   },
@@ -265,7 +265,7 @@ function CustomCursor() {
   );
 }
 
-// Epic 3D Hero with Interactive Particles
+// Epic 3D Hero with Interactive Particles - Responsive for Mobile & Desktop
 function HeroAurora() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
@@ -274,38 +274,48 @@ function HeroAurora() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // Check if mobile for performance optimization
+    const isMobile = window.innerWidth < 768;
+    const isTouch = 'ontouchstart' in window;
+
+    const renderer = new THREE.WebGLRenderer({ 
+      canvas, 
+      alpha: true, 
+      antialias: !isMobile, // Disable antialiasing on mobile for performance
+      powerPreference: isMobile ? "low-power" : "high-performance"
+    });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 50;
+    const camera = new THREE.PerspectiveCamera(
+      isMobile ? 60 : 75, // Narrower FOV on mobile
+      window.innerWidth / window.innerHeight, 
+      0.1, 
+      1000
+    );
+    camera.position.z = isMobile ? 60 : 50;
 
-    // Massive particle system
-    const particleCount = 2000;
+    // Responsive particle count - fewer on mobile for performance
+    const particleCount = isMobile ? 800 : 2000;
     const positions = new Float32Array(particleCount * 3);
     const colors = new Float32Array(particleCount * 3);
     const sizes = new Float32Array(particleCount);
-    const velocities: THREE.Vector3[] = [];
 
+    // Responsive spread - smaller on mobile
+    const spread = isMobile ? 60 : 100;
+    
     for (let i = 0; i < particleCount; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 100;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 100;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 50;
+      positions[i * 3] = (Math.random() - 0.5) * spread;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * spread;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * (spread * 0.5);
       
-      // Gold to white gradient
       const t = Math.random();
-      colors[i * 3] = 0.83 + t * 0.17;     // R
-      colors[i * 3 + 1] = 0.69 + t * 0.31; // G
-      colors[i * 3 + 2] = 0.22 + t * 0.78; // B
+      colors[i * 3] = 0.83 + t * 0.17;
+      colors[i * 3 + 1] = 0.69 + t * 0.31;
+      colors[i * 3 + 2] = 0.22 + t * 0.78;
       
-      sizes[i] = Math.random() * 3 + 0.5;
-      velocities.push(new THREE.Vector3(
-        (Math.random() - 0.5) * 0.02,
-        (Math.random() - 0.5) * 0.02,
-        (Math.random() - 0.5) * 0.02
-      ));
+      sizes[i] = Math.random() * (isMobile ? 4 : 3) + (isMobile ? 1 : 0.5);
     }
 
     const geometry = new THREE.BufferGeometry();
@@ -317,6 +327,7 @@ function HeroAurora() {
       uniforms: {
         uTime: { value: 0 },
         uMouse: { value: new THREE.Vector2(0, 0) },
+        uIsMobile: { value: isMobile ? 1.0 : 0.0 },
       },
       vertexShader: `
         attribute float size;
@@ -324,14 +335,15 @@ function HeroAurora() {
         varying vec3 vColor;
         uniform float uTime;
         uniform vec2 uMouse;
+        uniform float uIsMobile;
         void main() {
           vColor = color;
           vec3 pos = position;
-          float dist = distance(pos.xy, uMouse * 30.0);
-          pos.z += sin(uTime + position.x * 0.1) * 2.0;
-          pos.xy += normalize(pos.xy - uMouse * 30.0) * max(0.0, 10.0 - dist) * 0.5;
+          float dist = distance(pos.xy, uMouse * (uIsMobile > 0.5 ? 20.0 : 30.0));
+          pos.z += sin(uTime + position.x * 0.1) * (uIsMobile > 0.5 ? 1.5 : 2.0);
+          pos.xy += normalize(pos.xy - uMouse * (uIsMobile > 0.5 ? 20.0 : 30.0)) * max(0.0, (uIsMobile > 0.5 ? 8.0 : 10.0) - dist) * 0.5;
           vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-          gl_PointSize = size * (50.0 / -mvPosition.z);
+          gl_PointSize = size * ((uIsMobile > 0.5 ? 40.0 : 50.0) / -mvPosition.z);
           gl_Position = projectionMatrix * mvPosition;
         }
       `,
@@ -352,31 +364,33 @@ function HeroAurora() {
     const particles = new THREE.Points(geometry, material);
     scene.add(particles);
 
-    // Central glowing orb
-    const orbGeometry = new THREE.IcosahedronGeometry(5, 4);
+    // Responsive orb size
+    const orbSize = isMobile ? 3.5 : 5;
+    const orbGeometry = new THREE.IcosahedronGeometry(orbSize, isMobile ? 2 : 4);
     const orbMaterial = new THREE.MeshBasicMaterial({
       color: 0xd4af37,
       wireframe: true,
       transparent: true,
-      opacity: 0.3,
+      opacity: isMobile ? 0.4 : 0.3,
     });
     const orb = new THREE.Mesh(orbGeometry, orbMaterial);
     scene.add(orb);
 
-    // Outer ring
-    const ringGeometry = new THREE.TorusGeometry(15, 0.1, 16, 100);
+    // Responsive rings
+    const ringSize = isMobile ? 10 : 15;
+    const ringGeometry = new THREE.TorusGeometry(ringSize, isMobile ? 0.15 : 0.1, 16, isMobile ? 64 : 100);
     const ringMaterial = new THREE.MeshBasicMaterial({
       color: 0xd4af37,
       transparent: true,
-      opacity: 0.4,
+      opacity: isMobile ? 0.5 : 0.4,
     });
     const ring = new THREE.Mesh(ringGeometry, ringMaterial);
     ring.rotation.x = Math.PI / 2;
     scene.add(ring);
 
-    // Second ring
+    const ring2Size = isMobile ? 14 : 20;
     const ring2 = new THREE.Mesh(
-      new THREE.TorusGeometry(20, 0.05, 16, 100),
+      new THREE.TorusGeometry(ring2Size, isMobile ? 0.08 : 0.05, 16, isMobile ? 64 : 100),
       new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.2 })
     );
     ring2.rotation.x = Math.PI / 3;
@@ -386,7 +400,7 @@ function HeroAurora() {
     let animationFrame: number;
 
     const animate = () => {
-      time += 0.01;
+      time += isMobile ? 0.008 : 0.01; // Slower on mobile
       material.uniforms.uTime.value = time;
       material.uniforms.uMouse.value.set(mouseRef.current.x, mouseRef.current.y);
 
@@ -406,23 +420,66 @@ function HeroAurora() {
     };
     animate();
 
+    // Mouse move for desktop
     const handleMouseMove = (e: MouseEvent) => {
       mouseRef.current.x = (e.clientX / window.innerWidth) * 2 - 1;
       mouseRef.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
     };
 
+    // Touch move for mobile
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const touch = e.touches[0];
+        mouseRef.current.x = (touch.clientX / window.innerWidth) * 2 - 1;
+        mouseRef.current.y = -(touch.clientY / window.innerHeight) * 2 + 1;
+      }
+    };
+
+    // Device orientation for mobile (gyroscope effect)
+    const handleOrientation = (e: DeviceOrientationEvent) => {
+      if (e.gamma !== null && e.beta !== null) {
+        mouseRef.current.x = (e.gamma / 45) * 0.5; // -1 to 1 based on tilt
+        mouseRef.current.y = ((e.beta - 45) / 45) * 0.5;
+      }
+    };
+
     const handleResize = () => {
+      const newIsMobile = window.innerWidth < 768;
       renderer.setSize(window.innerWidth, window.innerHeight);
       camera.aspect = window.innerWidth / window.innerHeight;
+      camera.position.z = newIsMobile ? 60 : 50;
+      camera.fov = newIsMobile ? 60 : 75;
       camera.updateProjectionMatrix();
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    // Add event listeners based on device type
+    if (isTouch) {
+      window.addEventListener("touchmove", handleTouchMove, { passive: true });
+      // Request permission for device orientation on iOS
+      if (typeof DeviceOrientationEvent !== 'undefined' && 
+          typeof (DeviceOrientationEvent as unknown as { requestPermission?: () => Promise<string> }).requestPermission === 'function') {
+        // iOS 13+ requires permission
+        document.addEventListener('click', () => {
+          (DeviceOrientationEvent as unknown as { requestPermission: () => Promise<string> }).requestPermission()
+            .then(response => {
+              if (response === 'granted') {
+                window.addEventListener("deviceorientation", handleOrientation);
+              }
+            }).catch(console.error);
+        }, { once: true });
+      } else {
+        window.addEventListener("deviceorientation", handleOrientation);
+      }
+    } else {
+      window.addEventListener("mousemove", handleMouseMove);
+    }
     window.addEventListener("resize", handleResize);
 
     return () => {
       cancelAnimationFrame(animationFrame);
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("deviceorientation", handleOrientation);
       window.removeEventListener("resize", handleResize);
       renderer.dispose();
       geometry.dispose();
@@ -437,7 +494,7 @@ function HeroAurora() {
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none fixed inset-0 z-0 opacity-70"
+      className="pointer-events-none fixed inset-0 z-0 opacity-60 md:opacity-70"
       aria-hidden
     />
   );
@@ -546,7 +603,7 @@ function MotionShowcase() {
   return <div ref={containerRef} className="relative h-[360px] w-full" aria-hidden />;
 }
 
-// Tilt Card Component
+// Tilt Card Component - Desktop: 3D tilt, Mobile: scale on touch
 function TiltCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -554,40 +611,72 @@ function TiltCard({ children, className = "" }: { children: React.ReactNode; cla
     const card = cardRef.current;
     if (!card) return;
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const rotateX = (y - centerY) / 10;
-      const rotateY = (centerX - x) / 10;
-      
-      gsap.to(card, {
-        rotateX: rotateX,
-        rotateY: rotateY,
-        duration: 0.3,
-        ease: "power2.out",
-        transformPerspective: 1000,
-      });
-    };
+    const isTouch = 'ontouchstart' in window;
 
-    const handleMouseLeave = () => {
-      gsap.to(card, {
-        rotateX: 0,
-        rotateY: 0,
-        duration: 0.5,
-        ease: "power2.out",
-      });
-    };
+    if (!isTouch) {
+      // Desktop: 3D tilt effect on mouse move
+      const handleMouseMove = (e: MouseEvent) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 12;
+        const rotateY = (centerX - x) / 12;
+        
+        gsap.to(card, {
+          rotateX: rotateX,
+          rotateY: rotateY,
+          scale: 1.02,
+          duration: 0.3,
+          ease: "power2.out",
+          transformPerspective: 1000,
+        });
+      };
 
-    card.addEventListener("mousemove", handleMouseMove);
-    card.addEventListener("mouseleave", handleMouseLeave);
+      const handleMouseLeave = () => {
+        gsap.to(card, {
+          rotateX: 0,
+          rotateY: 0,
+          scale: 1,
+          duration: 0.5,
+          ease: "power2.out",
+        });
+      };
 
-    return () => {
-      card.removeEventListener("mousemove", handleMouseMove);
-      card.removeEventListener("mouseleave", handleMouseLeave);
-    };
+      card.addEventListener("mousemove", handleMouseMove);
+      card.addEventListener("mouseleave", handleMouseLeave);
+
+      return () => {
+        card.removeEventListener("mousemove", handleMouseMove);
+        card.removeEventListener("mouseleave", handleMouseLeave);
+      };
+    } else {
+      // Mobile: simple scale effect on touch
+      const handleTouchStart = () => {
+        gsap.to(card, {
+          scale: 0.98,
+          duration: 0.2,
+          ease: "power2.out",
+        });
+      };
+
+      const handleTouchEnd = () => {
+        gsap.to(card, {
+          scale: 1,
+          duration: 0.3,
+          ease: "back.out(1.7)",
+        });
+      };
+
+      card.addEventListener("touchstart", handleTouchStart, { passive: true });
+      card.addEventListener("touchend", handleTouchEnd, { passive: true });
+
+      return () => {
+        card.removeEventListener("touchstart", handleTouchStart);
+        card.removeEventListener("touchend", handleTouchEnd);
+      };
+    }
   }, []);
 
   return (

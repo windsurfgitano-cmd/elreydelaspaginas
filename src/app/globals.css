@@ -17,7 +17,12 @@
   --danger: #ff4d4d;
   --max-width: 1200px;
   scroll-behavior: smooth;
-  cursor: none;
+}
+
+/* Custom cursor only on desktop */
+@media (min-width: 768px) and (hover: hover) {
+  :root { cursor: none; }
+  a, button { cursor: none; }
 }
 
 * {
