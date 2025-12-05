@@ -51,22 +51,18 @@ const tickerItems = [
 
 const guarantees = [
   {
-    icon: "🎯",
     title: "Resultados garantizados",
     copy: "Si no ves métricas medibles en 60 días, ajustamos sin costo o devolvemos tu inversión.",
   },
   {
-    icon: "🔄",
     title: "Revisiones ilimitadas",
     copy: "Pulimos hasta que quede perfecto. Proceso colaborativo en Notion + Figma.",
   },
   {
-    icon: "⚡",
     title: "Soporte prioritario",
     copy: "Canal directo por Slack/WhatsApp. Respuesta máxima en 4h laborales.",
   },
   {
-    icon: "🔒",
     title: "Confidencialidad total",
     copy: "Firmamos NDA y protegemos data sensible, accesos y estrategias.",
   },
@@ -149,7 +145,7 @@ const packs = [
     title: "Apps PWA",
     price: "Desde $990.000 + IVA",
     desc:
-      "Aplicaciones web progresivas: experiencia nativa, notificaciones push, modo offline y velocidad brutal.",
+      "Aplicaciones web progresivas: experiencia nativa, notificaciones push, modo offline y alto rendimiento.",
   },
   {
     title: "Contenido UGC",
@@ -470,9 +466,106 @@ function HeroAurora() {
       scene.add(glow);
     });
 
+    // ============ COMETS (shooting stars) ============
+    interface Comet {
+      mesh: THREE.Mesh;
+      trail: THREE.Line;
+      velocity: THREE.Vector3;
+      life: number;
+      maxLife: number;
+    }
+    const comets: Comet[] = [];
+    const cometCount = isMobile ? 3 : 6;
+
+    const createComet = () => {
+      // Random start position at edge of scene
+      const startX = (Math.random() - 0.5) * 300;
+      const startY = Math.random() * 100 + 50;
+      const startZ = Math.random() * 200 - 100;
+      
+      // Comet head
+      const cometGeo = new THREE.SphereGeometry(0.5, 8, 8);
+      const cometMat = new THREE.MeshBasicMaterial({
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.9,
+      });
+      const cometMesh = new THREE.Mesh(cometGeo, cometMat);
+      cometMesh.position.set(startX, startY, startZ);
+      scene.add(cometMesh);
+
+      // Comet trail
+      const trailPoints = [];
+      for (let i = 0; i < 20; i++) {
+        trailPoints.push(new THREE.Vector3(startX, startY, startZ));
+      }
+      const trailGeo = new THREE.BufferGeometry().setFromPoints(trailPoints);
+      const trailMat = new THREE.LineBasicMaterial({
+        color: 0xd4af37,
+        transparent: true,
+        opacity: 0.4,
+      });
+      const trail = new THREE.Line(trailGeo, trailMat);
+      scene.add(trail);
+
+      // Direction towards center/black hole
+      const direction = new THREE.Vector3(
+        -startX * 0.01 + (Math.random() - 0.5) * 0.5,
+        -0.3 - Math.random() * 0.3,
+        -0.5 - Math.random() * 0.5
+      ).normalize();
+
+      comets.push({
+        mesh: cometMesh,
+        trail: trail,
+        velocity: direction.multiplyScalar(isMobile ? 1.5 : 2),
+        life: 0,
+        maxLife: 200 + Math.random() * 100,
+      });
+    };
+
+    // Initialize some comets
+    for (let i = 0; i < cometCount; i++) {
+      setTimeout(() => createComet(), i * 2000);
+    }
+
+    // ============ PARTICLE CLOUDS (drifting gas) ============
+    const cloudCount = isMobile ? 8 : 15;
+    const clouds: THREE.Points[] = [];
+    
+    for (let i = 0; i < cloudCount; i++) {
+      const cloudParticles = 50;
+      const cloudPositions = new Float32Array(cloudParticles * 3);
+      const centerX = (Math.random() - 0.5) * 250;
+      const centerY = (Math.random() - 0.5) * 150;
+      const centerZ = Math.random() * -300;
+      
+      for (let j = 0; j < cloudParticles; j++) {
+        cloudPositions[j * 3] = centerX + (Math.random() - 0.5) * 20;
+        cloudPositions[j * 3 + 1] = centerY + (Math.random() - 0.5) * 20;
+        cloudPositions[j * 3 + 2] = centerZ + (Math.random() - 0.5) * 20;
+      }
+
+      const cloudGeo = new THREE.BufferGeometry();
+      cloudGeo.setAttribute("position", new THREE.BufferAttribute(cloudPositions, 3));
+      
+      const cloudMat = new THREE.PointsMaterial({
+        color: new THREE.Color().setHSL(0.08 + Math.random() * 0.05, 0.6, 0.5),
+        size: isMobile ? 1.5 : 1,
+        transparent: true,
+        opacity: 0.15 + Math.random() * 0.1,
+        blending: THREE.AdditiveBlending,
+      });
+      
+      const cloud = new THREE.Points(cloudGeo, cloudMat);
+      clouds.push(cloud);
+      scene.add(cloud);
+    }
+
     let time = 0;
     let animationFrame: number;
     let currentScroll = 0;
+    let lastCometTime = 0;
 
     const animate = () => {
       time += isMobile ? 0.006 : 0.008;
@@ -530,6 +623,60 @@ function HeroAurora() {
       nebulae.forEach((nebula, i) => {
         nebula.position.x += Math.sin(time * 0.2 + i) * 0.02;
         nebula.position.y += Math.cos(time * 0.15 + i) * 0.02;
+      });
+
+      // Animate comets
+      for (let i = comets.length - 1; i >= 0; i--) {
+        const comet = comets[i];
+        comet.life++;
+        
+        // Move comet
+        comet.mesh.position.add(comet.velocity);
+        
+        // Update trail
+        const positions = comet.trail.geometry.attributes.position.array as Float32Array;
+        for (let j = positions.length - 3; j >= 3; j -= 3) {
+          positions[j] = positions[j - 3];
+          positions[j + 1] = positions[j - 2];
+          positions[j + 2] = positions[j - 1];
+        }
+        positions[0] = comet.mesh.position.x;
+        positions[1] = comet.mesh.position.y;
+        positions[2] = comet.mesh.position.z;
+        comet.trail.geometry.attributes.position.needsUpdate = true;
+        
+        // Fade out near end of life
+        const fadeStart = comet.maxLife * 0.7;
+        if (comet.life > fadeStart) {
+          const fade = 1 - (comet.life - fadeStart) / (comet.maxLife - fadeStart);
+          (comet.mesh.material as THREE.MeshBasicMaterial).opacity = 0.9 * fade;
+          (comet.trail.material as THREE.LineBasicMaterial).opacity = 0.4 * fade;
+        }
+        
+        // Remove dead comets and spawn new ones
+        if (comet.life > comet.maxLife) {
+          scene.remove(comet.mesh);
+          scene.remove(comet.trail);
+          comet.mesh.geometry.dispose();
+          comet.trail.geometry.dispose();
+          comets.splice(i, 1);
+        }
+      }
+      
+      // Spawn new comets periodically
+      if (time - lastCometTime > (isMobile ? 8 : 5)) {
+        lastCometTime = time;
+        if (comets.length < cometCount) {
+          createComet();
+        }
+      }
+
+      // Animate particle clouds (gentle rotation and drift)
+      clouds.forEach((cloud, i) => {
+        cloud.rotation.y += 0.001;
+        cloud.rotation.x += 0.0005;
+        cloud.position.x += Math.sin(time * 0.1 + i) * 0.01;
+        cloud.position.y += Math.cos(time * 0.08 + i) * 0.01;
       });
 
       renderer.render(scene, camera);
@@ -1114,7 +1261,7 @@ export default function Home() {
         <div className="mx-auto flex w-full max-w-4xl flex-col gap-8">
           <div className="text-center">
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-gold">
-              FAQ brutalmente honesto
+              Preguntas frecuentes
             </p>
             <h2 className="mt-3 text-3xl font-semibold text-white">
               Preguntas que siempre nos hacen
@@ -1346,14 +1493,9 @@ export default function Home() {
           </div>
           <div className="grid gap-4 md:grid-cols-2">
             {guarantees.map((item) => (
-              <article key={item.title} className="card-fade glass-card flex gap-4 p-6">
-                <span className="text-3xl" aria-hidden>
-                  {item.icon}
-                </span>
-                <div>
-                  <h3 className="text-lg font-semibold text-white">{item.title}</h3>
-                  <p className="mt-2 text-sm text-white/70">{item.copy}</p>
-                </div>
+              <article key={item.title} className="card-fade glass-card p-6">
+                <h3 className="text-lg font-semibold text-white">{item.title}</h3>
+                <p className="mt-2 text-sm text-white/70">{item.copy}</p>
               </article>
             ))}
           </div>
@@ -1385,14 +1527,16 @@ export default function Home() {
       {/* Promesa premium */}
       <section className="px-4 py-16" id="premium">
         <div className="mx-auto flex w-full max-w-4xl flex-col gap-6 rounded-3xl border border-gold/40 bg-gradient-to-br from-white/10 to-transparent p-8 text-center">
-          <h2 className="text-3xl font-semibold text-white">💎 Garantía premium</h2>
+          <h2 className="text-3xl font-semibold text-white">Garantía de satisfacción</h2>
           <p className="text-sm text-white/80">
-            Si después de 30 días no estás 100% satisfecho, devolvemos el 100% de tu inversión sin preguntas. Zero bullshit.
+            Si después de 30 días no estás 100% satisfecho, devolvemos tu inversión sin preguntas ni condiciones.
           </p>
-          <div className="flex flex-wrap justify-center gap-3 text-sm font-semibold text-gold">
-            <span>✓ Sin letra chica</span>
-            <span>✓ Reembolso inmediato</span>
-            <span>✓ Proceso documentado</span>
+          <div className="flex flex-wrap justify-center gap-4 text-sm font-semibold text-gold">
+            <span>Sin letra chica</span>
+            <span>·</span>
+            <span>Reembolso inmediato</span>
+            <span>·</span>
+            <span>Proceso documentado</span>
           </div>
         </div>
       </section>
@@ -1536,13 +1680,13 @@ export default function Home() {
             Cupos limitados este mes
           </div>
           <h2 className="text-4xl font-black text-white sm:text-5xl md:text-6xl">
-            ¿Listo para <span className="text-gold glow-text">dominar</span>?
+            ¿Listo para <span className="text-gold">comenzar</span>?
           </h2>
           <p className="max-w-2xl text-lg text-white/60">
             Cada día que pasa es una oportunidad perdida. Tu competencia ya está invirtiendo en experiencias digitales que convierten.
           </p>
           <Link
-            href="https://wa.me/56981330217?text=QUIERO%20DOMINAR%20MI%20MERCADO%20🔥"
+            href="https://wa.me/56981330217?text=Hola%2C%20me%20interesa%20saber%20m%C3%A1s"
             className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-gold px-10 py-5 text-lg font-black uppercase tracking-wider text-black shadow-[0_0_60px_rgba(212,175,55,0.5)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_80px_rgba(212,175,55,0.7)]"
           >
             <svg className="h-7 w-7" fill="currentColor" viewBox="0 0 24 24">
@@ -1570,14 +1714,14 @@ export default function Home() {
 
     {/* FLOATING WHATSAPP BUTTON - Always visible */}
     <Link
-      href="https://wa.me/56981330217?text=QUIERO%20DOMINAR%20MI%20MERCADO%20🔥"
+      href="https://wa.me/56981330217?text=Hola%2C%20me%20interesa%20saber%20m%C3%A1s"
       className="fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-full bg-[#25D366] px-5 py-4 font-bold text-white shadow-[0_8px_30px_rgba(37,211,102,0.4)] transition-all duration-300 hover:scale-110 hover:shadow-[0_8px_40px_rgba(37,211,102,0.6)] md:bottom-8 md:right-8"
       aria-label="Contactar por WhatsApp"
     >
       <svg className="h-7 w-7" fill="currentColor" viewBox="0 0 24 24">
         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
       </svg>
-      <span className="hidden sm:inline">¡Hablemos!</span>
+      <span className="hidden sm:inline">Hablemos</span>
     </Link>
     </>
   );
