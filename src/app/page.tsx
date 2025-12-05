@@ -586,45 +586,7 @@ function HeroAurora() {
     disk.rotation.x = 0.3; // Tilt the disk for that Interstellar look
     blackHoleGroup.add(disk);
 
-    // 4. GRAVITATIONAL LENSING - Light from behind warped around
-    // Top arc (light from behind, bent over the top)
-    const lensArcGeo = new THREE.TorusGeometry(bhSize * 1.15, 0.12, 16, 100, Math.PI);
-    const lensArcMat = new THREE.ShaderMaterial({
-      uniforms: { uTime: { value: 0 } },
-      vertexShader: `
-        varying float vAngle;
-        uniform float uTime;
-        void main() {
-          vAngle = atan(position.y, position.x);
-          vec3 pos = position;
-          pos *= 1.0 + sin(uTime * 1.5 + vAngle * 3.0) * 0.01;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-        }
-      `,
-      fragmentShader: `
-        varying float vAngle;
-        void main() {
-          float brightness = 0.6 + 0.4 * sin(vAngle * 2.0);
-          vec3 color = vec3(1.0, 0.95, 0.8) * brightness;
-          gl_FragColor = vec4(color, 0.7);
-        }
-      `,
-      transparent: true,
-      blending: THREE.AdditiveBlending,
-      side: THREE.DoubleSide,
-    });
-    const lensArcTop = new THREE.Mesh(lensArcGeo, lensArcMat);
-    lensArcTop.rotation.z = Math.PI / 2;
-    lensArcTop.rotation.y = Math.PI / 2;
-    blackHoleGroup.add(lensArcTop);
-
-    // Bottom arc
-    const lensArcBottom = new THREE.Mesh(lensArcGeo, lensArcMat.clone());
-    lensArcBottom.rotation.z = -Math.PI / 2;
-    lensArcBottom.rotation.y = Math.PI / 2;
-    blackHoleGroup.add(lensArcBottom);
-
-    // 5. PHOTON SPHERE GLOW - Eerie light trapped at 1.5x Schwarzschild radius
+    // 4. PHOTON SPHERE GLOW - Eerie halo around the void
     const photonSphereGeo = new THREE.SphereGeometry(bhSize * 1.08, 64, 64);
     const photonSphereMat = new THREE.ShaderMaterial({
       uniforms: { uTime: { value: 0 } },
@@ -658,23 +620,7 @@ function HeroAurora() {
     const photonSphere = new THREE.Mesh(photonSphereGeo, photonSphereMat);
     blackHoleGroup.add(photonSphere);
 
-    // 6. OUTER DISTORTION FIELD - Subtle warping effect
-    const distortionRings: THREE.Mesh[] = [];
-    for (let i = 0; i < 3; i++) {
-      const ringGeo = new THREE.TorusGeometry(bhSize * (1.5 + i * 0.4), 0.02, 8, 150);
-      const ringMat = new THREE.MeshBasicMaterial({
-        color: i === 0 ? 0xffffff : 0xd4af37,
-        transparent: true,
-        opacity: 0.15 - i * 0.04,
-      });
-      const ring = new THREE.Mesh(ringGeo, ringMat);
-      ring.rotation.x = Math.PI / 2 + (Math.random() - 0.5) * 0.2;
-      distortionRings.push(ring);
-      blackHoleGroup.add(ring);
-    }
-
     blackHoleGroup.position.set(0, 0, -50);
-    blackHoleGroup.rotation.x = 0.15; // Slight tilt for drama
     scene.add(blackHoleGroup);
 
     // ============ WAYPOINT STARS - Real bloom effect ============
@@ -885,29 +831,19 @@ function HeroAurora() {
       dust.rotation.y = time * 0.02;
       dust.rotation.x = Math.sin(time * 0.1) * 0.05;
 
-      // ============ GARGANTUA ANIMATIONS ============
+      // ============ BLACK HOLE ANIMATIONS ============
       
-      // Update all shader uniforms
+      // Update shader uniforms
       diskMat.uniforms.uTime.value = time;
       einsteinRingMat.uniforms.uTime.value = time;
-      lensArcMat.uniforms.uTime.value = time;
       photonSphereMat.uniforms.uTime.value = time;
       
-      // Einstein ring pulses with an eerie rhythm
-      einsteinRing.scale.setScalar(1 + Math.sin(time * 2) * 0.015);
+      // Einstein ring pulses subtly
+      einsteinRing.scale.setScalar(1 + Math.sin(time * 2) * 0.01);
       
-      // Lens arcs shimmer
-      lensArcTop.rotation.x += 0.001;
-      lensArcBottom.rotation.x -= 0.001;
-      
-      // Distortion rings drift slowly
-      distortionRings.forEach((ring, i) => {
-        ring.rotation.z = time * (0.03 + i * 0.01) * (i % 2 === 0 ? 1 : -1);
-      });
-      
-      // Subtle black hole group rotation - ominous slow spin
-      blackHoleGroup.rotation.y = time * 0.02;
-      blackHoleGroup.rotation.x = 0.15 + Math.sin(time * 0.3) * 0.03;
+      // Slow, ominous rotation
+      blackHoleGroup.rotation.y = time * 0.015;
+      blackHoleGroup.rotation.x = Math.sin(time * 0.2) * 0.02;
 
       // ============ BLOOM STARS ANIMATION ============
       waypointStars.forEach((starGroup, i) => {
