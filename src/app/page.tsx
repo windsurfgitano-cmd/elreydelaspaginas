@@ -265,85 +265,87 @@ function CustomCursor() {
   );
 }
 
-// Epic 3D Hero with Interactive Particles - Responsive for Mobile & Desktop
+// COSMIC JOURNEY - Camera travels through space on scroll
 function HeroAurora() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
+  const scrollRef = useRef(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // Check if mobile for performance optimization
     const isMobile = window.innerWidth < 768;
     const isTouch = 'ontouchstart' in window;
 
     const renderer = new THREE.WebGLRenderer({ 
       canvas, 
       alpha: true, 
-      antialias: !isMobile, // Disable antialiasing on mobile for performance
+      antialias: !isMobile,
       powerPreference: isMobile ? "low-power" : "high-performance"
     });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     const scene = new THREE.Scene();
+    
+    // Camera starts FAR (macro cosmos view)
     const camera = new THREE.PerspectiveCamera(
-      isMobile ? 60 : 75, // Narrower FOV on mobile
+      isMobile ? 60 : 75,
       window.innerWidth / window.innerHeight, 
       0.1, 
-      1000
+      2000
     );
-    camera.position.z = isMobile ? 60 : 50;
+    // Start position: far away in the cosmos
+    camera.position.set(0, 20, isMobile ? 200 : 250);
+    camera.lookAt(0, 0, 0);
 
-    // Responsive particle count - fewer on mobile for performance
-    const particleCount = isMobile ? 800 : 2000;
-    const positions = new Float32Array(particleCount * 3);
-    const colors = new Float32Array(particleCount * 3);
-    const sizes = new Float32Array(particleCount);
+    // ============ COSMIC DUST (far stars) ============
+    const dustCount = isMobile ? 1500 : 4000;
+    const dustPositions = new Float32Array(dustCount * 3);
+    const dustColors = new Float32Array(dustCount * 3);
+    const dustSizes = new Float32Array(dustCount);
 
-    // Responsive spread - smaller on mobile
-    const spread = isMobile ? 60 : 100;
-    
-    for (let i = 0; i < particleCount; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * spread;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * spread;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * (spread * 0.5);
+    for (let i = 0; i < dustCount; i++) {
+      // Spread across entire journey path
+      dustPositions[i * 3] = (Math.random() - 0.5) * 400;
+      dustPositions[i * 3 + 1] = (Math.random() - 0.5) * 400;
+      dustPositions[i * 3 + 2] = (Math.random() - 0.5) * 500 - 100; // Extend behind
       
       const t = Math.random();
-      colors[i * 3] = 0.83 + t * 0.17;
-      colors[i * 3 + 1] = 0.69 + t * 0.31;
-      colors[i * 3 + 2] = 0.22 + t * 0.78;
+      // Mix of gold, white, and subtle blue stars
+      if (t < 0.6) {
+        dustColors[i * 3] = 0.9 + Math.random() * 0.1;
+        dustColors[i * 3 + 1] = 0.85 + Math.random() * 0.15;
+        dustColors[i * 3 + 2] = 0.7 + Math.random() * 0.3;
+      } else if (t < 0.85) {
+        dustColors[i * 3] = 1; dustColors[i * 3 + 1] = 1; dustColors[i * 3 + 2] = 1;
+      } else {
+        dustColors[i * 3] = 0.6; dustColors[i * 3 + 1] = 0.7; dustColors[i * 3 + 2] = 1;
+      }
       
-      sizes[i] = Math.random() * (isMobile ? 4 : 3) + (isMobile ? 1 : 0.5);
+      dustSizes[i] = Math.random() * (isMobile ? 3 : 2) + 0.5;
     }
 
-    const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-    geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
-    geometry.setAttribute("size", new THREE.BufferAttribute(sizes, 1));
+    const dustGeometry = new THREE.BufferGeometry();
+    dustGeometry.setAttribute("position", new THREE.BufferAttribute(dustPositions, 3));
+    dustGeometry.setAttribute("color", new THREE.BufferAttribute(dustColors, 3));
+    dustGeometry.setAttribute("size", new THREE.BufferAttribute(dustSizes, 1));
 
-    const material = new THREE.ShaderMaterial({
-      uniforms: {
-        uTime: { value: 0 },
-        uMouse: { value: new THREE.Vector2(0, 0) },
-        uIsMobile: { value: isMobile ? 1.0 : 0.0 },
-      },
+    const dustMaterial = new THREE.ShaderMaterial({
+      uniforms: { uTime: { value: 0 } },
       vertexShader: `
         attribute float size;
         attribute vec3 color;
         varying vec3 vColor;
         uniform float uTime;
-        uniform vec2 uMouse;
-        uniform float uIsMobile;
         void main() {
           vColor = color;
           vec3 pos = position;
-          float dist = distance(pos.xy, uMouse * (uIsMobile > 0.5 ? 20.0 : 30.0));
-          pos.z += sin(uTime + position.x * 0.1) * (uIsMobile > 0.5 ? 1.5 : 2.0);
-          pos.xy += normalize(pos.xy - uMouse * (uIsMobile > 0.5 ? 20.0 : 30.0)) * max(0.0, (uIsMobile > 0.5 ? 8.0 : 10.0) - dist) * 0.5;
+          pos.x += sin(uTime * 0.5 + position.z * 0.01) * 0.5;
+          pos.y += cos(uTime * 0.3 + position.x * 0.01) * 0.5;
           vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-          gl_PointSize = size * ((uIsMobile > 0.5 ? 40.0 : 50.0) / -mvPosition.z);
+          gl_PointSize = size * (100.0 / -mvPosition.z);
           gl_Position = projectionMatrix * mvPosition;
         }
       `,
@@ -352,81 +354,200 @@ function HeroAurora() {
         void main() {
           float d = length(gl_PointCoord - vec2(0.5));
           if (d > 0.5) discard;
-          float alpha = 1.0 - smoothstep(0.3, 0.5, d);
-          gl_FragColor = vec4(vColor, alpha * 0.8);
+          float alpha = 1.0 - smoothstep(0.2, 0.5, d);
+          float glow = exp(-d * 3.0) * 0.5;
+          gl_FragColor = vec4(vColor, (alpha + glow) * 0.9);
         }
       `,
       transparent: true,
       depthWrite: false,
       blending: THREE.AdditiveBlending,
     });
+    const dust = new THREE.Points(dustGeometry, dustMaterial);
+    scene.add(dust);
 
-    const particles = new THREE.Points(geometry, material);
-    scene.add(particles);
+    // ============ NEBULA CLOUDS ============
+    const nebulaCount = isMobile ? 15 : 30;
+    const nebulae: THREE.Mesh[] = [];
+    for (let i = 0; i < nebulaCount; i++) {
+      const size = Math.random() * 30 + 10;
+      const nebulaGeo = new THREE.SphereGeometry(size, 8, 8);
+      const nebulaMat = new THREE.MeshBasicMaterial({
+        color: new THREE.Color().setHSL(0.1 + Math.random() * 0.1, 0.5, 0.3),
+        transparent: true,
+        opacity: 0.03 + Math.random() * 0.03,
+      });
+      const nebula = new THREE.Mesh(nebulaGeo, nebulaMat);
+      nebula.position.set(
+        (Math.random() - 0.5) * 300,
+        (Math.random() - 0.5) * 200,
+        Math.random() * -400
+      );
+      nebulae.push(nebula);
+      scene.add(nebula);
+    }
 
-    // Responsive orb size
-    const orbSize = isMobile ? 3.5 : 5;
-    const orbGeometry = new THREE.IcosahedronGeometry(orbSize, isMobile ? 2 : 4);
-    const orbMaterial = new THREE.MeshBasicMaterial({
+    // ============ THE BLACK HOLE (Event Horizon) ============
+    const blackHoleGroup = new THREE.Group();
+    
+    // Inner singularity
+    const singularityGeo = new THREE.SphereGeometry(isMobile ? 4 : 6, 32, 32);
+    const singularityMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
+    const singularity = new THREE.Mesh(singularityGeo, singularityMat);
+    blackHoleGroup.add(singularity);
+
+    // Event horizon wireframe orb
+    const horizonSize = isMobile ? 8 : 12;
+    const horizonGeo = new THREE.IcosahedronGeometry(horizonSize, 3);
+    const horizonMat = new THREE.MeshBasicMaterial({
       color: 0xd4af37,
       wireframe: true,
       transparent: true,
-      opacity: isMobile ? 0.4 : 0.3,
+      opacity: 0.6,
     });
-    const orb = new THREE.Mesh(orbGeometry, orbMaterial);
-    scene.add(orb);
+    const horizon = new THREE.Mesh(horizonGeo, horizonMat);
+    blackHoleGroup.add(horizon);
 
-    // Responsive rings
-    const ringSize = isMobile ? 10 : 15;
-    const ringGeometry = new THREE.TorusGeometry(ringSize, isMobile ? 0.15 : 0.1, 16, isMobile ? 64 : 100);
-    const ringMaterial = new THREE.MeshBasicMaterial({
+    // Accretion disk
+    const diskGeo = new THREE.TorusGeometry(horizonSize * 2, horizonSize * 0.8, 2, 64);
+    const diskMat = new THREE.MeshBasicMaterial({
       color: 0xd4af37,
       transparent: true,
-      opacity: isMobile ? 0.5 : 0.4,
+      opacity: 0.15,
+      side: THREE.DoubleSide,
     });
-    const ring = new THREE.Mesh(ringGeometry, ringMaterial);
-    ring.rotation.x = Math.PI / 2;
-    scene.add(ring);
+    const disk = new THREE.Mesh(diskGeo, diskMat);
+    disk.rotation.x = Math.PI / 2;
+    blackHoleGroup.add(disk);
 
-    const ring2Size = isMobile ? 14 : 20;
-    const ring2 = new THREE.Mesh(
-      new THREE.TorusGeometry(ring2Size, isMobile ? 0.08 : 0.05, 16, isMobile ? 64 : 100),
-      new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.2 })
-    );
-    ring2.rotation.x = Math.PI / 3;
-    scene.add(ring2);
+    // Outer rings
+    for (let i = 0; i < 4; i++) {
+      const ringSize = horizonSize * (1.5 + i * 0.5);
+      const ringGeo = new THREE.TorusGeometry(ringSize, 0.08, 16, 100);
+      const ringMat = new THREE.MeshBasicMaterial({
+        color: i % 2 === 0 ? 0xd4af37 : 0xffffff,
+        transparent: true,
+        opacity: 0.4 - i * 0.08,
+      });
+      const ring = new THREE.Mesh(ringGeo, ringMat);
+      ring.rotation.x = Math.PI / 2 + (Math.random() - 0.5) * 0.3;
+      ring.rotation.y = Math.random() * Math.PI;
+      blackHoleGroup.add(ring);
+    }
+
+    blackHoleGroup.position.set(0, 0, -50); // Black hole is ahead
+    scene.add(blackHoleGroup);
+
+    // ============ WAYPOINT STARS (bright stars to pass by) ============
+    const waypointStars: THREE.Mesh[] = [];
+    const waypointPositions = [
+      { x: -30, y: 10, z: 100 },
+      { x: 40, y: -15, z: 50 },
+      { x: -20, y: 5, z: 0 },
+      { x: 25, y: -8, z: -30 },
+    ];
+    waypointPositions.forEach((pos, i) => {
+      const starGeo = new THREE.OctahedronGeometry(isMobile ? 1.5 : 2, 0);
+      const starMat = new THREE.MeshBasicMaterial({
+        color: 0xffd700,
+        transparent: true,
+        opacity: 0.9,
+      });
+      const star = new THREE.Mesh(starGeo, starMat);
+      star.position.set(pos.x, pos.y, pos.z);
+      waypointStars.push(star);
+      scene.add(star);
+      
+      // Glow around star
+      const glowGeo = new THREE.SphereGeometry(isMobile ? 3 : 4, 16, 16);
+      const glowMat = new THREE.MeshBasicMaterial({
+        color: 0xd4af37,
+        transparent: true,
+        opacity: 0.1,
+      });
+      const glow = new THREE.Mesh(glowGeo, glowMat);
+      glow.position.copy(star.position);
+      scene.add(glow);
+    });
 
     let time = 0;
     let animationFrame: number;
+    let currentScroll = 0;
 
     const animate = () => {
-      time += isMobile ? 0.008 : 0.01; // Slower on mobile
-      material.uniforms.uTime.value = time;
-      material.uniforms.uMouse.value.set(mouseRef.current.x, mouseRef.current.y);
+      time += isMobile ? 0.006 : 0.008;
+      dustMaterial.uniforms.uTime.value = time;
 
-      particles.rotation.y = time * 0.05;
-      particles.rotation.x = Math.sin(time * 0.1) * 0.1;
+      // Smooth scroll interpolation
+      currentScroll += (scrollRef.current - currentScroll) * 0.05;
+      
+      // ============ CAMERA JOURNEY ============
+      // scrollRef.current goes from 0 to 1 (0% to 100% page scroll)
+      const progress = Math.min(currentScroll, 1);
+      
+      // Camera Z: starts at 250, ends at -30 (inside event horizon view)
+      const startZ = isMobile ? 200 : 250;
+      const endZ = isMobile ? -20 : -30;
+      camera.position.z = startZ - progress * (startZ - endZ);
+      
+      // Camera Y: slight arc movement
+      camera.position.y = 20 * Math.cos(progress * Math.PI * 0.5);
+      
+      // Camera X: subtle sway
+      camera.position.x = Math.sin(progress * Math.PI * 2) * 15;
+      
+      // Look ahead with slight offset based on mouse
+      camera.lookAt(
+        mouseRef.current.x * 5,
+        mouseRef.current.y * 3,
+        camera.position.z - 50
+      );
 
-      orb.rotation.x = time * 0.3;
-      orb.rotation.y = time * 0.2;
-      orb.scale.setScalar(1 + Math.sin(time * 2) * 0.1);
+      // Rotate dust field slowly
+      dust.rotation.y = time * 0.02;
+      dust.rotation.x = Math.sin(time * 0.1) * 0.05;
 
-      ring.rotation.z = time * 0.2;
-      ring2.rotation.z = -time * 0.15;
-      ring2.rotation.y = time * 0.1;
+      // Black hole animations - spins faster as you approach
+      const bhSpeed = 0.2 + progress * 0.5;
+      horizon.rotation.x = time * bhSpeed;
+      horizon.rotation.y = time * bhSpeed * 0.7;
+      disk.rotation.z = time * 0.3;
+      
+      // Rings spin at different speeds
+      blackHoleGroup.children.forEach((child, i) => {
+        if (i > 2) { // Outer rings
+          child.rotation.z = time * (0.1 + i * 0.05) * (i % 2 === 0 ? 1 : -1);
+        }
+      });
+
+      // Waypoint stars pulse
+      waypointStars.forEach((star, i) => {
+        star.rotation.y = time * (1 + i * 0.2);
+        star.scale.setScalar(1 + Math.sin(time * 2 + i) * 0.2);
+      });
+
+      // Nebulae drift
+      nebulae.forEach((nebula, i) => {
+        nebula.position.x += Math.sin(time * 0.2 + i) * 0.02;
+        nebula.position.y += Math.cos(time * 0.15 + i) * 0.02;
+      });
 
       renderer.render(scene, camera);
       animationFrame = requestAnimationFrame(animate);
     };
     animate();
 
-    // Mouse move for desktop
+    // ============ SCROLL TRACKING ============
+    const handleScroll = () => {
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      scrollRef.current = window.scrollY / scrollHeight;
+    };
+
     const handleMouseMove = (e: MouseEvent) => {
       mouseRef.current.x = (e.clientX / window.innerWidth) * 2 - 1;
       mouseRef.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
     };
 
-    // Touch move for mobile
     const handleTouchMove = (e: TouchEvent) => {
       if (e.touches.length > 0) {
         const touch = e.touches[0];
@@ -435,30 +556,27 @@ function HeroAurora() {
       }
     };
 
-    // Device orientation for mobile (gyroscope effect)
     const handleOrientation = (e: DeviceOrientationEvent) => {
       if (e.gamma !== null && e.beta !== null) {
-        mouseRef.current.x = (e.gamma / 45) * 0.5; // -1 to 1 based on tilt
-        mouseRef.current.y = ((e.beta - 45) / 45) * 0.5;
+        mouseRef.current.x = (e.gamma / 45) * 0.3;
+        mouseRef.current.y = ((e.beta - 45) / 45) * 0.3;
       }
     };
 
     const handleResize = () => {
-      const newIsMobile = window.innerWidth < 768;
       renderer.setSize(window.innerWidth, window.innerHeight);
       camera.aspect = window.innerWidth / window.innerHeight;
-      camera.position.z = newIsMobile ? 60 : 50;
-      camera.fov = newIsMobile ? 60 : 75;
       camera.updateProjectionMatrix();
     };
 
-    // Add event listeners based on device type
+    // Event listeners
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleResize);
+    
     if (isTouch) {
       window.addEventListener("touchmove", handleTouchMove, { passive: true });
-      // Request permission for device orientation on iOS
       if (typeof DeviceOrientationEvent !== 'undefined' && 
           typeof (DeviceOrientationEvent as unknown as { requestPermission?: () => Promise<string> }).requestPermission === 'function') {
-        // iOS 13+ requires permission
         document.addEventListener('click', () => {
           (DeviceOrientationEvent as unknown as { requestPermission: () => Promise<string> }).requestPermission()
             .then(response => {
@@ -473,28 +591,27 @@ function HeroAurora() {
     } else {
       window.addEventListener("mousemove", handleMouseMove);
     }
-    window.addEventListener("resize", handleResize);
+
+    // Initial scroll position
+    handleScroll();
 
     return () => {
       cancelAnimationFrame(animationFrame);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("deviceorientation", handleOrientation);
-      window.removeEventListener("resize", handleResize);
       renderer.dispose();
-      geometry.dispose();
-      material.dispose();
-      orbGeometry.dispose();
-      orbMaterial.dispose();
-      ringGeometry.dispose();
-      ringMaterial.dispose();
+      dustGeometry.dispose();
+      dustMaterial.dispose();
     };
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none fixed inset-0 z-0 opacity-60 md:opacity-70"
+      className="pointer-events-none fixed inset-0 z-0 opacity-70 md:opacity-80"
       aria-hidden
     />
   );
