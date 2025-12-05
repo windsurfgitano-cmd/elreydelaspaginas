@@ -271,42 +271,101 @@ function HeroAurora() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const isMobile = window.innerWidth < 768;
+    // ============ DEVICE-SPECIFIC CONFIGURATION ============
+    const width = window.innerWidth;
     const isTouch = 'ontouchstart' in window;
+    
+    // Three tiers: mobile (<768), tablet (768-1024), desktop (>1024)
+    const deviceType = width < 768 ? 'mobile' : width < 1024 ? 'tablet' : 'desktop';
+    
+    const config = {
+      mobile: {
+        particles: 1200,
+        spreadX: 120,      // Much narrower for portrait screens
+        spreadY: 200,      // Taller to fill vertical space
+        spreadZ: 400,
+        cameraZ: 150,
+        cameraFOV: 70,     // Wider FOV to see more
+        orbSize: 5,
+        horizonSize: 10,
+        ringScale: 0.7,
+        cometCount: 3,
+        cloudCount: 6,
+        nebulaCount: 12,
+        particleSize: 4,
+        antialias: false,
+        pixelRatio: 1.5,
+      },
+      tablet: {
+        particles: 2500,
+        spreadX: 200,
+        spreadY: 250,
+        spreadZ: 450,
+        cameraZ: 200,
+        cameraFOV: 70,
+        orbSize: 8,
+        horizonSize: 12,
+        ringScale: 0.85,
+        cometCount: 5,
+        cloudCount: 10,
+        nebulaCount: 20,
+        particleSize: 3,
+        antialias: true,
+        pixelRatio: 1.5,
+      },
+      desktop: {
+        particles: 4000,
+        spreadX: 400,
+        spreadY: 400,
+        spreadZ: 500,
+        cameraZ: 250,
+        cameraFOV: 75,
+        orbSize: 12,
+        horizonSize: 15,
+        ringScale: 1,
+        cometCount: 6,
+        cloudCount: 15,
+        nebulaCount: 30,
+        particleSize: 2,
+        antialias: true,
+        pixelRatio: 2,
+      }
+    };
+    
+    const cfg = config[deviceType];
 
     const renderer = new THREE.WebGLRenderer({ 
       canvas, 
       alpha: true, 
-      antialias: !isMobile,
-      powerPreference: isMobile ? "low-power" : "high-performance"
+      antialias: cfg.antialias,
+      powerPreference: deviceType === 'mobile' ? "low-power" : "high-performance"
     });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, cfg.pixelRatio));
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     const scene = new THREE.Scene();
     
     // Camera starts FAR (macro cosmos view)
     const camera = new THREE.PerspectiveCamera(
-      isMobile ? 60 : 75,
+      cfg.cameraFOV,
       window.innerWidth / window.innerHeight, 
       0.1, 
       2000
     );
-    // Start position: far away in the cosmos
-    camera.position.set(0, 20, isMobile ? 200 : 250);
+    camera.position.set(0, 15, cfg.cameraZ);
     camera.lookAt(0, 0, 0);
 
     // ============ COSMIC DUST (far stars) ============
-    const dustCount = isMobile ? 1500 : 4000;
+    const dustCount = cfg.particles;
     const dustPositions = new Float32Array(dustCount * 3);
     const dustColors = new Float32Array(dustCount * 3);
     const dustSizes = new Float32Array(dustCount);
 
     for (let i = 0; i < dustCount; i++) {
-      // Spread across entire journey path
-      dustPositions[i * 3] = (Math.random() - 0.5) * 400;
-      dustPositions[i * 3 + 1] = (Math.random() - 0.5) * 400;
-      dustPositions[i * 3 + 2] = (Math.random() - 0.5) * 500 - 100; // Extend behind
+      // Device-specific spread - narrower on mobile to keep stars visible
+      dustPositions[i * 3] = (Math.random() - 0.5) * cfg.spreadX;
+      dustPositions[i * 3 + 1] = (Math.random() - 0.5) * cfg.spreadY;
+      dustPositions[i * 3 + 2] = (Math.random() - 0.5) * cfg.spreadZ - 100;
       
       const t = Math.random();
       // Mix of gold, white, and subtle blue stars
@@ -320,7 +379,7 @@ function HeroAurora() {
         dustColors[i * 3] = 0.6; dustColors[i * 3 + 1] = 0.7; dustColors[i * 3 + 2] = 1;
       }
       
-      dustSizes[i] = Math.random() * (isMobile ? 3 : 2) + 0.5;
+      dustSizes[i] = Math.random() * cfg.particleSize + 0.5;
     }
 
     const dustGeometry = new THREE.BufferGeometry();
@@ -363,10 +422,10 @@ function HeroAurora() {
     scene.add(dust);
 
     // ============ NEBULA CLOUDS ============
-    const nebulaCount = isMobile ? 15 : 30;
+    const nebulaCount = cfg.nebulaCount;
     const nebulae: THREE.Mesh[] = [];
     for (let i = 0; i < nebulaCount; i++) {
-      const size = Math.random() * 30 + 10;
+      const size = Math.random() * 25 + 8;
       const nebulaGeo = new THREE.SphereGeometry(size, 8, 8);
       const nebulaMat = new THREE.MeshBasicMaterial({
         color: new THREE.Color().setHSL(0.1 + Math.random() * 0.1, 0.5, 0.3),
@@ -374,10 +433,11 @@ function HeroAurora() {
         opacity: 0.03 + Math.random() * 0.03,
       });
       const nebula = new THREE.Mesh(nebulaGeo, nebulaMat);
+      // Keep nebulae within visible range based on device
       nebula.position.set(
-        (Math.random() - 0.5) * 300,
-        (Math.random() - 0.5) * 200,
-        Math.random() * -400
+        (Math.random() - 0.5) * cfg.spreadX * 0.8,
+        (Math.random() - 0.5) * cfg.spreadY * 0.6,
+        Math.random() * -300
       );
       nebulae.push(nebula);
       scene.add(nebula);
@@ -386,14 +446,15 @@ function HeroAurora() {
     // ============ THE BLACK HOLE (Event Horizon) ============
     const blackHoleGroup = new THREE.Group();
     
-    // Inner singularity
-    const singularityGeo = new THREE.SphereGeometry(isMobile ? 4 : 6, 32, 32);
+    // Inner singularity - scaled by config
+    const singularitySize = cfg.orbSize * 0.5;
+    const singularityGeo = new THREE.SphereGeometry(singularitySize, 32, 32);
     const singularityMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
     const singularity = new THREE.Mesh(singularityGeo, singularityMat);
     blackHoleGroup.add(singularity);
 
     // Event horizon wireframe orb
-    const horizonSize = isMobile ? 8 : 12;
+    const horizonSize = cfg.horizonSize;
     const horizonGeo = new THREE.IcosahedronGeometry(horizonSize, 3);
     const horizonMat = new THREE.MeshBasicMaterial({
       color: 0xd4af37,
@@ -416,10 +477,11 @@ function HeroAurora() {
     disk.rotation.x = Math.PI / 2;
     blackHoleGroup.add(disk);
 
-    // Outer rings
-    for (let i = 0; i < 4; i++) {
-      const ringSize = horizonSize * (1.5 + i * 0.5);
-      const ringGeo = new THREE.TorusGeometry(ringSize, 0.08, 16, 100);
+    // Outer rings - scaled by config
+    const ringCount = deviceType === 'mobile' ? 3 : 4;
+    for (let i = 0; i < ringCount; i++) {
+      const ringSize = horizonSize * (1.5 + i * 0.5) * cfg.ringScale;
+      const ringGeo = new THREE.TorusGeometry(ringSize, 0.08, 16, 80);
       const ringMat = new THREE.MeshBasicMaterial({
         color: i % 2 === 0 ? 0xd4af37 : 0xffffff,
         transparent: true,
@@ -431,19 +493,22 @@ function HeroAurora() {
       blackHoleGroup.add(ring);
     }
 
-    blackHoleGroup.position.set(0, 0, -50); // Black hole is ahead
+    blackHoleGroup.position.set(0, 0, -50);
     scene.add(blackHoleGroup);
 
-    // ============ WAYPOINT STARS (bright stars to pass by) ============
+    // ============ WAYPOINT STARS - positioned for device ============
     const waypointStars: THREE.Mesh[] = [];
+    // Tighter positions on mobile so stars stay in view
+    const posScale = deviceType === 'mobile' ? 0.4 : deviceType === 'tablet' ? 0.6 : 1;
     const waypointPositions = [
-      { x: -30, y: 10, z: 100 },
-      { x: 40, y: -15, z: 50 },
-      { x: -20, y: 5, z: 0 },
-      { x: 25, y: -8, z: -30 },
+      { x: -30 * posScale, y: 10, z: 80 },
+      { x: 35 * posScale, y: -12, z: 40 },
+      { x: -18 * posScale, y: 5, z: 0 },
+      { x: 22 * posScale, y: -6, z: -25 },
     ];
-    waypointPositions.forEach((pos, i) => {
-      const starGeo = new THREE.OctahedronGeometry(isMobile ? 1.5 : 2, 0);
+    const starSize = deviceType === 'mobile' ? 2 : deviceType === 'tablet' ? 2.5 : 3;
+    waypointPositions.forEach((pos) => {
+      const starGeo = new THREE.OctahedronGeometry(starSize, 0);
       const starMat = new THREE.MeshBasicMaterial({
         color: 0xffd700,
         transparent: true,
@@ -455,7 +520,7 @@ function HeroAurora() {
       scene.add(star);
       
       // Glow around star
-      const glowGeo = new THREE.SphereGeometry(isMobile ? 3 : 4, 16, 16);
+      const glowGeo = new THREE.SphereGeometry(starSize * 1.5, 16, 16);
       const glowMat = new THREE.MeshBasicMaterial({
         color: 0xd4af37,
         transparent: true,
@@ -475,16 +540,17 @@ function HeroAurora() {
       maxLife: number;
     }
     const comets: Comet[] = [];
-    const cometCount = isMobile ? 3 : 6;
+    const cometCount = cfg.cometCount;
+    const cometSpeed = deviceType === 'mobile' ? 1.2 : deviceType === 'tablet' ? 1.5 : 2;
 
     const createComet = () => {
-      // Random start position at edge of scene
-      const startX = (Math.random() - 0.5) * 300;
-      const startY = Math.random() * 100 + 50;
-      const startZ = Math.random() * 200 - 100;
+      // Spawn within visible range based on device
+      const startX = (Math.random() - 0.5) * cfg.spreadX * 0.8;
+      const startY = Math.random() * 80 + 40;
+      const startZ = Math.random() * 150 - 50;
       
       // Comet head
-      const cometGeo = new THREE.SphereGeometry(0.5, 8, 8);
+      const cometGeo = new THREE.SphereGeometry(0.6, 8, 8);
       const cometMat = new THREE.MeshBasicMaterial({
         color: 0xffffff,
         transparent: true,
@@ -503,47 +569,48 @@ function HeroAurora() {
       const trailMat = new THREE.LineBasicMaterial({
         color: 0xd4af37,
         transparent: true,
-        opacity: 0.4,
+        opacity: 0.5,
       });
       const trail = new THREE.Line(trailGeo, trailMat);
       scene.add(trail);
 
       // Direction towards center/black hole
       const direction = new THREE.Vector3(
-        -startX * 0.01 + (Math.random() - 0.5) * 0.5,
-        -0.3 - Math.random() * 0.3,
-        -0.5 - Math.random() * 0.5
+        -startX * 0.015 + (Math.random() - 0.5) * 0.3,
+        -0.4 - Math.random() * 0.2,
+        -0.6 - Math.random() * 0.3
       ).normalize();
 
       comets.push({
         mesh: cometMesh,
         trail: trail,
-        velocity: direction.multiplyScalar(isMobile ? 1.5 : 2),
+        velocity: direction.multiplyScalar(cometSpeed),
         life: 0,
-        maxLife: 200 + Math.random() * 100,
+        maxLife: 180 + Math.random() * 80,
       });
     };
 
     // Initialize some comets
     for (let i = 0; i < cometCount; i++) {
-      setTimeout(() => createComet(), i * 2000);
+      setTimeout(() => createComet(), i * 2500);
     }
 
     // ============ PARTICLE CLOUDS (drifting gas) ============
-    const cloudCount = isMobile ? 8 : 15;
+    const cloudCount = cfg.cloudCount;
     const clouds: THREE.Points[] = [];
     
     for (let i = 0; i < cloudCount; i++) {
-      const cloudParticles = 50;
+      const cloudParticles = deviceType === 'mobile' ? 30 : 50;
       const cloudPositions = new Float32Array(cloudParticles * 3);
-      const centerX = (Math.random() - 0.5) * 250;
-      const centerY = (Math.random() - 0.5) * 150;
-      const centerZ = Math.random() * -300;
+      // Keep clouds within visible range
+      const centerX = (Math.random() - 0.5) * cfg.spreadX * 0.7;
+      const centerY = (Math.random() - 0.5) * cfg.spreadY * 0.5;
+      const centerZ = Math.random() * -250;
       
       for (let j = 0; j < cloudParticles; j++) {
-        cloudPositions[j * 3] = centerX + (Math.random() - 0.5) * 20;
-        cloudPositions[j * 3 + 1] = centerY + (Math.random() - 0.5) * 20;
-        cloudPositions[j * 3 + 2] = centerZ + (Math.random() - 0.5) * 20;
+        cloudPositions[j * 3] = centerX + (Math.random() - 0.5) * 18;
+        cloudPositions[j * 3 + 1] = centerY + (Math.random() - 0.5) * 18;
+        cloudPositions[j * 3 + 2] = centerZ + (Math.random() - 0.5) * 18;
       }
 
       const cloudGeo = new THREE.BufferGeometry();
@@ -551,9 +618,9 @@ function HeroAurora() {
       
       const cloudMat = new THREE.PointsMaterial({
         color: new THREE.Color().setHSL(0.08 + Math.random() * 0.05, 0.6, 0.5),
-        size: isMobile ? 1.5 : 1,
+        size: deviceType === 'mobile' ? 1.8 : 1.2,
         transparent: true,
-        opacity: 0.15 + Math.random() * 0.1,
+        opacity: 0.18 + Math.random() * 0.1,
         blending: THREE.AdditiveBlending,
       });
       
@@ -566,28 +633,29 @@ function HeroAurora() {
     let animationFrame: number;
     let currentScroll = 0;
     let lastCometTime = 0;
+    const animSpeed = deviceType === 'mobile' ? 0.005 : 0.008;
 
     const animate = () => {
-      time += isMobile ? 0.006 : 0.008;
+      time += animSpeed;
       dustMaterial.uniforms.uTime.value = time;
 
       // Smooth scroll interpolation
       currentScroll += (scrollRef.current - currentScroll) * 0.05;
       
       // ============ CAMERA JOURNEY ============
-      // scrollRef.current goes from 0 to 1 (0% to 100% page scroll)
       const progress = Math.min(currentScroll, 1);
       
-      // Camera Z: starts at 250, ends at -30 (inside event horizon view)
-      const startZ = isMobile ? 200 : 250;
-      const endZ = isMobile ? -20 : -30;
+      // Camera journey based on device - travels from start to event horizon
+      const startZ = cfg.cameraZ;
+      const endZ = deviceType === 'mobile' ? -15 : -25;
       camera.position.z = startZ - progress * (startZ - endZ);
       
       // Camera Y: slight arc movement
-      camera.position.y = 20 * Math.cos(progress * Math.PI * 0.5);
+      camera.position.y = 15 * Math.cos(progress * Math.PI * 0.5);
       
-      // Camera X: subtle sway
-      camera.position.x = Math.sin(progress * Math.PI * 2) * 15;
+      // Camera X: sway based on device (tighter on mobile)
+      const swayAmount = deviceType === 'mobile' ? 5 : deviceType === 'tablet' ? 10 : 15;
+      camera.position.x = Math.sin(progress * Math.PI * 2) * swayAmount;
       
       // Look ahead with slight offset based on mouse
       camera.lookAt(
@@ -664,7 +732,8 @@ function HeroAurora() {
       }
       
       // Spawn new comets periodically
-      if (time - lastCometTime > (isMobile ? 8 : 5)) {
+      const cometInterval = deviceType === 'mobile' ? 10 : 6;
+      if (time - lastCometTime > cometInterval) {
         lastCometTime = time;
         if (comets.length < cometCount) {
           createComet();
