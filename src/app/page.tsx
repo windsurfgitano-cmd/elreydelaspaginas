@@ -41,12 +41,12 @@ const faqs = [
 ];
 
 const tickerItems = [
-  "20% OFF páginas web premium",
-  "Videos 10% OFF",
-  "Contenido social 15% OFF",
-  "Packs completos 25% OFF",
-  "Automatizaciones + IA",
-  "Experiencias mobile-first"
+  "Shopify 2.0 desde $1.300.000",
+  "WooCommerce desde $1.500.000",
+  "Apps PWA desde $990.000",
+  "Contenido UGC premium",
+  "Branding desde $490.000",
+  "Marketing Digital desde $300.000"
 ];
 
 const guarantees = [
@@ -134,28 +134,40 @@ const pains = [
 
 const packs = [
   {
-    title: "Pack Web + Funnel",
-    price: "Desde $49.990",
+    title: "Shopify 2.0",
+    price: "$1.300.000 + IVA",
     desc:
-      "Sitios SSR ultra rápidos, SEO técnico, analytics y funnels conectados a CRM.",
+      "E-commerce profesional con Shopify 2.0: theme custom, checkout optimizado, integraciones de pago y logística.",
   },
   {
-    title: "Pack Social Reactor",
-    price: "Desde $29.990",
+    title: "WooCommerce Pro",
+    price: "$1.500.000 + IVA",
     desc:
-      "Calendarios, motion vertical, copywriting y automatización de respuestas en WhatsApp.",
+      "Tienda WordPress con WooCommerce: personalización total, SEO, pasarelas de pago y automatizaciones.",
   },
   {
-    title: "Pack Video / GSAP",
-    price: "Desde $39.990",
+    title: "Apps PWA",
+    price: "Desde $990.000 + IVA",
     desc:
-      "Video vertical + animaciones GSAP/Three.js para campañas con retención brutal.",
+      "Aplicaciones web progresivas: experiencia nativa, notificaciones push, modo offline y velocidad brutal.",
   },
   {
-    title: "Pack Apps & No-Code",
-    price: "Desde $89.990",
+    title: "Contenido UGC",
+    price: "Cotizar",
     desc:
-      "Dashboards, portals y apps que automatizan procesos y liberan a tu equipo.",
+      "Generación de contenido UGC (videos y fotos). Todos los modelos, todas las locaciones. Producción premium.",
+  },
+  {
+    title: "Branding & Marca",
+    price: "Desde $490.000 + IVA",
+    desc:
+      "Diseño de marca completo: logo, identidad visual, manual de marca y aplicaciones gráficas.",
+  },
+  {
+    title: "Marketing Digital & RRSS",
+    price: "Desde $300.000 + IVA",
+    desc:
+      "Gestión de redes sociales, campañas pagadas, contenido estratégico y reportes mensuales.",
   },
 ];
 
@@ -662,10 +674,10 @@ export default function Home() {
               Soluciones
             </p>
             <h2 className="mt-3 text-3xl font-semibold text-white sm:text-4xl">
-              Packs diseñados para destrabar cada etapa del funnel
+              Servicios premium para marcas que quieren dominar
             </h2>
           </div>
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {packs.map((pack) => (
               <article key={pack.title} className="card-fade glass-card flex flex-col gap-4 p-6">
                 <div>
