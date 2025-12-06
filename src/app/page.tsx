@@ -41,12 +41,12 @@ const faqs = [
 ];
 
 const tickerItems = [
-  "Shopify 2.0 desde $1.300.000",
-  "WooCommerce desde $1.500.000",
-  "Apps PWA desde $990.000",
+  "Shopify 2.0 desde $649.990",
+  "WooCommerce desde $749.990",
+  "Apps PWA desde $489.990",
   "Contenido UGC · Cotizar",
-  "Branding desde $490.000",
-  "Marketing Digital desde $300.000"
+  "Branding desde $239.990",
+  "Marketing Digital desde $149.990"
 ];
 
 const guarantees = [
@@ -131,19 +131,19 @@ const pains = [
 const packs = [
   {
     title: "Shopify 2.0",
-    price: "Desde $1.300.000 + IVA",
+    price: "Desde $649.990 + IVA",
     desc:
       "E-commerce profesional con Shopify 2.0: theme custom, checkout optimizado, integraciones de pago y logística.",
   },
   {
     title: "WooCommerce Pro",
-    price: "Desde $1.500.000 + IVA",
+    price: "Desde $749.990 + IVA",
     desc:
       "Tienda WordPress con WooCommerce: personalización total, SEO, pasarelas de pago y automatizaciones.",
   },
   {
     title: "Apps PWA",
-    price: "Desde $990.000 + IVA",
+    price: "Desde $489.990 + IVA",
     desc:
       "Aplicaciones web progresivas: experiencia nativa, notificaciones push, modo offline y alto rendimiento.",
   },
