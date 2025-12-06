@@ -38,6 +38,17 @@ body {
   letter-spacing: -0.01em;
 }
 
+/* Títulos condensados - más impacto visual */
+h1, h2, h3 {
+  font-stretch: 90%;
+  letter-spacing: -0.03em;
+}
+
+h1 {
+  font-stretch: 85%;
+  letter-spacing: -0.04em;
+}
+
 img {
   max-width: 100%;
   height: auto;

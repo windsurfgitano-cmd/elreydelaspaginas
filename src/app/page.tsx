@@ -1390,7 +1390,7 @@ export default function Home() {
                 motion que <span className="text-gold glow-text">hipnotiza</span>
               </h1>
               <p className="hero-title text-balance text-lg text-white/60 sm:max-w-2xl sm:text-xl">
-                Experiencias digitales que convierten 24/7. Three.js + GSAP + estrategia = 
+                Experiencias digitales que convierten 24/7. Diseño + animación + estrategia = 
                 <span className="font-semibold text-white"> resultados medibles.</span>
               </p>
             </div>
