@@ -997,11 +997,11 @@ function MotionShowcase() {
     const torus = new THREE.Mesh(
       new THREE.TorusKnotGeometry(1.5, 0.45, 220, 20),
       new THREE.MeshStandardMaterial({
-        color: 0xd4af37,
-        metalness: 0.65,
-        roughness: 0.25,
-        emissive: 0x080808,
-        emissiveIntensity: 0.6,
+        color: 0xfff176, // amarillo patito
+        metalness: 0.55,
+        roughness: 0.2,
+        emissive: 0x2b1c02,
+        emissiveIntensity: 0.45,
       })
     );
     scene.add(torus);
