@@ -994,33 +994,20 @@ function MotionShowcase() {
     );
     camera.position.set(0, 0, 8);
 
-    const gradientTexture = (() => {
-      const size = 128;
-      const canvas = document.createElement("canvas");
-      canvas.width = size;
-      canvas.height = size;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return null;
-      const gradient = ctx.createLinearGradient(0, 0, 0, size);
-      gradient.addColorStop(0, "#fff9c4");
-      gradient.addColorStop(0.45, "#ffe082");
-      gradient.addColorStop(0.75, "#fdd835");
-      gradient.addColorStop(1, "#c49100");
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, size, size);
-      const texture = new THREE.CanvasTexture(canvas);
-      texture.minFilter = THREE.LinearFilter;
-      texture.magFilter = THREE.LinearFilter;
-      texture.generateMipmaps = false;
-      return texture;
-    })();
-
     const torus = new THREE.Mesh(
       new THREE.TorusKnotGeometry(1.5, 0.45, 220, 20),
-      new THREE.MeshToonMaterial({
-        color: 0xffeb3b,
-        gradientMap: gradientTexture ?? undefined,
-        emissive: new THREE.Color(0xfff59d).multiplyScalar(0.15),
+      new THREE.MeshPhysicalMaterial({
+        color: 0xffd54f,
+        emissive: 0x1c1202,
+        emissiveIntensity: 0.35,
+        metalness: 1,
+        roughness: 0.08,
+        clearcoat: 1,
+        clearcoatRoughness: 0.05,
+        sheen: 0.8,
+        sheenColor: new THREE.Color(0xfff2c1),
+        reflectivity: 1,
+        envMapIntensity: 1.4,
       })
     );
     scene.add(torus);
@@ -1037,10 +1024,15 @@ function MotionShowcase() {
     halo.rotation.x = Math.PI / 2;
     scene.add(halo);
 
-    const ambient = new THREE.AmbientLight(0xffffff, 0.6);
-    const point = new THREE.PointLight(0xffde8a, 1.2);
-    point.position.set(5, 6, 4);
-    scene.add(ambient, point);
+    const ambient = new THREE.AmbientLight(0xfff1c0, 0.5);
+    const keyLight = new THREE.DirectionalLight(0xfff7d6, 1.5);
+    keyLight.position.set(6, 8, 5);
+    const rimLight = new THREE.PointLight(0xffc94c, 1.4, 20);
+    rimLight.position.set(-4, -3, 3);
+    const fillLight = new THREE.SpotLight(0xffffff, 0.8, 15, Math.PI / 4, 0.5, 1.2);
+    fillLight.position.set(0, 3, 6);
+    fillLight.target = torus;
+    scene.add(ambient, keyLight, rimLight, fillLight, fillLight.target);
 
     let raf = 0;
     const renderScene = () => {
