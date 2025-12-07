@@ -994,14 +994,33 @@ function MotionShowcase() {
     );
     camera.position.set(0, 0, 8);
 
+    const gradientTexture = (() => {
+      const size = 128;
+      const canvas = document.createElement("canvas");
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return null;
+      const gradient = ctx.createLinearGradient(0, 0, 0, size);
+      gradient.addColorStop(0, "#fff9c4");
+      gradient.addColorStop(0.45, "#ffe082");
+      gradient.addColorStop(0.75, "#fdd835");
+      gradient.addColorStop(1, "#c49100");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, size, size);
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.minFilter = THREE.LinearFilter;
+      texture.magFilter = THREE.LinearFilter;
+      texture.generateMipmaps = false;
+      return texture;
+    })();
+
     const torus = new THREE.Mesh(
       new THREE.TorusKnotGeometry(1.5, 0.45, 220, 20),
-      new THREE.MeshStandardMaterial({
-        color: 0xfff176, // amarillo patito
-        metalness: 0.55,
-        roughness: 0.2,
-        emissive: 0x2b1c02,
-        emissiveIntensity: 0.45,
+      new THREE.MeshToonMaterial({
+        color: 0xffeb3b,
+        gradientMap: gradientTexture ?? undefined,
+        emissive: new THREE.Color(0xfff59d).multiplyScalar(0.15),
       })
     );
     scene.add(torus);
