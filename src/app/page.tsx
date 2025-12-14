@@ -920,6 +920,7 @@ function HeroAurora() {
     };
 
     const handleResize = () => {
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, cfg.pixelRatio));
       renderer.setSize(window.innerWidth, window.innerHeight);
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
@@ -967,7 +968,7 @@ function HeroAurora() {
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none fixed inset-0 z-0 opacity-70 md:opacity-80"
+      className="hero-aurora-canvas pointer-events-none fixed inset-0 z-0 opacity-70 md:opacity-80"
       aria-hidden
     />
   );
@@ -980,8 +981,13 @@ function MotionShowcase() {
     const container = containerRef.current;
     if (!container) return;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(window.devicePixelRatio);
+    const isMobile = window.innerWidth < 768;
+    const renderer = new THREE.WebGLRenderer({
+      antialias: !isMobile,
+      alpha: true,
+      powerPreference: isMobile ? "low-power" : "high-performance",
+    });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
     renderer.setSize(container.clientWidth, container.clientHeight);
     container.appendChild(renderer.domElement);
 
@@ -995,7 +1001,7 @@ function MotionShowcase() {
     camera.position.set(0, 0, 8);
 
     const torus = new THREE.Mesh(
-      new THREE.TorusKnotGeometry(1.5, 0.45, 220, 20),
+      new THREE.TorusKnotGeometry(1.5, 0.45, isMobile ? 140 : 220, isMobile ? 12 : 20),
       new THREE.MeshPhysicalMaterial({
         color: 0xffd54f,
         emissive: 0x1c1202,
@@ -1048,6 +1054,7 @@ function MotionShowcase() {
       if (!container) return;
       const width = container.clientWidth;
       const height = container.clientHeight;
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.innerWidth < 768 ? 1.5 : 2));
       renderer.setSize(width, height);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
