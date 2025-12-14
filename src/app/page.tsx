@@ -1331,7 +1331,7 @@ export default function Home() {
           </nav>
           <div className="flex items-center gap-3">
             <Link
-              href="https://wa.me/56981330217?text=QUIERO%20DOMINAR%20MI%20MERCADO"
+              href="https://wa.me/56981734039?text=Hablar%20con%20el%20Rey%20de%20las%20Paginas"
               className="hidden rounded-full bg-gold px-4 py-2 text-xs font-semibold text-black sm:inline-flex"
             >
               WhatsApp
@@ -1374,7 +1374,7 @@ export default function Home() {
                 </Link>
               ))}
               <Link
-                href="https://wa.me/56981330217?text=QUIERO%20DOMINAR%20MI%20MERCADO"
+                href="https://wa.me/56981734039?text=Hablar%20con%20el%20Rey%20de%20las%20Paginas"
                 className="rounded-full bg-gold px-4 py-2 text-center text-xs font-semibold text-black"
                 onClick={() => setMenuOpen(false)}
               >
@@ -1416,7 +1416,7 @@ export default function Home() {
 
           <div className="hero-cta flex flex-col gap-4 sm:flex-row sm:items-center">
             <Link
-              href="https://wa.me/56981330217?text=QUIERO%20DOMINAR%20MI%20MERCADO"
+              href="https://wa.me/56981734039?text=Hablar%20con%20el%20Rey%20de%20las%20Paginas"
               className="magnetic-btn group relative inline-flex flex-1 items-center justify-center gap-2 overflow-hidden rounded-full bg-gold px-8 py-4 text-sm font-bold uppercase tracking-wider text-black shadow-[0_0_60px_rgba(212,175,55,0.4)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_80px_rgba(212,175,55,0.6)]"
             >
               <span className="relative z-10">Dominar mi mercado</span>
@@ -1560,7 +1560,7 @@ export default function Home() {
           </div>
           {/* Urgency CTA */}
           <Link
-            href="https://wa.me/56981330217?text=NECESITO%20SOLUCIONAR%20ESTO%20URGENTE%20🔥"
+            href="https://wa.me/56981734039?text=Hablar%20con%20el%20Rey%20de%20las%20Paginas"
             className="mx-auto inline-flex items-center gap-2 rounded-full border-2 border-danger bg-danger/20 px-8 py-4 font-bold text-white transition-all hover:bg-danger hover:text-white"
           >
             Solucionar esto AHORA →
@@ -1598,7 +1598,7 @@ export default function Home() {
             <p className="text-sm font-bold uppercase tracking-wider text-gold">¿No sabes cuál elegir?</p>
             <p className="text-white/70">Te asesoramos gratis en 5 minutos</p>
             <Link
-              href="https://wa.me/56981330217?text=Hola!%20Quiero%20asesoría%20para%20elegir%20el%20mejor%20servicio%20🚀"
+              href="https://wa.me/56981734039?text=Hablar%20con%20el%20Rey%20de%20las%20Paginas"
               className="inline-flex items-center gap-2 rounded-full bg-gold px-8 py-4 font-bold text-black transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(212,175,55,0.4)]"
             >
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -1677,13 +1677,13 @@ export default function Home() {
             </p>
             <div className="mt-6 flex flex-col gap-3">
               <Link
-                href="https://wa.me/56981734039?text=PROYECTO%20ALTO%20VALOR"
+                href="https://wa.me/56981734039?text=Hablar%20con%20el%20Rey%20de%20las%20Paginas"
                 className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#ff6b35] to-[#f7931e] px-6 py-3 text-sm font-semibold text-black shadow-[0_20px_45px_rgba(255,107,53,0.35)]"
               >
                 Proyecto técnico urgente
               </Link>
               <Link
-                href="https://wa.me/56981330217?text=QUIERO%20MI%20PROMO"
+                href="https://wa.me/56981734039?text=Hablar%20con%20el%20Rey%20de%20las%20Paginas"
                 className="inline-flex items-center justify-center rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white"
               >
                 Quiero mi promo hoy
@@ -1886,7 +1886,7 @@ export default function Home() {
             <div className="mt-6 rounded-2xl border border-white/10 bg-black/30 p-4 text-sm">
               <p className="font-semibold text-white">Atención Alto Valor</p>
               <p className="mt-2 text-white/70">
-                +56 9 8173 4039 · soporte@elreydelaspaginas.com
+                +56981734039 · soporte@elreydelaspaginas.com
               </p>
               <p className="mt-2 text-xs text-white/60">
                 Respuesta en menos de 2h hábiles.
@@ -1913,7 +1913,7 @@ export default function Home() {
             Cada día que pasa es una oportunidad perdida. Tu competencia ya está invirtiendo en experiencias digitales que convierten.
           </p>
           <Link
-            href="https://wa.me/56981330217?text=Hola%2C%20me%20interesa%20saber%20m%C3%A1s"
+            href="https://wa.me/56981734039?text=Hablar%20con%20el%20Rey%20de%20las%20Paginas"
             className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-gold px-10 py-5 text-lg font-black uppercase tracking-wider text-black shadow-[0_0_60px_rgba(212,175,55,0.5)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_80px_rgba(212,175,55,0.7)]"
           >
             <svg className="h-7 w-7" fill="currentColor" viewBox="0 0 24 24">
@@ -1941,7 +1941,7 @@ export default function Home() {
 
     {/* FLOATING WHATSAPP BUTTON - Always visible */}
     <Link
-      href="https://wa.me/56981330217?text=Hola%2C%20me%20interesa%20saber%20m%C3%A1s"
+      href="https://wa.me/56981734039?text=Hablar%20con%20el%20Rey%20de%20las%20Paginas"
       className="fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-full bg-[#25D366] px-5 py-4 font-bold text-white shadow-[0_8px_30px_rgba(37,211,102,0.4)] transition-all duration-300 hover:scale-110 hover:shadow-[0_8px_40px_rgba(37,211,102,0.6)] md:bottom-8 md:right-8"
       aria-label="Contactar por WhatsApp"
     >
