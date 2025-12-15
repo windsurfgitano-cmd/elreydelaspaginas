@@ -13,6 +13,7 @@ const navItems = [
   { label: "Problema", href: "#problem" },
   { label: "Packs", href: "#services" },
   { label: "Casos", href: "#portfolio" },
+  { label: "Concurso", href: "/concurso-shopify" },
   { label: "Garantías", href: "#guarantees" },
   { label: "Contacto", href: "#contact" },
 ];
