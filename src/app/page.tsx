@@ -550,7 +550,6 @@ function HeroAurora() {
       transparent: true,
       depthWrite: false,
       blending: THREE.AdditiveBlending,
-      vertexColors: true,
     });
     const disk = new THREE.Points(diskGeo, diskMat);
     disk.rotation.x = 0.3; // Tilt the disk for that Interstellar look
