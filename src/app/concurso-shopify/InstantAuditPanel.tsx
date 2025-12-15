@@ -156,7 +156,17 @@ export default function InstantAuditPanel({ onResult }: Props) {
 
       const data = (await res.json().catch(() => null)) as InstantAuditResponse | null;
 
-      if (!res.ok || !data) {
+      const errorFromServer =
+        data && "error" in data && typeof data.error === "string" ? data.error : null;
+
+      if (!res.ok) {
+        throw new Error(
+          errorFromServer ||
+            `No se pudo generar el diagnóstico (HTTP ${res.status}). Intenta de nuevo.`
+        );
+      }
+
+      if (!data) {
         throw new Error("No se pudo generar el diagnóstico. Intenta de nuevo.");
       }
 

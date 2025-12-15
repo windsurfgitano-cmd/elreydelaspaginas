@@ -127,7 +127,11 @@ async function callAzureOpenAI(prompt: string) {
   const model = process.env.AZURE_OPENAI_MODEL;
 
   if (!url || !apiKey || !model) {
-    throw new Error("Azure OpenAI no está configurado (AZURE_OPENAI_*).");
+    const missing: string[] = [];
+    if (!url) missing.push("AZURE_OPENAI_RESPONSES_URL");
+    if (!apiKey) missing.push("AZURE_OPENAI_API_KEY");
+    if (!model) missing.push("AZURE_OPENAI_MODEL");
+    throw new Error(`Faltan variables Azure OpenAI: ${missing.join(", ")}.`);
   }
 
   const res = await fetch(url, {
@@ -150,7 +154,7 @@ async function callAzureOpenAI(prompt: string) {
       typeof data?.error?.message === "string"
         ? data.error.message
         : "Error llamando Azure OpenAI";
-    throw new Error(message);
+    throw new Error(`Azure OpenAI (HTTP ${res.status}): ${message}`);
   }
 
   const text = readAzureOpenAIOutputText(data);
@@ -169,7 +173,11 @@ async function callAzureAnthropic(prompt: string) {
   const model = process.env.AZURE_ANTHROPIC_MODEL;
 
   if (!url || !apiKey || !model) {
-    throw new Error("Azure Anthropic no está configurado (AZURE_ANTHROPIC_*).");
+    const missing: string[] = [];
+    if (!url) missing.push("AZURE_ANTHROPIC_MESSAGES_URL");
+    if (!apiKey) missing.push("AZURE_ANTHROPIC_API_KEY");
+    if (!model) missing.push("AZURE_ANTHROPIC_MODEL");
+    throw new Error(`Faltan variables Azure Anthropic: ${missing.join(", ")}.`);
   }
 
   const res = await fetch(url, {
@@ -183,12 +191,9 @@ async function callAzureAnthropic(prompt: string) {
       model,
       max_tokens: 900,
       temperature: 0.7,
+      system:
+        "Eres experto/a en copywriting de performance y ofertas para tráfico de IG/TikTok.",
       messages: [
-        {
-          role: "system",
-          content:
-            "Eres experto/a en copywriting de performance y ofertas para tráfico de IG/TikTok.",
-        },
         { role: "user", content: prompt },
       ],
     }),
@@ -201,7 +206,7 @@ async function callAzureAnthropic(prompt: string) {
       typeof data?.error?.message === "string"
         ? data.error.message
         : "Error llamando Azure Anthropic";
-    throw new Error(message);
+    throw new Error(`Azure Anthropic (HTTP ${res.status}): ${message}`);
   }
 
   const text = readClaudeOutputText(data);
@@ -231,26 +236,41 @@ export async function POST(request: Request) {
 
   const prompt = buildAuditPrompt({ offer, audience, goal, url: url || undefined });
 
-  try {
-    const [gpt, claude] = await Promise.all([
-      callAzureOpenAI(prompt),
-      callAzureAnthropic(prompt),
-    ]);
+  const errorToMessage = (reason: unknown) =>
+    reason instanceof Error ? reason.message : "Error inesperado.";
 
-    return NextResponse.json({
-      ok: true,
-      input: { offer, audience, goal, url: url || undefined },
-      gpt,
-      claude,
-      generated_at: new Date().toISOString(),
-    });
-  } catch (err) {
+  const [gptResult, claudeResult] = await Promise.allSettled([
+    callAzureOpenAI(prompt),
+    callAzureAnthropic(prompt),
+  ]);
+
+  const gpt =
+    gptResult.status === "fulfilled"
+      ? gptResult.value
+      : { raw: `ERROR: ${errorToMessage(gptResult.reason)}`, json: null };
+
+  const claude =
+    claudeResult.status === "fulfilled"
+      ? claudeResult.value
+      : { raw: `ERROR: ${errorToMessage(claudeResult.reason)}`, json: null };
+
+  if (gptResult.status === "rejected" && claudeResult.status === "rejected") {
     return NextResponse.json(
       {
         ok: false,
-        error: err instanceof Error ? err.message : "Error inesperado.",
+        error: `GPT: ${errorToMessage(gptResult.reason)} | Claude: ${errorToMessage(
+          claudeResult.reason
+        )}`,
       },
       { status: 500 }
     );
   }
+
+  return NextResponse.json({
+    ok: true,
+    input: { offer, audience, goal, url: url || undefined },
+    gpt,
+    claude,
+    generated_at: new Date().toISOString(),
+  });
 }
