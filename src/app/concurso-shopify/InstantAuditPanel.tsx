@@ -125,6 +125,23 @@ function ModelCard({ title, data }: { title: string; data: ModelResult }) {
   );
 }
 
+function ThinkingIndicator() {
+  return (
+    <span className="thinking-loader">
+      <span className="thinking-icon" aria-hidden="true">
+        <span className="thinking-brain">🧠</span>
+        <span className="thinking-spark thinking-spark-1" />
+        <span className="thinking-spark thinking-spark-2" />
+        <span className="thinking-spark thinking-spark-3" />
+        <span className="thinking-spark thinking-spark-4" />
+        <span className="thinking-spark thinking-spark-5" />
+        <span className="thinking-spark thinking-spark-6" />
+      </span>
+      <span>Pensando…</span>
+    </span>
+  );
+}
+
 export default function InstantAuditPanel({ onResult }: Props) {
   const [offer, setOffer] = useState("");
   const [audience, setAudience] = useState("");
@@ -248,7 +265,7 @@ export default function InstantAuditPanel({ onResult }: Props) {
           className="mt-1 w-full rounded-full bg-white px-6 py-3 text-sm font-semibold text-black disabled:opacity-70"
           disabled={status === "loading"}
         >
-          {status === "loading" ? "Generando…" : "Dame mi diagnóstico"}
+          {status === "loading" ? <ThinkingIndicator /> : "Dame mi diagnóstico"}
         </button>
 
         {status === "error" && (
