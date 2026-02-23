@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang=\"es\" class=\"scroll-smooth\">
+<head>
+    <meta charset=\"UTF-8\">
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+    <title>El Rey de las Páginas — Agencia Digital Premium</title>
+    <meta name=\"description\" content=\"Diseño web, e-commerce y marketing digital para marcas que buscan resultados medibles y escalables.\">
+    
+    <!-- Fonts -->
+    <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">
+    <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>
+    <link href=\"https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&display=swap\" rel=\"stylesheet\">
+    
+    <!-- Tailwind CSS (via CDN for simplicity in this HTML file, recommend building locally for production) -->
+    <script src=\"https://cdn.tailwindcss.com\"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        gold: '#d4af37',
+                        dark: '#0a0a0a',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+            color: #000;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(212, 175, 55, 0.4);
+        }
+    </style>
+</head>
+<body class=\"antialiased selection:bg-gold selection:text-black font-sans\">
+
+    <!-- Navbar Minimalista -->
+    <nav class=\"fixed w-full z-50 glass-panel border-b-0 border-white/5\">
+        <div class=\"max-w-6xl mx-auto px-6 h-20 flex items-center justify-between\">
+            <div class=\"font-display font-bold tracking-widest text-gold text-lg uppercase\">
+                El Rey
+            </div>
+            <a href=\"#contacto\" class=\"text-sm font-semibold text-white/80 hover:text-white transition-colors\">
+                Agendar Asesoría →
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section: Claro, directo, sin distracciones pesadas -->
+    <header class=\"relative pt-40 pb-20 lg:pt-48 lg:pb-32 px-6 overflow-hidden\">
+        <!-- Fondo sutil en lugar de Three.js -->
+        <div class=\"absolute inset-0 z-[-1]\">
+            <div class=\"absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-gold/10 rounded-full blur-[120px] opacity-50\"></div>
+        </div>
+
+        <div class=\"max-w-4xl mx-auto text-center\">
+            <div class=\"inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gold/30 bg-gold/5 text-gold text-xs font-semibold uppercase tracking-widest mb-8\">
+                <span class=\"w-2 h-2 rounded-full bg-gold animate-pulse\"></span>
+                Agencia Digital Especializada
+            </div>
+            
+            <h1 class=\"font-display text-5xl lg:text-7xl font-bold leading-tight mb-6\">
+                Construimos plataformas que <span class=\"text-gold glow-text\">escalan tu negocio</span>.
+            </h1>
+            
+            <p class=\"text-lg lg:text-xl text-white/60 mb-10 max-w-2xl mx-auto leading-relaxed\">
+                Dejamos atrás las plantillas lentas. Diseñamos e-commerce (Shopify) y aplicaciones web (Next.js) orientadas 100% a la conversión y velocidad.
+            </p>
+            
+            <div class=\"flex flex-col sm:flex-row gap-4 justify-center\">
+                <a href=\"https://wa.me/56981734039?text=Hola,%20quiero%20agendar%20una%20asesoría%20de%2015%20minutos\" target=\"_blank\" rel=\"noopener\" class=\"btn-primary px-8 py-4 rounded-full font-bold text-sm uppercase tracking-wide flex items-center justify-center gap-2\">
+                    Agendar Llamada (15 min)
+                    <svg class=\"w-4 h-4\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M14 5l7 7m0 0l-7 7m7-7H3\"></path></svg>
+                </a>
+                <a href=\"#portafolio\" class=\"px-8 py-4 rounded-full font-bold text-sm uppercase tracking-wide text-white border border-white/20 hover:bg-white/5 transition-colors\">
+                    Ver Casos de Éxito
+                </a>
+            </div>
+            
+            <p class=\"mt-6 text-xs text-white/40 uppercase tracking-widest\">Respuesta garantizada en 4 horas hábiles</p>
+        </div>
+    </header>
+
+    <!-- Social Proof / Logos Clientes -->
+    <section class=\"py-10 border-y border-white/5 bg-white/[0.02]\">
+        <div class=\"max-w-6xl mx-auto px-6\">
+            <p class=\"text-center text-xs font-semibold text-white/40 uppercase tracking-widest mb-8\">Confían en nuestra tecnología</p>
+            <div class=\"flex flex-wrap justify-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-500\">
+                <!-- Reemplazar con logos reales -->
+                <div class=\"font-display text-xl font-bold\">BANANA CO.</div>
+                <div class=\"font-display text-xl font-bold\">TITAN SOUL</div>
+                <div class=\"font-display text-xl font-bold\">BEAUTY NAILS</div>
+                <div class=\"font-display text-xl font-bold\">FASHION FORWARD</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Propuesta de Valor B2B (Sin meter miedo) -->
+    <section class=\"py-24 px-6\" id=\"servicios\">
+        <div class=\"max-w-6xl mx-auto\">
+            <div class=\"text-center mb-16\">
+                <h2 class=\"font-display text-3xl lg:text-4xl font-bold mb-4\">Ingeniería orientada a ingresos</h2>
+                <p class=\"text-white/60 max-w-2xl mx-auto\">No hacemos \"páginas bonitas\". Construimos activos digitales integrados con tu CRM, analítica y logística.</p>
+            </div>
+
+            <div class=\"grid md:grid-cols-3 gap-6\">
+                <!-- Servicio 1 -->
+                <div class=\"glass-panel p-8 rounded-2xl hover:border-gold/30 transition-colors\">
+                    <div class=\"w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-6\">
+                        <svg class=\"w-6 h-6 text-gold\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z\"></path></svg>
+                    </div>
+                    <h3 class=\"text-xl font-bold mb-3\">E-Commerce High-End</h3>
+                    <p class=\"text-white/60 text-sm leading-relaxed mb-6\">Desarrollo en Shopify 2.0 y WooCommerce. Optimizados para mobile, integrados con pasarelas de pago chilenas y ERPs.</p>
+                    <p class=\"text-sm font-semibold text-gold\">Desde $649.990 CLP</p>
+                </div>
+
+                <!-- Servicio 2 -->
+                <div class=\"glass-panel p-8 rounded-2xl hover:border-gold/30 transition-colors\">
+                    <div class=\"w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-6\">
+                        <svg class=\"w-6 h-6 text-gold\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4\"></path></svg>
+                    </div>
+                    <h3 class=\"text-xl font-bold mb-3\">Desarrollo a Medida (PWA)</h3>
+                    <p class=\"text-white/60 text-sm leading-relaxed mb-6\">Aplicaciones web progresivas (Next.js/React). Experiencia nativa, ultra rápidas y escalables para procesos complejos.</p>
+                    <p class=\"text-sm font-semibold text-gold\">Desde $489.990 CLP</p>
+                </div>
+
+                <!-- Servicio 3 -->
+                <div class=\"glass-panel p-8 rounded-2xl hover:border-gold/30 transition-colors\">
+                    <div class=\"w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-6\">
+                        <svg class=\"w-6 h-6 text-gold\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z\"></path></svg>
+                    </div>
+                    <h3 class=\"text-xl font-bold mb-3\">Growth & Analítica</h3>
+                    <p class=\"text-white/60 text-sm leading-relaxed mb-6\">Implementación de GA4, Meta Pixel, Looker Studio y campañas de performance para medir el ROI exacto.</p>
+                    <p class=\"text-sm font-semibold text-gold\">Cotización a medida</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- El Proceso (Genera confianza) -->
+    <section class=\"py-24 px-6 bg-white/[0.02]\">
+        <div class=\"max-w-4xl mx-auto\">
+            <div class=\"text-center mb-16\">
+                <h2 class=\"font-display text-3xl lg:text-4xl font-bold mb-4\">Metodología sin fricción</h2>
+                <p class=\"text-white/60\">Un proceso transparente, documentado y con fechas de entrega reales.</p>
+            </div>
+
+            <div class=\"space-y-8\">
+                <div class=\"flex gap-6 items-start\">
+                    <div class=\"flex-shrink-0 w-10 h-10 rounded-full bg-gold/20 text-gold flex items-center justify-center font-bold border border-gold/30\">1</div>
+                    <div>
+                        <h4 class=\"text-lg font-bold mb-2\">Discovery & Workshop (Día 1-2)</h4>
+                        <p class=\"text-white/60 text-sm\">Entendemos tu modelo de negocio, definimos KPIs, arquitectura técnica y te entregamos un cronograma exacto en Notion.</p>
+                    </div>
+                </div>
+                <div class=\"flex gap-6 items-start\">
+                    <div class=\"flex-shrink-0 w-10 h-10 rounded-full bg-gold/20 text-gold flex items-center justify-center font-bold border border-gold/30\">2</div>
+                    <div>
+                        <h4 class=\"text-lg font-bold mb-2\">Desarrollo & UI/UX (Semanas 1-3)</h4>
+                        <p class=\"text-white/60 text-sm\">Construimos la plataforma con revisiones semanales. Sin sorpresas. Todo optimizado para SEO y Core Web Vitals desde el día uno.</p>
+                    </div>
+                </div>
+                <div class=\"flex gap-6 items-start\">
+                    <div class=\"flex-shrink-0 w-10 h-10 rounded-full bg-gold/20 text-gold flex items-center justify-center font-bold border border-gold/30\">3</div>
+                    <div>
+                        <h4 class=\"text-lg font-bold mb-2\">QA, Analítica & Lanzamiento (Semana 4)</h4>
+                        <p class=\"text-white/60 text-sm\">Conectamos pixeles, probamos pasarelas de pago, capacitamos a tu equipo (videos en Loom) y lanzamos a producción.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final (Único, claro, WhatsApp) -->
+    <section class=\"py-32 px-6\" id=\"contacto\">
+        <div class=\"max-w-3xl mx-auto text-center glass-panel p-12 rounded-3xl relative overflow-hidden\">
+            <!-- Resplandor interno -->
+            <div class=\"absolute inset-0 bg-gradient-to-b from-gold/10 to-transparent opacity-50\"></div>
+            
+            <div class=\"relative z-10\">
+                <h2 class=\"font-display text-4xl font-bold mb-6\">Hablemos de tu proyecto</h2>
+                <p class=\"text-lg text-white/70 mb-10\">Sin formularios largos ni correos perdidos. Escríbenos directo y agendamos una videollamada para evaluar si hacemos fit.</p>
+                
+                <a href=\"https://wa.me/56981734039?text=Hola,%20vengo%20de%20la%20web.%20Me%20gustaría%20agendar%20una%20reunión%20sobre%20un%20proyecto.\" target=\"_blank\" rel=\"noopener\" class=\"btn-primary inline-flex px-10 py-5 rounded-full font-bold text-lg uppercase tracking-wide items-center justify-center gap-3\">
+                    <svg class=\"w-6 h-6\" fill=\"currentColor\" viewBox=\"0 0 24 24\"><path d=\"M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z\"/></svg>\n                    Chatear por WhatsApp\n                </a>\n                <p class=\"mt-4 text-sm text-white/50\">Respondemos en minutos (Lunes a Viernes, 9am - 18pm)</p>\n            </div>\n        </div>\n    </section>\n\n    <!-- Footer Minimalista -->\n    <footer class=\"border-t border-white/5 py-8 px-6\">\n        <div class=\"max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/40\">\n            <p>&copy; 2026 El Rey de las Páginas. Santiago, Chile.</p>\n            <div class=\"flex gap-6\">\n                <a href=\"#\" class=\"hover:text-gold transition-colors\">Términos de Servicio</a>\n                <a href=\"#\" class=\"hover:text-gold transition-colors\">Política de Privacidad</a>\n            </div>\n        </div>\n    </footer>\n\n</body>\n</html>
