@@ -37,6 +37,9 @@ export const metadata: Metadata = {
     description:
       "Shopify 2.0, AI-Ready Store, AO y marketing. Mobile first + WCAG 2.2. Santiago, Chile.",
   },
+  alternates: {
+    canonical: "https://www.elreydelaspaginas.com",
+  },
   icons: {
     icon: "/reylogo.png",
     apple: "/reylogo.png",
@@ -149,6 +152,11 @@ export default function RootLayout({
                       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Branding & Marca" } },
                       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Marketing Digital & RRSS" } },
                     ],
+                  },
+                  geo: {
+                    "@type": "GeoCoordinates",
+                    latitude: -33.4489,
+                    longitude: -70.6693,
                   },
                   sameAs: [
                     "https://wa.me/56981734039",
