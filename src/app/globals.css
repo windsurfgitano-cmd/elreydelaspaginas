@@ -326,13 +326,85 @@ img {
   }
 }
 
+/* ============================================
+   ACCESSIBILITY — WCAG 2.2 AA / AAA selectivo
+   Principio: no romper la esencia visual,
+   solo respetar las preferencias del sistema.
+   ============================================ */
+
+/* Skip-to-content — visible solo con teclado */
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99999;
+  background: var(--gold);
+  color: #000;
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0 0 0.75rem 0.75rem;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid #000;
+  outline-offset: 2px;
+}
+
+/* Focus rings — visibles solo con teclado, no con mouse */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+/* Quitar outline en click (mouse users) */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* prefers-reduced-motion:
+   - Para CSS: detiene animaciones decorativas
+   - Three.js / GSAP se detienen desde JS (ver HeroAurora / useEffect)
+   - El diseño visual se mantiene igual — solo deja de moverse */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
+  /* Animaciones CSS decorativas → off */
+  .text-shimmer,
+  .ticker-track,
+  .thinking-brain,
+  .thinking-spark,
+  .hero-glow-element,
+  .float-element,
+  .glow-text {
+    animation: none !important;
   }
+
+  /* Transiciones de hover → instantáneas */
+  .glass-card,
+  .magnetic-btn,
+  .tilt-card {
+    transition: none !important;
+  }
+
+  /* Scroll suave → off */
+  :root { scroll-behavior: auto; }
+
+  /* Custom cursor → off */
   :root { cursor: auto; }
-  .custom-cursor, .cursor-dot { display: none; }
+  .custom-cursor,
+  .cursor-dot { display: none; }
+
+  /* Canvas 3D: ocultar y mostrar fallback estático */
+  .hero-aurora-canvas { display: none; }
+  .motion-reduced-bg {
+    display: block;
+  }
+}
+
+/* Por defecto el fallback está oculto */
+.motion-reduced-bg {
+  display: none;
 }
