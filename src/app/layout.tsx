@@ -19,13 +19,13 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.elreydelaspaginas.com"),
-  title: "El Rey de las Páginas — Digital Design & Web Experience",
+  title: "El Rey de las Páginas — Agencia Shopify & Web Premium Santiago",
   description:
-    "Domina tu mercado con experiencias web premium: branding, contenido, automatización y tecnología lista para 2025.",
+    "Agencia web en Santiago: Shopify 2.0, AI-Ready Store, Agent Optimization (AO), branding y marketing digital. Experiencias que dominan el mercado 2026.",
   openGraph: {
-    title: "El Rey de las Páginas",
+    title: "El Rey de las Páginas — Agencia Shopify & Web Premium Santiago",
     description:
-      "Landing premium, mobile-first y accesible para marcas que quieren ganarle a su competencia.",
+      "Shopify 2.0, AI-Ready Store y Agent Optimization. Domina tu mercado con experiencias web premium. Santiago, Chile.",
     url: "https://www.elreydelaspaginas.com",
     siteName: "El Rey de las Páginas",
     locale: "es_CL",
@@ -33,14 +33,23 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "El Rey de las Páginas",
+    title: "El Rey de las Páginas — Agencia Shopify & Web Premium",
     description:
-      "Diseño, automatización y marketing listos para dominar 2025. Mobile first + WCAG.",
+      "Shopify 2.0, AI-Ready Store, AO y marketing. Mobile first + WCAG 2.2. Santiago, Chile.",
   },
   icons: {
     icon: "/reylogo.png",
     apple: "/reylogo.png",
   },
+  keywords: [
+    "agencia shopify santiago",
+    "diseño web chile",
+    "shopify 2.0 chile",
+    "agent optimization chile",
+    "ai ready store",
+    "agencia ecommerce santiago",
+    "desarrollo web premium chile",
+  ],
 };
 
 export default function RootLayout({
@@ -98,6 +107,89 @@ export default function RootLayout({
         <Suspense fallback={null}>
           <TrackingClient ga4MeasurementId={ga4MeasurementId} />
         </Suspense>
+
+        {/* JSON-LD Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "LocalBusiness",
+                  "@id": "https://www.elreydelaspaginas.com/#business",
+                  name: "El Rey de las Páginas",
+                  url: "https://www.elreydelaspaginas.com",
+                  telephone: "+56981734039",
+                  email: "soporte@elreydelaspaginas.com",
+                  description:
+                    "Agencia web en Santiago especializada en Shopify 2.0, AI-Ready Store, Agent Optimization (AO), branding y marketing digital premium.",
+                  address: {
+                    "@type": "PostalAddress",
+                    addressLocality: "Santiago",
+                    addressRegion: "Región Metropolitana",
+                    addressCountry: "CL",
+                  },
+                  areaServed: ["CL", "LATAM"],
+                  priceRange: "$$",
+                  hasOfferCatalog: {
+                    "@type": "OfferCatalog",
+                    name: "Servicios Digitales Premium",
+                    itemListElement: [
+                      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Shopify 2.0" } },
+                      { "@type": "Offer", itemOffered: { "@type": "Service", name: "AI-Ready Store" } },
+                      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Agent Optimization (AO)" } },
+                      { "@type": "Offer", itemOffered: { "@type": "Service", name: "WooCommerce Pro" } },
+                      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Apps PWA" } },
+                      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Branding & Marca" } },
+                      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Marketing Digital & RRSS" } },
+                    ],
+                  },
+                  sameAs: [
+                    "https://wa.me/56981734039",
+                  ],
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://www.elreydelaspaginas.com/#website",
+                  url: "https://www.elreydelaspaginas.com",
+                  name: "El Rey de las Páginas",
+                  publisher: { "@id": "https://www.elreydelaspaginas.com/#business" },
+                },
+                {
+                  "@type": "FAQPage",
+                  mainEntity: [
+                    {
+                      "@type": "Question",
+                      name: "¿Cuánto tarda un proyecto completo?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "Sprint inicial de 2 semanas para la landing/branding + 2 semanas para automatizaciones. Ajustamos según complejidad.",
+                      },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "¿Trabajan solo en Chile?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "No. Operamos remoto con marcas en LATAM, USA y Europa. Coordinamos horarios y facturación internacional.",
+                      },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "¿Cómo miden resultados?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "Implementamos GA4, Meta Pixel y dashboards (Looker/Databox) con KPIs acordados antes del kickoff.",
+                      },
+                    },
+                  ],
+                },
+              ],
+            }),
+          }}
+        />
+
         {children}
       </body>
     </html>
