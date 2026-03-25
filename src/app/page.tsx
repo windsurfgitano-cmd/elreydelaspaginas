@@ -36,24 +36,34 @@ const navItems = [
 
 const faqs = [
   {
-    question: "¿Cuánto tarda un proyecto completo?",
+    question: "¿Cuánto cuesta una tienda Shopify en Chile?",
     answer:
-      "Sprint inicial de 2 semanas para la landing/branding + 2 semanas para automatizaciones. Ajustamos según complejidad.",
+      "El precio base es desde $649.990 CLP + IVA. El costo final depende del alcance: integraciones de pago, apps custom, migraciones o automatizaciones. Cotizamos sin compromiso en 24h.",
   },
   {
-    question: "¿Trabajan solo en Chile?",
+    question: "¿Cuánto tarda un proyecto web completo?",
     answer:
-      "No. Operamos remoto con marcas en LATAM, USA y Europa. Coordinamos horarios y facturación internacional.",
+      "Sprint inicial de 2 semanas para landing/branding + 2 semanas para automatizaciones. Ajustamos según complejidad del proyecto.",
   },
   {
-    question: "¿Puedo traer mi diseño o equipo?",
+    question: "¿Qué es Agent Optimization (AO) y para qué sirve?",
     answer:
-      "Sí. Podemos ser tu squad de implementación o integrarnos a tu equipo actual (agencia, product, etc.).",
+      "AO es el nuevo SEO para inteligencia artificial. Optimizamos tu presencia para que ChatGPT, Gemini y Copilot recomienden tu negocio cuando usuarios preguntan sobre tus servicios o productos.",
   },
   {
-    question: "¿Cómo miden resultados?",
+    question: "¿Trabajan solo en Santiago o en todo Chile y LATAM?",
     answer:
-      "Implementamos GA4, Meta Pixel y dashboards (Looker/Databox) con KPIs acordados antes del kickoff.",
+      "Operamos 100% remoto con clientes en Chile, LATAM, USA y Europa. Coordinamos horarios y facturación internacional sin problema.",
+  },
+  {
+    question: "¿Puedo traer mi diseño o integrarme con mi equipo actual?",
+    answer:
+      "Sí. Podemos ser tu squad de implementación o integrarnos a tu equipo actual (agencia, product, diseñadores, etc.).",
+  },
+  {
+    question: "¿Cómo miden y reportan los resultados?",
+    answer:
+      "Implementamos GA4, Meta Pixel y dashboards en Looker/Databox con KPIs acordados antes del kickoff. Reportes periódicos incluidos.",
   },
 ];
 
