@@ -30,24 +30,24 @@ const recursos = [
     title: "Checklist: Lanza Tu Negocio Digital en 7 Días",
     description:
       "Paso a paso para pasar de la idea a un negocio funcionando en una semana. Sin rodeos, pura acción.",
-    file: "/recursos/checklist-negocio-digital.md",
-    filename: "checklist-negocio-digital.md",
+    file: "/recursos/checklist-negocio-digital-7-dias.pdf",
+    filename: "checklist-negocio-digital-7-dias.pdf",
   },
   {
     emoji: "💬",
     title: "Vende por WhatsApp en Chile: De 0 a 100 Clientes",
     description:
       "Scripts copy-paste, manejo de objeciones y un plan para conseguir tus primeros 100 clientes usando WhatsApp Business.",
-    file: "/recursos/guia-whatsapp-chile.md",
-    filename: "guia-whatsapp-chile.md",
+    file: "/recursos/guia-whatsapp-ventas-chile.pdf",
+    filename: "guia-whatsapp-ventas-chile.pdf",
   },
   {
     emoji: "💰",
     title: "Control de Finanzas para Emprendedores",
     description:
       "Plantilla de control de caja, fórmulas de pricing, KPIs financieros y un ejemplo real con números reales.",
-    file: "/recursos/plantilla-finanzas.md",
-    filename: "plantilla-finanzas.md",
+    file: "/recursos/plantilla-control-finanzas.pdf",
+    filename: "plantilla-control-finanzas.pdf",
   },
 ];
 
