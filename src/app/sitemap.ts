@@ -24,6 +24,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     ...blogPosts,
     {
+      url: "https://www.elreydelaspaginas.com/recursos",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: "https://www.elreydelaspaginas.com/concurso-shopify",
       lastModified: new Date(),
       changeFrequency: "monthly",
