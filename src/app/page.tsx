@@ -29,6 +29,7 @@ const navItems = [
   { label: "Problema", href: "#problem" },
   { label: "Packs", href: "#services" },
   { label: "Casos", href: "#portfolio" },
+  { label: "Blog", href: "/blog" },
   { label: "Concurso", href: "/concurso-shopify" },
   { label: "Garantías", href: "#guarantees" },
   { label: "Contacto", href: "#contact" },
@@ -161,35 +162,35 @@ const packs = [
   {
     title: "Shopify 2.0",
     price: "Desde $649.990 + IVA",
-    priceNote: "Precio final según alcance del proyecto",
+    priceNote: "Tier Starter · Tarifa horaria desde $45 USD/hr",
     desc:
-      "E-commerce profesional con Shopify 2.0: theme custom, checkout optimizado, integraciones de pago y logística.",
+      "E-commerce profesional con Shopify 2.0: theme custom, checkout optimizado, integraciones de pago y logística. Precio final según horas y alcance del proyecto.",
   },
   {
     title: "WooCommerce Pro",
     price: "Desde $749.990 + IVA",
-    priceNote: "Precio final según alcance del proyecto",
+    priceNote: "Tier Starter · Tarifa horaria desde $45 USD/hr",
     desc:
-      "Tienda WordPress con WooCommerce: personalización total, SEO, pasarelas de pago y automatizaciones.",
+      "Tienda WordPress con WooCommerce: personalización total, SEO técnico, pasarelas de pago y automatizaciones. Precio final según horas y alcance.",
   },
   {
     title: "Apps PWA",
     price: "Desde $489.990 + IVA",
-    priceNote: "Precio final según alcance del proyecto",
+    priceNote: "Tier Starter · Tarifa horaria desde $45 USD/hr",
     desc:
-      "Aplicaciones web progresivas: experiencia nativa, notificaciones push, modo offline y alto rendimiento.",
+      "Aplicaciones web progresivas: experiencia nativa, notificaciones push, modo offline y alto rendimiento. Precio final según alcance.",
   },
   {
     title: "AI-Ready Store 🤖",
     price: "Desde $1.490.990 + IVA",
-    priceNote: "Precio final según alcance del proyecto",
+    priceNote: "Tier Premium · Tarifa horaria desde $75 USD/hr",
     desc:
       "Tu tienda lista para vender en ChatGPT, Google AI Mode, Copilot y Gemini. Catálogo estructurado para agentes IA, UCP/MCP setup y Agent Optimization (AO). El nuevo SEO.",
   },
   {
     title: "Agent Optimization (AO)",
     price: "Desde $390.990 + IVA",
-    priceNote: "Precio final según alcance del proyecto",
+    priceNote: "Tier Pro · Tarifa horaria desde $60 USD/hr",
     desc:
       "Audit + setup para que tus productos aparezcan en respuestas de IA. Metafields, structured data, knowledge base y lenguaje natural optimizado para agentes. Ninguna agencia chilena lo ofrece.",
   },
@@ -198,19 +199,19 @@ const packs = [
     price: "Cotizar",
     priceNote: "Presupuesto según volumen y producción",
     desc:
-      "Generación de contenido UGC (videos y fotos). Todos los modelos, todas las locaciones. Producción premium.",
+      "Generación de contenido UGC premium (videos y fotos). Todos los modelos, todas las locaciones.",
   },
   {
     title: "Branding & Marca",
     price: "Desde $490.000 + IVA",
-    priceNote: "Precio final según alcance del proyecto",
+    priceNote: "Tier Starter · Tarifa horaria desde $45 USD/hr",
     desc:
       "Diseño de marca completo: logo, identidad visual, manual de marca y aplicaciones gráficas.",
   },
   {
     title: "Marketing Digital & RRSS",
     price: "Desde $300.000 + IVA",
-    priceNote: "Precio final según alcance del proyecto",
+    priceNote: "Retainer mensual · Precio según canales",
     desc:
       "Gestión de redes sociales, campañas pagadas, contenido estratégico y reportes mensuales.",
   },
@@ -220,6 +221,7 @@ const portfolio = [
   {
     name: "BANANA COMPANY",
     img: "/banana.png",
+    imgPosition: "object-center",
     badge: "E-commerce",
     quote:
       "+340% ventas en 3 meses tras e-commerce omnicanal con CRM y fulfillment integrado.",
@@ -228,7 +230,8 @@ const portfolio = [
   },
   {
     name: "TITAN SOUL",
-    img: "/titan.png",
+    img: "https://titansoul.cl/wp-content/uploads/2025/09/dos-localizadores-37.webp",
+    imgPosition: "object-center",
     badge: "Retail",
     quote:
       "Branding + Shopify + campañas UGC: 500 ventas mensuales, app de fidelización.",
@@ -238,6 +241,7 @@ const portfolio = [
   {
     name: "Beauty Nails Studio",
     img: "/unas.png",
+    imgPosition: "object-center",
     badge: "Social/Video",
     quote:
       "Videos cinematográficos que reventaron TikTok/IG: agenda llena +50K views/mes.",
@@ -246,6 +250,7 @@ const portfolio = [
   {
     name: "Fashion Forward",
     img: "/moda.png",
+    imgPosition: "object-center",
     badge: "Mobile App",
     quote:
       "App de fidelización con notificaciones y AR previews. Retención +250%.",
@@ -1694,8 +1699,8 @@ export default function Home() {
                     src={project.img}
                     alt={`Proyecto ${project.name}`}
                     fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className={`object-cover ${project.imgPosition ?? "object-center"}`}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 560px"
                   />
                   <span className="absolute left-4 top-4 rounded-full bg-black/70 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-white">
                     {project.badge}
@@ -1994,12 +1999,51 @@ export default function Home() {
       </section>
 
       <footer className="px-4 pb-32 md:pb-10">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 border-t border-white/10 pt-6 text-sm text-white/60 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <p className="font-semibold text-white">EL REY DE LAS PÁGINAS</p>
-            <p>Desde 2005 — Underground & Premium</p>
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 border-t border-white/10 pt-8 text-sm text-white/60">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div className="flex flex-col gap-1">
+              <p className="font-semibold text-white">EL REY DE LAS PÁGINAS</p>
+              <p>Santiago, Chile — Servicio remoto Chile & LATAM</p>
+              <p>Contacto: hola@elreydelaspaginas.com · +56981734039</p>
+            </div>
+            {/* Redes sociales */}
+            <div className="flex items-center gap-4">
+              <a
+                href="https://www.instagram.com/elreydelaspaginas"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram de El Rey de las Páginas"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/60 transition hover:border-gold hover:text-gold"
+              >
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </a>
+              <a
+                href="https://www.linkedin.com/company/elreydelaspaginas"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn de El Rey de las Páginas"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/60 transition hover:border-gold hover:text-gold"
+              >
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </a>
+              <a
+                href="https://www.tiktok.com/@elreydelaspaginas"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TikTok de El Rey de las Páginas"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/60 transition hover:border-gold hover:text-gold"
+              >
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+                </svg>
+              </a>
+            </div>
           </div>
-          <p>Contacto: hola@elreydelaspaginas.com</p>
+          <p className="text-xs text-white/30">© 2026 El Rey de las Páginas · Santiago, Chile · Todos los derechos reservados</p>
         </div>
       </footer>
     </main>
