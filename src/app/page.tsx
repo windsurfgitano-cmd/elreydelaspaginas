@@ -162,35 +162,35 @@ const packs = [
   {
     title: "Shopify 2.0",
     price: "Desde $649.990 + IVA",
-    priceNote: "Tier Starter · Tarifa horaria desde $45 USD/hr",
+    priceNote: "Precio final según alcance del proyecto",
     desc:
-      "E-commerce profesional con Shopify 2.0: theme custom, checkout optimizado, integraciones de pago y logística. Precio final según horas y alcance del proyecto.",
+      "E-commerce profesional con Shopify 2.0: theme custom, checkout optimizado, integraciones de pago y logística.",
   },
   {
     title: "WooCommerce Pro",
     price: "Desde $749.990 + IVA",
-    priceNote: "Tier Starter · Tarifa horaria desde $45 USD/hr",
+    priceNote: "Precio final según alcance del proyecto",
     desc:
-      "Tienda WordPress con WooCommerce: personalización total, SEO técnico, pasarelas de pago y automatizaciones. Precio final según horas y alcance.",
+      "Tienda WordPress con WooCommerce: personalización total, SEO técnico, pasarelas de pago y automatizaciones.",
   },
   {
     title: "Apps PWA",
     price: "Desde $489.990 + IVA",
-    priceNote: "Tier Starter · Tarifa horaria desde $45 USD/hr",
+    priceNote: "Precio final según alcance del proyecto",
     desc:
-      "Aplicaciones web progresivas: experiencia nativa, notificaciones push, modo offline y alto rendimiento. Precio final según alcance.",
+      "Aplicaciones web progresivas: experiencia nativa, notificaciones push, modo offline y alto rendimiento.",
   },
   {
     title: "AI-Ready Store 🤖",
     price: "Desde $1.490.990 + IVA",
-    priceNote: "Tier Premium · Tarifa horaria desde $75 USD/hr",
+    priceNote: "Precio final según alcance del proyecto",
     desc:
       "Tu tienda lista para vender en ChatGPT, Google AI Mode, Copilot y Gemini. Catálogo estructurado para agentes IA, UCP/MCP setup y Agent Optimization (AO). El nuevo SEO.",
   },
   {
     title: "Agent Optimization (AO)",
     price: "Desde $390.990 + IVA",
-    priceNote: "Tier Pro · Tarifa horaria desde $60 USD/hr",
+    priceNote: "Precio final según alcance del proyecto",
     desc:
       "Audit + setup para que tus productos aparezcan en respuestas de IA. Metafields, structured data, knowledge base y lenguaje natural optimizado para agentes. Ninguna agencia chilena lo ofrece.",
   },
@@ -204,14 +204,14 @@ const packs = [
   {
     title: "Branding & Marca",
     price: "Desde $490.000 + IVA",
-    priceNote: "Tier Starter · Tarifa horaria desde $45 USD/hr",
+    priceNote: "Precio final según alcance del proyecto",
     desc:
       "Diseño de marca completo: logo, identidad visual, manual de marca y aplicaciones gráficas.",
   },
   {
     title: "Marketing Digital & RRSS",
     price: "Desde $300.000 + IVA",
-    priceNote: "Retainer mensual · Precio según canales",
+    priceNote: "Precio final según alcance del proyecto",
     desc:
       "Gestión de redes sociales, campañas pagadas, contenido estratégico y reportes mensuales.",
   },
