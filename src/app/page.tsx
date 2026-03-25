@@ -9,6 +9,22 @@ import * as THREE from "three";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Hook: respeta prefers-reduced-motion del sistema
+function useReducedMotion(): boolean {
+  const [reduced, setReduced] = useState(() =>
+    typeof window !== "undefined"
+      ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      : false
+  );
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const handler = (e: MediaQueryListEvent) => setReduced(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+  return reduced;
+}
+
 const navItems = [
   { label: "Problema", href: "#problem" },
   { label: "Packs", href: "#services" },
@@ -289,8 +305,11 @@ function HeroAurora() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
   const scrollRef = useRef(0);
+  const prefersReduced = useReducedMotion();
 
   useEffect(() => {
+    // Respeta prefers-reduced-motion: no iniciar Three.js
+    if (prefersReduced) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -1203,10 +1222,11 @@ export default function Home() {
   const heroRef = useRef<HTMLElement | null>(null);
   const rootRef = useRef<HTMLElement | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const prefersReduced = useReducedMotion();
 
-  // Epic GSAP animations
+  // Epic GSAP animations — respeta prefers-reduced-motion
   useEffect(() => {
-    if (!heroRef.current) return;
+    if (!heroRef.current || prefersReduced) return;
     const ctx = gsap.context(() => {
       // Dramatic hero entrance
       const tl = gsap.timeline();
@@ -1251,9 +1271,9 @@ export default function Home() {
     return () => ctx.revert();
   }, []);
 
-  // Scroll-triggered animations with parallax
+  // Scroll-triggered animations with parallax — respeta prefers-reduced-motion
   useEffect(() => {
-    if (!rootRef.current) return;
+    if (!rootRef.current || prefersReduced) return;
     const ctx = gsap.context(() => {
       // Parallax sections
       gsap.utils.toArray<HTMLElement>(".parallax-section").forEach((section) => {
@@ -1323,7 +1343,17 @@ export default function Home() {
     <>
     <CustomCursor />
     <HeroAurora />
+    {/* Fondo estático para prefers-reduced-motion — mismo look, sin movimiento */}
+    <div
+      className="motion-reduced-bg pointer-events-none fixed inset-0 z-0"
+      aria-hidden="true"
+      style={{
+        background:
+          "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(212,175,55,0.08) 0%, transparent 70%), #030303",
+      }}
+    />
     <main
+      id="main-content"
       ref={rootRef}
       className="relative z-10 min-h-screen"
     >
