@@ -7,6 +7,7 @@ const links = [
   { label: "Servicios", href: "/#services" },
   { label: "Casos", href: "/#portfolio" },
   { label: "Blog", href: "/blog" },
+  { label: "Recursos", href: "/recursos" },
   { label: "Garantías", href: "/#guarantees" },
   { label: "Contacto", href: "/#contact" },
 ];
