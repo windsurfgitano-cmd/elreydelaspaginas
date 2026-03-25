@@ -4,6 +4,8 @@ import Script from "next/script";
 import { Suspense } from "react";
 import "./globals.css";
 import TrackingClient from "./TrackingClient";
+import SiteNav from "./components/SiteNav";
+import SiteFooter from "./components/SiteFooter";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -211,7 +213,9 @@ export default function RootLayout({
           }}
         />
 
+        <SiteNav />
         {children}
+        <SiteFooter />
       </body>
     </html>
   );
