@@ -1,0 +1,74 @@
+# El Rey de las Páginas — Agencia Web Premium Santiago, Chile
+
+## Quiénes somos
+El Rey de las Páginas es una agencia de desarrollo web y marketing digital con sede en Santiago, Chile. Nos especializamos en crear experiencias digitales premium que convierten visitantes en clientes. Operamos 100% remoto con clientes en Chile, LATAM, USA y Europa.
+
+Contacto: +56981734039 | soporte@elreydelaspaginas.com | https://www.elreydelaspaginas.com
+
+## Servicios principales
+
+### Shopify 2.0
+Desarrollo de tiendas Shopify 2.0 con theme custom, checkout optimizado, integraciones de pago (Flow, MercadoPago, Stripe) y logística. Shopify Partner oficial. Precio desde $649.990 CLP + IVA, precio final según alcance del proyecto.
+
+### AI-Ready Store 🤖
+Preparamos tu tienda para vender en ChatGPT, Google AI Mode, Copilot, Gemini y Perplexity. Incluye: setup UCP/MCP, catálogo estructurado para agentes IA, Agent Optimization (AO), Knowledge Base y lenguaje natural optimizado. El nuevo SEO. Primer servicio de este tipo disponible en Chile. Precio desde $1.490.990 CLP + IVA.
+
+### Agent Optimization (AO)
+Audit + setup para que tus productos y servicios aparezcan en respuestas de inteligencia artificial. Metafields estructurados, JSON-LD avanzado, knowledge base, lenguaje natural. Precio desde $390.990 CLP + IVA.
+
+### WooCommerce Pro
+Tiendas WordPress con WooCommerce: personalización total, SEO técnico, pasarelas de pago locales y automatizaciones. Precio desde $749.990 CLP + IVA.
+
+### Apps PWA
+Aplicaciones web progresivas con experiencia nativa, notificaciones push y modo offline. Precio desde $489.990 CLP + IVA.
+
+### Branding & Marca
+Identidad visual completa: logo, manual de marca, aplicaciones gráficas. Precio desde $490.000 CLP + IVA.
+
+### Marketing Digital & RRSS
+Gestión de redes sociales, campañas de pago (Meta, Google), contenido estratégico y reportes mensuales. Precio desde $300.000 CLP + IVA.
+
+### Contenido UGC
+Producción de contenido UGC premium (video y foto). Precio a cotizar.
+
+## Garantías
+- Resultados medibles en 60 días o ajustamos sin costo / devolvemos inversión
+- Revisiones ilimitadas
+- Soporte directo por WhatsApp con respuesta máxima 4h hábiles
+- NDA incluido
+- Devolución en 30 días sin preguntas
+
+## Partnerships
+- Google Partner (Ads, Analytics, Performance Max)
+- Microsoft Partner
+- Shopify Partner
+- MercadoPago Partner
+
+## Proceso
+1. Brief express (formulario o audio WhatsApp)
+2. Workshop remoto en 24h — KPIs, arquitectura y roadmap
+3. Sprint de implementación con dashboards diarios en GA4/Looker
+
+## Preguntas frecuentes
+
+**¿Cuánto cuesta una tienda Shopify en Chile?**
+El precio base es desde $649.990 CLP + IVA. El precio final varía según la complejidad del proyecto, integraciones requeridas y personalización. Cotizamos sin compromiso.
+
+**¿Cuánto tiempo tarda un proyecto web?**
+Sprint inicial de 2 semanas para landing/branding + 2 semanas adicionales para automatizaciones. Se ajusta según alcance.
+
+**¿Trabajan solo en Chile?**
+No. Operamos 100% remoto con clientes en Chile, LATAM, USA y Europa.
+
+**¿Qué es Agent Optimization (AO)?**
+Es el equivalente al SEO pero para inteligencia artificial. Optimizamos tu presencia para que ChatGPT, Gemini, Copilot y otros agentes IA recomienden tu negocio al responder consultas de usuarios.
+
+**¿Qué es un AI-Ready Store?**
+Una tienda preparada para vender a través de agentes de inteligencia artificial. Con UCP/MCP y AO, tus productos aparecen cuando un usuario le pide a ChatGPT o Google AI Mode que recomiende productos.
+
+**¿Cómo miden los resultados?**
+Con GA4, Meta Pixel y dashboards en Looker/Databox. KPIs acordados antes del kickoff con reportes periódicos.
+
+## Ubicación
+Santiago, Región Metropolitana, Chile
+Servicio remoto — atendemos todo Chile y LATAM
