@@ -255,4 +255,63 @@ En El Rey de las Páginas usamos GSAP 3.14 en todos nuestros proyectos. El resul
 [Ver nuestro trabajo](/#portfolio)
     `.trim(),
   },
+  {
+    slug: "marcas-chilenas-perdiendo-visibilidad-ventas-por-trafico-organico",
+    title: "Por qué las marcas chilenas que dependen del tráfico orgánico están perdiendo visibilidad y ventas",
+    excerpt: "La búsqueda ya no reparte clics como antes: si tu marca vive del SEO, hoy estás financiando menos crecimiento con el mismo esfuerzo.",
+    category: "SEO",
+    date: "2026-03-25",
+    content: `
+# Por qué las marcas chilenas que dependen del tráfico orgánico están perdiendo visibilidad y ventas
+
+La conversación ya no es teórica. Está ocurriendo ahora. En múltiples verticales, el tráfico que antes llegaba a sitios de contenido, ecommerce y marcas de servicios está siendo absorbido por respuestas generadas por IA, módulos de resultados enriquecidos y experiencias de búsqueda que reducen el clic hacia la web. Para muchas empresas, eso se traduce en una realidad incómoda: el mismo posicionamiento ya no garantiza el mismo volumen de visitas.
+
+Esto no significa que el SEO haya muerto. Significa que cambió el contrato implícito entre Google, los usuarios y las marcas. Durante años, el premio por invertir en contenido era simple: aparecer arriba y recibir visitas. Hoy, en muchas consultas, la respuesta aparece antes que el clic. Y cuando el clic baja, también cambian el costo de adquisición, el retorno del contenido y la forma en que una empresa justifica su inversión digital.
+
+Para Chile y Latinoamérica, el impacto es especialmente sensible. En mercados donde el presupuesto de marketing suele ser más exigente, cada punto de eficiencia importa. Si una empresa depende de orgánico para captar leads, vender productos o educar demanda, no puede darse el lujo de seguir operando con una estrategia pensada para un buscador que ya se comporta distinto.
+
+## Lo que cambió de verdad
+
+La mayor transformación no es solo tecnológica; es económica. Antes, el contenido bien rankeado podía sostener una parte relevante del pipeline comercial. Hoy, el sistema de búsqueda está reteniendo más respuesta dentro de la propia página de resultados. Eso afecta especialmente a tres tipos de negocio:
+
+- **Ecommerce**, donde el contenido informacional ya no siempre deriva en visitas a categorías o fichas.
+- **B2B y servicios profesionales**, donde la etapa de investigación inicial puede resolverse sin contacto con la marca.
+- **Medios y publishers**, que ven cómo una parte importante de su inventario editorial pierde monetización indirecta por menor tráfico.
+
+El informe y la conversación de la industria son claros en una cosa: no estamos ante una caída marginal. Estamos frente a una redistribución de atención. Y cuando la atención se concentra en menos clics, gana quien tiene una marca más fuerte, una propuesta más clara y una arquitectura digital diseñada para capturar valor fuera del puro volumen de visitas.
+
+En Chile esto se nota especialmente en industrias competitivas como retail, educación, fintech, salud, seguros e inmobiliario. Son categorías donde el usuario compara, pregunta, filtra y decide cada vez más dentro del propio ecosistema de búsqueda. Si tu sitio no está preparado para convertir esa intención en negocio, quedas como fuente de información… pero no como opción comercial.
+
+## Lo que importa para negocios en Chile y LATAM
+
+Muchos equipos siguen evaluando el SEO con métricas que ya no explican el negocio. Posiciones, clics y sesiones siguen siendo útiles, pero dejaron de ser suficientes. La pregunta estratégica ahora es otra: **¿cuánto valor real sigue capturando tu marca por cada consulta relevante?**
+
+Un ejemplo simple: una clínica, una universidad o una aseguradora puede seguir apareciendo en primeros lugares para cientos de búsquedas, pero si el usuario resuelve su duda sin entrar al sitio, el ranking pierde valor económico. Lo mismo ocurre con un ecommerce que atrae tráfico informativo, pero no logra empujar a la categoría o al producto. El resultado es un crecimiento aparente que no siempre se traduce en ventas.
+
+Esto obliga a repensar el SEO como una disciplina de negocio, no solo de visibilidad. Las marcas más preparadas están haciendo tres cosas distintas:
+
+1. **Construyen autoridad real de marca**, no solo páginas optimizadas.
+2. **Diseñan contenido con intención comercial**, no únicamente para capturar keywords.
+3. **Alinean la experiencia web con conversión**, porque menos tráfico exige más efectividad por visita.
+
+En otras palabras: si el mercado te entrega menos clics, necesitas más precisión. Y esa precisión no se improvisa con plantillas ni con contenido genérico.
+
+## Lo que hacemos diferente
+
+En **El Rey de las Páginas** no abordamos este escenario como una crisis de SEO, sino como una oportunidad para reposicionar marcas que quieren competir con ventaja. Nuestra mirada combina arquitectura web, performance, SEO estratégico y conversión, porque hoy la visibilidad sin capacidad de capturar demanda vale cada vez menos.
+
+Un caso frecuente que vemos en Chile es el de empresas con buen tráfico orgánico, pero baja rentabilidad digital. Ahí no basta con producir más artículos. Hay que rediseñar la lógica del sitio para que cada visita tenga una probabilidad real de avanzar comercialmente. Ese cambio —desde la intención de búsqueda hasta la conversión— es donde una agencia premium marca la diferencia.
+
+Por eso trabajamos con una lógica de negocio: priorización de oportunidades, estructura de contenidos, autoridad temática y experiencia de usuario orientada a resultados. No vendemos “más visitas” como promesa abstracta. Vendemos capacidad de captura de demanda en un entorno donde la atención es más escasa y más cara.
+
+## La nueva ventaja competitiva
+
+El mercado ya está premiando a las marcas que entienden una verdad incómoda: depender solo del tráfico orgánico es más riesgoso que antes. Las empresas que reaccionan temprano no solo defienden su presencia digital; también construyen una ventaja difícil de copiar.
+
+En un contexto donde la IA y los buscadores están filtrando el acceso a la información, las marcas con mejor estrategia no son las que más publican, sino las que mejor convierten relevancia en negocio. Y eso exige una visión más madura: menos obsesión por el volumen, más foco en el valor.
+
+Si quieres evaluar cómo esto afecta tu tienda, [conversemos](https://wa.me/56981734039)
+
+    `.trim(),
+  },
 ];
