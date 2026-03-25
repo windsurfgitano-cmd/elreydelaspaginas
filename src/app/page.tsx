@@ -42,12 +42,14 @@ const faqs = [
 ];
 
 const tickerItems = [
-  "Shopify 2.0 desde $649.990",
-  "WooCommerce desde $749.990",
-  "Apps PWA desde $489.990",
+  "Shopify 2.0 · Desde $649.990 · Precio según proyecto",
+  "WooCommerce Pro · Desde $749.990 · Precio según proyecto",
+  "Apps PWA · Desde $489.990 · Precio según proyecto",
+  "AI-Ready Store · Desde $1.490.990 · Cotizar",
+  "Agent Optimization (AO) · Desde $390.990",
   "Contenido UGC · Cotizar",
-  "Branding desde $239.990",
-  "Marketing Digital desde $149.990"
+  "Branding desde $490.000",
+  "Marketing Digital desde $300.000"
 ];
 
 const guarantees = [
@@ -133,36 +135,56 @@ const packs = [
   {
     title: "Shopify 2.0",
     price: "Desde $649.990 + IVA",
+    priceNote: "Precio final según alcance del proyecto",
     desc:
       "E-commerce profesional con Shopify 2.0: theme custom, checkout optimizado, integraciones de pago y logística.",
   },
   {
     title: "WooCommerce Pro",
     price: "Desde $749.990 + IVA",
+    priceNote: "Precio final según alcance del proyecto",
     desc:
       "Tienda WordPress con WooCommerce: personalización total, SEO, pasarelas de pago y automatizaciones.",
   },
   {
     title: "Apps PWA",
     price: "Desde $489.990 + IVA",
+    priceNote: "Precio final según alcance del proyecto",
     desc:
       "Aplicaciones web progresivas: experiencia nativa, notificaciones push, modo offline y alto rendimiento.",
   },
   {
+    title: "AI-Ready Store 🤖",
+    price: "Desde $1.490.990 + IVA",
+    priceNote: "Precio final según alcance del proyecto",
+    desc:
+      "Tu tienda lista para vender en ChatGPT, Google AI Mode, Copilot y Gemini. Catálogo estructurado para agentes IA, UCP/MCP setup y Agent Optimization (AO). El nuevo SEO.",
+  },
+  {
+    title: "Agent Optimization (AO)",
+    price: "Desde $390.990 + IVA",
+    priceNote: "Precio final según alcance del proyecto",
+    desc:
+      "Audit + setup para que tus productos aparezcan en respuestas de IA. Metafields, structured data, knowledge base y lenguaje natural optimizado para agentes. Ninguna agencia chilena lo ofrece.",
+  },
+  {
     title: "Contenido UGC",
     price: "Cotizar",
+    priceNote: "Presupuesto según volumen y producción",
     desc:
       "Generación de contenido UGC (videos y fotos). Todos los modelos, todas las locaciones. Producción premium.",
   },
   {
     title: "Branding & Marca",
     price: "Desde $490.000 + IVA",
+    priceNote: "Precio final según alcance del proyecto",
     desc:
       "Diseño de marca completo: logo, identidad visual, manual de marca y aplicaciones gráficas.",
   },
   {
     title: "Marketing Digital & RRSS",
     price: "Desde $300.000 + IVA",
+    priceNote: "Precio final según alcance del proyecto",
     desc:
       "Gestión de redes sociales, campañas pagadas, contenido estratégico y reportes mensuales.",
   },
@@ -176,7 +198,7 @@ const portfolio = [
     quote:
       "+340% ventas en 3 meses tras e-commerce omnicanal con CRM y fulfillment integrado.",
     metrics: ["+340% ventas", "+180% tráfico", "100% automatizado"],
-    href: "https://www.banana-company.com",
+    href: "https://www.bananacompanychile.cl",
   },
   {
     name: "TITAN SOUL",
@@ -185,7 +207,7 @@ const portfolio = [
     quote:
       "Branding + Shopify + campañas UGC: 500 ventas mensuales, app de fidelización.",
     metrics: ["500 ventas/mes", "+2.5K seguidores", "+85% mobile"],
-    href: "https://www-titansoul.cl",
+    href: "https://www.titansoul.cl",
   },
   {
     name: "Beauty Nails Studio",
@@ -1397,7 +1419,7 @@ export default function Home() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75"></span>
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-gold"></span>
               </span>
-              Mobile First · WCAG 2.2 · Experiencias 2025
+              Mobile First · WCAG 2.2 · Experiencias 2026
             </div>
             <div className="flex flex-col gap-6">
               <p className="hero-title text-sm font-bold uppercase tracking-[0.4em] text-gold glow-text">
@@ -1586,9 +1608,12 @@ export default function Home() {
                   <h3 className="text-xl font-semibold text-white">{pack.title}</h3>
                   <p className="mt-2 text-sm text-white/70">{pack.desc}</p>
                 </div>
-                <span className="inline-flex w-fit rounded-full bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-gold">
-                  {pack.price}
-                </span>
+                <div className="flex flex-col gap-1">
+                  <span className="inline-flex w-fit rounded-full bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-gold">
+                    {pack.price}
+                  </span>
+                  <span className="text-[11px] text-white/40 italic pl-1">{pack.priceNote}</span>
+                </div>
               </article>
             ))}
           </div>
