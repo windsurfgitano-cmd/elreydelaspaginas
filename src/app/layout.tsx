@@ -37,6 +37,11 @@ export const metadata: Metadata = {
     description:
       "Shopify 2.0, AI-Ready Store, AO y marketing. Mobile first + WCAG 2.2. Santiago, Chile.",
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
   alternates: {
     canonical: "https://www.elreydelaspaginas.com",
   },
@@ -160,6 +165,9 @@ export default function RootLayout({
                   },
                   sameAs: [
                     "https://wa.me/56981734039",
+                    "https://www.instagram.com/elreydelaspaginas",
+                    "https://www.linkedin.com/company/elreydelaspaginas",
+                    "https://www.tiktok.com/@elreydelaspaginas",
                   ],
                 },
                 {
