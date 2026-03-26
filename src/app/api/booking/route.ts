@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import fs from "fs/promises";
 
 const CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID!;
-const TOKEN_FILE = "/Users/openozymandias/.rey-calendar-token.json";
 const CLIENT_ID = process.env.GOOGLE_CLIENT_ID!;
 const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET!;
 const TIMEZONE = "America/Santiago";
@@ -12,6 +10,8 @@ interface TokenData {
   refresh_token: string;
   expiry_date?: number;
   token_type?: string;
+  client_id?: string;
+  client_secret?: string;
 }
 
 interface ConversationState {
@@ -25,12 +25,17 @@ interface ConversationState {
 }
 
 async function readToken(): Promise<TokenData> {
-  const raw = await fs.readFile(TOKEN_FILE, "utf-8");
-  return JSON.parse(raw);
+  // In Vercel serverless: use env vars
+  return {
+    access_token: "",
+    refresh_token: process.env.GOOGLE_REFRESH_TOKEN!,
+    client_id: CLIENT_ID,
+    client_secret: CLIENT_SECRET,
+  };
 }
 
 async function writeToken(token: TokenData): Promise<void> {
-  await fs.writeFile(TOKEN_FILE, JSON.stringify(token, null, 2));
+  // Token refresh successful (not persisted in serverless env)
 }
 
 async function refreshTokenIfNeeded(): Promise<string> {
