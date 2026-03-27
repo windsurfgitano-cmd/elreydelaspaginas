@@ -214,15 +214,22 @@ async function createCalendarEvent(
   startIso: string,
   name: string,
   summary: string
-): Promise<string> {
+): Promise<{ ownerLink: string; clientLink: string }> {
   const start = new Date(startIso);
-  const end = new Date(start.getTime() + 30 * 60 * 1000);
+  const end = new Date(start.getTime() + 15 * 60 * 1000); // 15 minutos
 
   const event = {
     summary: `Llamada con ${name} — El Rey de las Páginas`,
     description: summary,
     start: { dateTime: start.toISOString(), timeZone: TIMEZONE },
     end: { dateTime: end.toISOString(), timeZone: TIMEZONE },
+    reminders: {
+      useDefault: false,
+      overrides: [
+        { method: "email", minutes: 60 },
+        { method: "popup", minutes: 15 },
+      ],
+    },
   };
 
   const res = await fetch(
@@ -242,7 +249,20 @@ async function createCalendarEvent(
   }
 
   const data = await res.json();
-  return data.htmlLink ?? "";
+
+  // Link para el CLIENTE: permite agregar a SU calendario sin ver el nuestro
+  const fmt = (d: Date) => d.toISOString().replace(/[-:]/g, "").replace(".000Z", "Z");
+  const clientLink =
+    `https://calendar.google.com/calendar/render?action=TEMPLATE` +
+    `&text=${encodeURIComponent(`Llamada con El Rey de las Páginas`)}` +
+    `&dates=${fmt(start)}/${fmt(end)}` +
+    `&details=${encodeURIComponent(`Tu llamada de 15 minutos con El Rey de las Páginas está confirmada.\n\nNos vemos pronto! 👑\n\nContacto: hola@elreydelaspaginas.com | +56981734039`)}` +
+    `&location=${encodeURIComponent("Videollamada (link se enviará por WhatsApp)")}`;
+
+  return {
+    ownerLink: data.htmlLink ?? "",  // para el dueño (no se muestra al cliente)
+    clientLink,                       // para que el cliente agregue a SU calendario
+  };
 }
 
 const EMOJI_NUMBERS = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣"];
@@ -351,19 +371,19 @@ export async function POST(req: NextRequest) {
             `Urgencia: ${state.q4}`,
           ].join("\n");
 
-          const eventLink = await createCalendarEvent(
+          const { clientLink } = await createCalendarEvent(
             accessToken,
             selected.iso,
             state.name ?? "Cliente",
             summary
           );
 
-          reply = `✅ **¡Listo, ${state.name}!** Tu llamada está agendada:\n\n📅 ${selected.label}\n⏱️ 15 minutos\n\n${eventLink ? `🔗 [Ver en Google Calendar](${eventLink})\n\n` : ""}¡Nos vemos pronto! 👑`;
+          reply = `✅ **¡Listo, ${state.name}!** Tu llamada está agendada:\n\n📅 ${selected.label}\n⏱️ 15 minutos\n\n➕ [Agregar a tu Google Calendar](${clientLink})\n\n¡Nos vemos pronto! 👑`;
           return NextResponse.json({
             reply,
             state: { step: "done" },
             booked: true,
-            eventLink,
+            clientLink,
           });
         } catch (err) {
           console.error("Booking error:", err);
