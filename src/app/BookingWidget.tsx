@@ -204,6 +204,7 @@ export default function BookingWidget() {
             flexDirection: "column",
             overflow: "hidden",
             boxShadow: "0 8px 40px rgba(0,0,0,0.6)",
+            cursor: "auto",  /* restaurar cursor nativo dentro del widget */
           }}
         >
           {/* Header */}
