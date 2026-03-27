@@ -230,8 +230,11 @@ export async function POST(req: NextRequest) {
       }
 
       case "q1": {
-        newState.name = message;
-        reply = `¡Un gusto, ${message}! 🤝\n\n¿Tienes tienda online actualmente o quieres crear una desde cero?`;
+        // Extraer solo el nombre del mensaje (ej: "hola mi nombre es Oscar" → "Oscar")
+        const nameMatch = message.match(/(?:soy|llamo|nombre es|me llaman|llaman)\s+([A-Za-záéíóúÁÉÍÓÚñÑ]+)/i);
+        const cleanName = nameMatch ? nameMatch[1] : message.split(/[\s,]+/).find(w => w.length > 2 && /^[A-Za-záéíóúÁÉÍÓÚñÑ]+$/.test(w)) || message.split(/\s+/)[0];
+        newState.name = cleanName.charAt(0).toUpperCase() + cleanName.slice(1).toLowerCase();
+        reply = `¡Un gusto, ${newState.name}! 🤝\n\n¿Tienes tienda online actualmente o quieres crear una desde cero?`;
         newState.step = "q2";
         break;
       }
@@ -278,7 +281,7 @@ export async function POST(req: NextRequest) {
             .map((s, i) => `${EMOJI_NUMBERS[i]} ${s.label}`)
             .join("\n");
 
-          reply = `¡Genial, ${newState.name}! Estos son los próximos horarios disponibles para una llamada de 30 min:\n\n${slotList}\n\nEscribe el número del horario que prefieras 👆`;
+          reply = `¡Genial, ${newState.name}! Estos son los próximos horarios disponibles para una llamada de 15 min:\n\n${slotList}\n\nEscribe el número del horario que prefieras 👆`;
           newState.step = "confirm";
         } catch (err) {
           console.error("Calendar error:", err);
@@ -315,7 +318,7 @@ export async function POST(req: NextRequest) {
             summary
           );
 
-          reply = `✅ **¡Listo, ${state.name}!** Tu llamada está agendada:\n\n📅 ${selected.label}\n⏱️ 30 minutos\n\n${eventLink ? `🔗 [Ver en Google Calendar](${eventLink})\n\n` : ""}¡Nos vemos pronto! 👑`;
+          reply = `✅ **¡Listo, ${state.name}!** Tu llamada está agendada:\n\n📅 ${selected.label}\n⏱️ 15 minutos\n\n${eventLink ? `🔗 [Ver en Google Calendar](${eventLink})\n\n` : ""}¡Nos vemos pronto! 👑`;
           return NextResponse.json({
             reply,
             state: { step: "done" },
