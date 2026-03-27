@@ -282,6 +282,7 @@ function CustomCursor() {
     const handleLeave = () => cursor.classList.remove("hover");
 
     document.addEventListener("mousemove", moveCursor);
+    document.body.classList.add("cursor-active");
     animateCursor();
 
     const interactives = document.querySelectorAll("a, button, .tilt-card");
@@ -292,6 +293,7 @@ function CustomCursor() {
 
     return () => {
       document.removeEventListener("mousemove", moveCursor);
+      document.body.classList.remove("cursor-active");
       interactives.forEach(el => {
         el.removeEventListener("mouseenter", handleHover);
         el.removeEventListener("mouseleave", handleLeave);
