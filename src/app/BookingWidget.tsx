@@ -93,16 +93,47 @@ export default function BookingWidget() {
     }
   };
 
-  // Simple markdown bold replacement
+  // Markdown renderer: soporta **bold** y [texto](url)
   const renderText = (text: string) => {
-    const parts = text.split(/\*\*(.*?)\*\*/g);
-    return parts.map((part, i) =>
-      i % 2 === 1 ? (
-        <strong key={i}>{part}</strong>
-      ) : (
-        <span key={i}>{part}</span>
-      )
-    );
+    // Primero dividir por links [texto](url)
+    const linkRegex = /\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g;
+    const segments: React.ReactNode[] = [];
+    let lastIndex = 0;
+    let match;
+
+    while ((match = linkRegex.exec(text)) !== null) {
+      // Texto antes del link
+      if (match.index > lastIndex) {
+        const before = text.slice(lastIndex, match.index);
+        // Parsear bold en el texto previo
+        before.split(/\*\*(.*?)\*\*/g).forEach((p, j) =>
+          segments.push(j % 2 === 1 ? <strong key={`b-${lastIndex}-${j}`}>{p}</strong> : <span key={`s-${lastIndex}-${j}`}>{p}</span>)
+        );
+      }
+      // El link clickeable
+      segments.push(
+        <a
+          key={`link-${match.index}`}
+          href={match[2]}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "#d4af37", textDecoration: "underline", cursor: "pointer" }}
+        >
+          {match[1]}
+        </a>
+      );
+      lastIndex = match.index + match[0].length;
+    }
+
+    // Texto restante después del último link
+    if (lastIndex < text.length) {
+      const rest = text.slice(lastIndex);
+      rest.split(/\*\*(.*?)\*\*/g).forEach((p, j) =>
+        segments.push(j % 2 === 1 ? <strong key={`b-end-${j}`}>{p}</strong> : <span key={`s-end-${j}`}>{p}</span>)
+      );
+    }
+
+    return segments.length > 0 ? segments : <span>{text}</span>;
   };
 
   const renderMessage = (msg: Message, i: number) => {
