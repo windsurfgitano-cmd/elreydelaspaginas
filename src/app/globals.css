@@ -19,10 +19,11 @@
   scroll-behavior: smooth;
 }
 
-/* Custom cursor only on desktop */
-@media (min-width: 768px) and (hover: hover) {
-  :root { cursor: none; }
-  a, button { cursor: none; }
+/* Custom cursor — solo activo cuando el body tiene la clase cursor-active */
+body.cursor-active,
+body.cursor-active a,
+body.cursor-active button {
+  cursor: none;
 }
 
 * {
