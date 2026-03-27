@@ -5,6 +5,41 @@ const CLIENT_ID = process.env.GOOGLE_CLIENT_ID!;
 const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET!;
 const TIMEZONE = "America/Santiago";
 
+// Azure OpenAI — GPT-5.4-nano
+const AZURE_ENDPOINT = "https://ai-chatbotchile3482ai792819186607.cognitiveservices.azure.com/openai/responses?api-version=2025-04-01-preview";
+const AZURE_KEY = process.env.AZURE_OPENAI_KEY!;
+const AZURE_MODEL = "gpt-5.4-nano";
+
+async function aiReply(systemPrompt: string, userMessage: string, context: string): Promise<string | null> {
+  if (!AZURE_KEY) return null;
+  try {
+    const res = await fetch(AZURE_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "api-key": AZURE_KEY,
+      },
+      body: JSON.stringify({
+        model: AZURE_MODEL,
+        input: userMessage,
+        instructions: `${systemPrompt}\n\nContexto de la conversación:\n${context}`,
+        max_output_tokens: 200,
+      }),
+    });
+    if (!res.ok) return null;
+    const data = await res.json() as { output?: Array<{ content?: Array<{ text?: string }> }> };
+    return data?.output?.[0]?.content?.[0]?.text?.trim() ?? null;
+  } catch {
+    return null;
+  }
+}
+
+const SYSTEM_PROMPT = `Eres el asistente de ventas de "El Rey de las Páginas", agencia web premium en Santiago, Chile.
+Tu rol: agendar una llamada de 15 minutos con el cliente potencial de forma natural y amigable.
+Tono: directo, cálido, en español chileno. Usa emojis con moderación.
+NUNCA inventes slots de calendario ni precios. NUNCA hagas preguntas fuera del guión.
+Si el usuario pregunta algo fuera del flujo, responde brevemente y vuelve al guión.`;
+
 interface TokenData {
   access_token: string;
   refresh_token: string;
@@ -234,31 +269,36 @@ export async function POST(req: NextRequest) {
         const nameMatch = message.match(/(?:soy|llamo|nombre es|me llaman|llaman)\s+([A-Za-záéíóúÁÉÍÓÚñÑ]+)/i);
         const cleanName = nameMatch ? nameMatch[1] : message.split(/[\s,]+/).find(w => w.length > 2 && /^[A-Za-záéíóúÁÉÍÓÚñÑ]+$/.test(w)) || message.split(/\s+/)[0];
         newState.name = cleanName.charAt(0).toUpperCase() + cleanName.slice(1).toLowerCase();
-        reply = `¡Un gusto, ${newState.name}! 🤝\n\n¿Tienes tienda online actualmente o quieres crear una desde cero?`;
+        const q1ai = await aiReply(SYSTEM_PROMPT, message,
+          `El usuario dijo su nombre: "${newState.name}". Salúdalo por su nombre y pregunta: ¿Tienes tienda online actualmente o quieres crear una desde cero? (solo esa pregunta, máx 2 líneas)`);
+        reply = q1ai ?? `¡Un gusto, ${newState.name}! 🤝\n\n¿Tienes tienda online actualmente o quieres crear una desde cero?`;
         newState.step = "q2";
         break;
       }
 
       case "q2": {
         newState.q1 = message;
-        reply =
-          "Perfecto. ¿Cuál es tu mayor dolor hoy?\n\n• Ventas bajas\n• Diseño anticuado\n• Velocidad lenta\n• Necesito e-commerce\n• Otro";
+        const q2ai = await aiReply(SYSTEM_PROMPT, message,
+          `Nombre: ${newState.name}. Respondió sobre tienda online: "${message}". Acusa recibo brevemente y pregunta: ¿Cuál es tu mayor dolor hoy? Da opciones: ventas, diseño, velocidad, e-commerce. Máx 3 líneas.`);
+        reply = q2ai ?? "Perfecto. ¿Cuál es tu mayor dolor hoy?\n\n• Ventas bajas\n• Diseño anticuado\n• Velocidad lenta\n• Necesito e-commerce\n• Otro";
         newState.step = "q3";
         break;
       }
 
       case "q3": {
         newState.q2 = message;
-        reply =
-          "¿Cuánto es tu presupuesto aproximado?\n\n• $300-500 USD\n• $500-1.000 USD\n• $1.000+ USD\n• No estoy seguro aún";
+        const q3ai = await aiReply(SYSTEM_PROMPT, message,
+          `Nombre: ${newState.name}. Dolor: "${message}". Acusa recibo y pregunta el presupuesto aproximado. Opciones: $300-500 USD / $500-1.000 USD / $1.000+ USD / No sé aún. Máx 3 líneas.`);
+        reply = q3ai ?? "¿Cuánto es tu presupuesto aproximado?\n\n• $300-500 USD\n• $500-1.000 USD\n• $1.000+ USD\n• No estoy seguro aún";
         newState.step = "q4";
         break;
       }
 
       case "q4": {
         newState.q3 = message;
-        reply =
-          "¿Para cuándo lo necesitas?\n\n• 🔥 Urgente (esta semana)\n• 📅 En 1-2 meses\n• 🔍 Solo estoy explorando";
+        const q4ai = await aiReply(SYSTEM_PROMPT, message,
+          `Nombre: ${newState.name}. Presupuesto: "${message}". Acusa recibo y pregunta para cuándo lo necesita. Opciones: urgente / 1-2 meses / explorando. Máx 3 líneas.`);
+        reply = q4ai ?? "¿Para cuándo lo necesitas?\n\n• 🔥 Urgente (esta semana)\n• 📅 En 1-2 meses\n• 🔍 Solo estoy explorando";
         newState.step = "slots";
         break;
       }
