@@ -533,7 +533,7 @@
   <!-- NAV -->
   <nav id="siteNav" class="site-nav fixed top-0 left-0 right-0 z-50 mix-blend-normal" aria-label="Principal">
     <div class="nav-inner max-w-7xl mx-auto px-4 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between">
-      <a href="#main-content" class="font-serif italic text-sm sm:text-base leading-none tracking-tight text-white">El Rey™</a>
+      <a href="#main-content" class="inline-flex items-center font-serif italic text-base sm:text-xl md:text-2xl leading-none tracking-tight text-white py-1.5">El Rey™</a>
       <div class="hidden md:flex items-center gap-8 text-sm tracking-widest uppercase text-white/70">
         <a href="#manifiesto" class="hover:text-white transition-colors duration-300">Manifiesto</a>
         <a href="#servicios" class="hover:text-white transition-colors duration-300">Servicios</a>
@@ -543,9 +543,11 @@
         <a href="#contacto" class="border border-white/30 px-5 py-2 hover:bg-white hover:text-noir transition-all duration-300">Contacto</a>
       </div>
       <!-- Mobile menu button -->
-      <button id="menuBtn" class="md:hidden text-white flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 backdrop-blur-sm" aria-label="Abrir menú">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="17" x2="20" y2="17"/>
+      <button id="menuBtn" class="md:hidden inline-flex h-9 w-9 items-center justify-center text-white p-0" aria-label="Abrir menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <line x1="4" y1="6" x2="20" y2="6"/>
+          <line x1="4" y1="12" x2="20" y2="12"/>
+          <line x1="4" y1="18" x2="20" y2="18"/>
         </svg>
       </button>
     </div>
@@ -554,7 +556,7 @@
   <!-- ============================================ -->
   <!-- HERO -->
   <!-- ============================================ -->
-  <section id="main-content" class="hero-section relative min-h-screen flex items-center justify-center px-4 sm:px-6 pt-24 sm:pt-20 pb-24 sm:pb-28 overflow-hidden">
+  <section id="main-content" class="hero-section relative min-h-screen flex items-center justify-center px-4 sm:px-6 pt-20 sm:pt-20 pb-24 sm:pb-28 overflow-hidden">
     <div class="absolute inset-0 pointer-events-none">
       <div class="absolute -top-24 left-[8%] w-80 h-80 rounded-full bg-accent/10 blur-3xl"></div>
       <div class="absolute top-[18%] right-[10%] w-72 h-72 rounded-full bg-neon/8 blur-3xl"></div>
@@ -593,10 +595,7 @@
     <div class="watermark top-[30%] left-[-5%] -rotate-12 hidden sm:block">DIGITAL</div>
 
     <div class="max-w-6xl mx-auto text-center relative z-10 px-1 sm:px-0">
-      <div class="flex flex-col items-center justify-center mb-5 sm:mb-8 mt-8 sm:mt-0">
-        <div class="inline-flex items-end gap-3 mb-3 sm:mb-4">
-          <span class="text-[10px] sm:text-sm tracking-[0.32em] sm:tracking-[0.4em] uppercase text-white/60 sm:text-white/55 font-medium pb-2">Portada</span>
-        </div>
+      <div class="flex flex-col items-center justify-center mb-5 sm:mb-8 mt-3 sm:mt-0">
         <p class="inline-block relative z-10 bg-white/[0.14] border border-white/[0.24] px-3 py-1.5 rounded-full text-[10px] sm:text-sm tracking-[0.32em] sm:tracking-[0.4em] uppercase text-white/95 sm:text-white/85 font-medium shadow-[0_0_28px_rgba(255,255,255,0.05)] backdrop-blur-sm">Sitios vivos — claridad, presencia y conversión</p>
       </div>
 
