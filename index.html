@@ -218,6 +218,25 @@
     }
 
     @media (max-width: 767px) {
+      body > section {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+      }
+      #main-content {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+      }
+      .hero-section .max-w-6xl {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+      }
+      .site-nav .nav-inner {
+        padding-top: 0.65rem;
+        padding-bottom: 0.65rem;
+      }
+    }
+
+    @media (min-width: 768px) {
       /* Red star ornament: floats at 44% of hero height on mobile.
          This places it beside the h1 headline (below the 'Agencia Digital' label
          and clear of the top of the heading) on all screen heights ≥ 568px. */
@@ -533,7 +552,7 @@
   <!-- NAV -->
   <nav id="siteNav" class="site-nav fixed top-0 left-0 right-0 z-50 mix-blend-normal" aria-label="Principal">
     <div class="nav-inner max-w-7xl mx-auto px-4 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between">
-      <a href="#main-content" class="inline-flex items-center font-serif italic text-base sm:text-xl md:text-2xl leading-none tracking-tight text-white py-1.5">El Rey™</a>
+      <a href="#main-content" class="inline-flex items-center font-serif italic text-lg sm:text-xl md:text-2xl leading-none tracking-tight text-white py-0.5 sm:py-1.5 min-h-9 sm:min-h-0">El Rey™</a>
       <div class="hidden md:flex items-center gap-8 text-sm tracking-widest uppercase text-white/70">
         <a href="#manifiesto" class="hover:text-white transition-colors duration-300">Manifiesto</a>
         <a href="#servicios" class="hover:text-white transition-colors duration-300">Servicios</a>
@@ -543,7 +562,7 @@
         <a href="#contacto" class="border border-white/30 px-5 py-2 hover:bg-white hover:text-noir transition-all duration-300">Contacto</a>
       </div>
       <!-- Mobile menu button -->
-      <button id="menuBtn" class="md:hidden inline-flex h-9 w-9 items-center justify-center text-white p-0" aria-label="Abrir menú">
+      <button id="menuBtn" class="md:hidden inline-flex h-9 w-9 items-center justify-center text-white p-0 min-h-9" aria-label="Abrir menú">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
           <line x1="4" y1="6" x2="20" y2="6"/>
           <line x1="4" y1="12" x2="20" y2="12"/>
