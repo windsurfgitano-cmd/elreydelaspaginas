@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- SEO Primario -->
-  <title>El Rey de las Páginas | Agencia Digital Premium — Shopify, Next.js, AI | Santiago, Chile</title>
-  <meta name="description" content="Agencia digital premium en Santiago, Chile. Especialistas en Shopify Plus, Next.js, integración de IA y community platforms. Construimos sistemas que venden. +340% conversión en Tribu Impulsa." />
-  <meta name="keywords" content="agencia digital Santiago, desarrollo web Chile, Shopify Plus Chile, Next.js Chile, desarrollo web premium, agencia Shopify Santiago" />
+  <title>El Rey de las Páginas | Sitios que venden con claridad</title>
+  <meta name="description" content="Diseñamos sitios que ordenan la oferta, reducen fricción y convierten mejor para marcas que necesitan más confianza, más leads y más ventas." />
+  <meta name="keywords" content="sitios que venden, diseño web Chile, ecommerce que convierte, landing pages Chile, más leads, más ventas, menos fricción, más confianza, SEO local, automatización comercial" />
   <meta name="author" content="El Rey de las Páginas" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <link rel="canonical" href="https://elreydelaspaginas.cl" />
@@ -15,8 +15,8 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://elreydelaspaginas.cl" />
-  <meta property="og:title" content="El Rey de las Páginas | Agencia Digital Premium" />
-  <meta property="og:description" content="Agencia digital premium en Santiago, Chile. Shopify Plus, Next.js, AI. Construimos sistemas que venden." />
+  <meta property="og:title" content="El Rey de las Páginas | Sitios que venden con claridad" />
+  <meta property="og:description" content="Diseñamos sitios que ordenan la oferta, reducen fricción y convierten mejor para marcas que necesitan más confianza, más leads y más ventas." />
   <meta property="og:image" content="https://elreydelaspaginas.cl/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -26,8 +26,8 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@elreydelaspaginas" />
-  <meta name="twitter:title" content="El Rey de las Páginas | Agencia Digital Premium" />
-  <meta name="twitter:description" content="Agencia digital premium en Santiago, Chile. Shopify Plus, Next.js, AI." />
+  <meta name="twitter:title" content="El Rey de las Páginas | Sitios que venden con claridad" />
+  <meta name="twitter:description" content="Diseñamos sitios que ordenan la oferta, reducen fricción y convierten mejor para marcas que necesitan más confianza, más leads y más ventas." />
   <meta name="twitter:image" content="https://elreydelaspaginas.cl/og-image.jpg" />
 
   <!-- GEO Local SEO -->
@@ -42,7 +42,7 @@
   <link rel="alternate" hreflang="x-default" href="https://elreydelaspaginas.cl" />
 
   <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👑</text></svg>" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2218%22 fill=%220a0a0a%22/><path d=%22M18 62L28 30L44 52L50 24L56 52L72 30L82 62Z%22 fill=%22none%22 stroke=%22%23FF3B30%22 stroke-width=%226%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/><path d=%22M24 72H76%22 stroke=%22%23f5f0eb%22 stroke-width=%225%22 stroke-linecap=%22round%22 opacity=%220.55%22/></svg>" />
 
   <!-- Performance -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -116,7 +116,7 @@
     }
     .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
 
-    /* Wiggle for doodles */
+    /* Wiggle for accent ornaments */
     @keyframes wiggle {
       0%, 100% { transform: rotate(-3deg); }
       50% { transform: rotate(3deg); }
@@ -161,6 +161,79 @@
     .twinkle-delay { animation: twinkle 1.5s ease-in-out infinite 0.5s; }
     .twinkle-delay-2 { animation: twinkle 1.5s ease-in-out infinite 1s; }
 
+    /* Hero star safety */
+    .hero-star-main { will-change: transform; }
+    .hero-star-aux { will-change: transform; }
+
+    @keyframes soft-reel {
+      0%, 100% { transform: scale(1) translateY(0); }
+      50% { transform: scale(1.015) translateY(-6px); }
+    }
+    .scroll-reel {
+      display: block;
+      will-change: transform;
+      animation: soft-reel 9s ease-in-out infinite;
+    }
+    .scroll-reel:hover { animation-play-state: paused; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .marquee,
+      .scroll-bounce,
+      .wiggle,
+      .twinkle,
+      .twinkle-delay,
+      .twinkle-delay-2,
+      .scroll-reel,
+      .fade-up,
+      .draw-line,
+      .pulse-glow {
+        animation: none !important;
+        transform: none !important;
+      }
+      .fade-up { opacity: 1 !important; }
+    }
+
+    @media (prefers-contrast: more) {
+      .text-white\/40,
+      .text-white\/50,
+      .text-white\/30 { color: rgba(245,240,235,0.94) !important; }
+      .text-white\/20,
+      .text-white\/15,
+      .text-white\/10 { color: rgba(245,240,235,0.82) !important; }
+      .text-white\/55,
+      .text-white\/60 { color: rgba(245,240,235,0.96) !important; }
+      .border-white\/10,
+      .border-white\/5 { border-color: rgba(245,240,235,0.52) !important; }
+      .bg-white\/10,
+      .bg-white\/20,
+      .bg-white\/05,
+      .bg-white\/03 { background-color: rgba(245,240,235,0.28) !important; }
+      .couture-card { border-color: rgba(245,240,235,0.44) !important; }
+    }
+
+    @media (max-width: 767px) {
+      /* Red star ornament: floats at 44% of hero height on mobile.
+         This places it beside the h1 headline (below the 'Agencia Digital' label
+         and clear of the top of the heading) on all screen heights ≥ 568px. */
+      .hero-star-main {
+        top: 44% !important;
+        right: 0 !important;
+        left: auto !important;
+        width: 1rem !important;
+        height: 1rem !important;
+        opacity: 0.6 !important;
+      }
+      .hero-star-aux {
+        display: none !important;
+      }
+    }
+
     /* Editorial number */
     .editorial-num {
       font-family: 'Instrument Serif', serif;
@@ -204,7 +277,168 @@
       color: #f5f0eb;
     }
 
-    /* Custom scrollbar */
+
+    /* === FLOATING ACTIONS === */
+    .floating-actions {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.75rem;
+    }
+
+    /* Tooltip label */
+    .float-btn-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      font: inherit;
+      color: inherit;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .float-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: rgba(10,10,10,0.9);
+      color: #f5f0eb;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid rgba(245,240,235,0.15);
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      transform: translateX(8px);
+      transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    .float-btn-wrap:hover .float-label {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Base button */
+    .float-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+      position: relative;
+      flex-shrink: 0;
+    }
+    .float-btn::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1px solid currentColor;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .float-btn:hover {
+      transform: scale(1.1);
+    }
+    .float-btn:hover::before {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+
+    /* WhatsApp — accent rojo del tema */
+    .float-btn-wsp {
+      background: #FF3B30;
+      color: #f5f0eb;
+      box-shadow: 0 8px 24px rgba(255,59,48,0.3);
+    }
+    .float-btn-wsp:hover {
+      box-shadow: 0 12px 32px rgba(255,59,48,0.5);
+    }
+
+    /* Agenda — cream editorial */
+    .float-btn-agenda {
+      background: #f5f0eb;
+      color: #0a0a0a;
+      box-shadow: 0 8px 24px rgba(245,240,235,0.15);
+    }
+    .float-btn-agenda:hover {
+      box-shadow: 0 12px 32px rgba(245,240,235,0.25);
+    }
+
+    /* Pulse ring animado en WSP */
+    @keyframes float-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255,59,48,0.4); }
+      70% { box-shadow: 0 0 0 12px rgba(255,59,48,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,59,48,0); }
+    }
+    .float-btn-wsp {
+      animation: float-pulse 2.5s ease-out infinite;
+    }
+    .float-btn-wsp:hover {
+      animation: none;
+    }
+
+    /* Floating action ornament */
+    .float-doodle {
+      position: fixed;
+      bottom: 5.5rem;
+      right: 5.5rem;
+      z-index: 999;
+      pointer-events: none;
+      opacity: 0.12;
+    }
+
+    /* Frosted top bar */
+    .site-nav {
+      --nav-frost: 0;
+      isolation: isolate;
+      overflow: visible;
+    }
+    .site-nav::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        180deg,
+        rgba(10, 10, 10, calc(0.16 + var(--nav-frost) * 0.46)) 0%,
+        rgba(10, 10, 10, calc(0.12 + var(--nav-frost) * 0.28)) 100%
+      );
+      backdrop-filter: blur(calc(10px + var(--nav-frost) * 14px)) saturate(165%);
+      -webkit-backdrop-filter: blur(calc(10px + var(--nav-frost) * 14px)) saturate(165%);
+      border-bottom: 1px solid rgba(245, 240, 235, calc(0.10 + var(--nav-frost) * 0.12));
+      box-shadow: 0 10px 30px rgba(0, 0, 0, calc(0.08 + var(--nav-frost) * 0.12));
+      opacity: 1;
+      transition: background 180ms ease, box-shadow 180ms ease, border-color 180ms ease, backdrop-filter 180ms ease;
+    }
+    .site-nav .nav-inner {
+      position: relative;
+      z-index: 1;
+      min-height: 3.15rem;
+    }
+    @media (max-width: 767px) {
+      .site-nav .nav-inner {
+        min-height: 2.9rem;
+      }
+    }
+    .site-nav.is-frosted .nav-inner a,
+    .site-nav.is-frosted .nav-inner button {
+      text-shadow: 0 1px 10px rgba(0, 0, 0, 0.22);
+    }
+
+        /* Custom scrollbar */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #0a0a0a; }
     ::-webkit-scrollbar-thumb { background: #FF3B30; border-radius: 3px; }
@@ -248,27 +482,68 @@
     }
     /* Better tap targets */
     a, button { min-height: 44px; min-width: 44px; }
+    a:focus-visible,
+    button:focus-visible,
+    [role="button"]:focus-visible,
+    [tabindex]:focus-visible {
+      outline: 2px solid #00FFB2;
+      outline-offset: 3px;
+      box-shadow: 0 0 0 4px rgba(0,255,178,0.14);
+    }
+
+    @media (max-width: 767px) {
+      .grain::after { opacity: 0.022; }
+      .floating-actions {
+        right: 1rem;
+        bottom: 1rem;
+        gap: 0.5rem;
+      }
+      .float-doodle {
+        right: 4rem;
+        bottom: 4.5rem;
+        opacity: 0.08;
+      }
+      .float-btn {
+        width: 48px;
+        height: 48px;
+      }
+      .float-label { display: none; }
+      .timeline-dot::after { width: calc(100% + 1rem); }
+      .editorial-num { font-size: clamp(3rem, 18vw, 5rem); }
+      .watermark { font-size: clamp(4rem, 22vw, 8rem); }
+      .text-white\/40,
+      .text-white\/50,
+      .text-white\/30 { color: rgba(245,240,235,0.72) !important; }
+      .text-white\/20,
+      .text-white\/15,
+      .text-white\/10 { color: rgba(245,240,235,0.52) !important; }
+      .border-white\/10,
+      .border-white\/5 { border-color: rgba(245,240,235,0.18) !important; }
+      .bg-white\/10,
+      .bg-white\/20 { background-color: rgba(245,240,235,0.18) !important; }
+    }
   </style>
 </head>
-<body style="background-color:#0a0a0a;color:#f5f0eb" class="bg-noir text-cream font-sans grain overflow-x-hidden">
+<body style="background:radial-gradient(circle at 18% 18%, rgba(255,59,48,0.12), transparent 24%), radial-gradient(circle at 82% 16%, rgba(0,255,178,0.08), transparent 22%), linear-gradient(180deg, #121212 0%, #0a0a0a 42%, #090909 100%);color:#f5f0eb" class="bg-noir text-cream font-sans grain overflow-x-hidden">
 
   <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-accent focus:text-cream focus:px-4 focus:py-2 focus:rounded">
     Saltar al contenido principal
   </a>
 
   <!-- NAV -->
-  <nav class="fixed top-0 left-0 right-0 z-50 mix-blend-difference">
-    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-      <a href="#" class="font-serif italic text-xl tracking-tight text-white">El Rey™</a>
+  <nav id="siteNav" class="site-nav fixed top-0 left-0 right-0 z-50 mix-blend-normal" aria-label="Principal">
+    <div class="nav-inner max-w-7xl mx-auto px-4 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between">
+      <a href="#main-content" class="font-serif italic text-sm sm:text-base leading-none tracking-tight text-white">El Rey™</a>
       <div class="hidden md:flex items-center gap-8 text-sm tracking-widest uppercase text-white/70">
         <a href="#manifiesto" class="hover:text-white transition-colors duration-300">Manifiesto</a>
         <a href="#servicios" class="hover:text-white transition-colors duration-300">Servicios</a>
         <a href="#trabajo" class="hover:text-white transition-colors duration-300">Trabajo</a>
-        <a href="#pricing" class="hover:text-white transition-colors duration-300">Pricing</a>
+        <a href="#sitios" class="hover:text-white transition-colors duration-300">Sitios</a>
+        <a href="#pricing" class="hover:text-white transition-colors duration-300">Planes</a>
         <a href="#contacto" class="border border-white/30 px-5 py-2 hover:bg-white hover:text-noir transition-all duration-300">Contacto</a>
       </div>
       <!-- Mobile menu button -->
-      <button id="menuBtn" class="md:hidden text-white" aria-label="Abrir menú">
+      <button id="menuBtn" class="md:hidden text-white flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 backdrop-blur-sm" aria-label="Abrir menú">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
           <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="17" x2="20" y2="17"/>
         </svg>
@@ -279,110 +554,83 @@
   <!-- ============================================ -->
   <!-- HERO -->
   <!-- ============================================ -->
-  <section id="main-content" class="relative min-h-screen flex items-center justify-center px-6 pt-20">
-    <!-- Background doodle: web/spider -->
-    <svg class="absolute top-20 right-10 w-64 h-64 opacity-[0.06]" viewBox="0 0 200 200" fill="none" stroke="#FF3B30" stroke-width="0.5" aria-hidden="true">
-      <circle cx="100" cy="100" r="20" class="draw-line" style="animation-delay: 0s"/>
-      <circle cx="100" cy="100" r="45" class="draw-line" style="animation-delay: 0.3s"/>
-      <circle cx="100" cy="100" r="70" class="draw-line" style="animation-delay: 0.6s"/>
-      <circle cx="100" cy="100" r="95" class="draw-line" style="animation-delay: 0.9s"/>
-      <line x1="100" y1="5" x2="100" y2="195" class="draw-line" style="animation-delay: 1.2s"/>
-      <line x1="5" y1="100" x2="195" y2="100" class="draw-line" style="animation-delay: 1.2s"/>
-      <line x1="30" y1="30" x2="170" y2="170" class="draw-line" style="animation-delay: 1.4s"/>
-      <line x1="170" y1="30" x2="30" y2="170" class="draw-line" style="animation-delay: 1.4s"/>
+  <section id="main-content" class="hero-section relative min-h-screen flex items-center justify-center px-4 sm:px-6 pt-24 sm:pt-20 pb-24 sm:pb-28 overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute -top-24 left-[8%] w-80 h-80 rounded-full bg-accent/10 blur-3xl"></div>
+      <div class="absolute top-[18%] right-[10%] w-72 h-72 rounded-full bg-neon/8 blur-3xl"></div>
+      <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+    </div>
+
+    <!-- Background ornament -->
+    <svg class="absolute top-24 right-0 sm:right-10 w-40 sm:w-64 h-40 sm:h-64 opacity-[0.04] sm:opacity-[0.06] hidden sm:block" viewBox="0 0 220 220" fill="none" stroke="#FF3B30" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="110" cy="110" r="92" class="draw-line" style="animation-delay: 0s"/>
+      <path d="M56 128 L78 86 L110 118 L142 82 L164 128 L56 128 Z" class="draw-line" style="animation-delay: 0.25s"/>
+      <path d="M74 128 H146" class="draw-line" style="animation-delay: 0.45s"/>
+      <path d="M86 82 L86 70 M110 118 L110 60 M134 82 L134 70" class="draw-line" style="animation-delay: 0.6s"/>
     </svg>
 
     <!-- Floating stars -->
-    <svg class="absolute top-32 left-[15%] w-5 h-5 twinkle" viewBox="0 0 20 20" fill="#FF3B30" aria-hidden="true">
+    <!-- Red star ornament: placed at ~44% hero height on mobile so it floats
+         beside the h1 headline lines (never above the 'Agencia Digital' label
+         and never over the top of the headline). On sm+ restores to design position. -->
+    <svg class="hero-star-main absolute top-[44%] right-0 left-auto sm:top-28 sm:left-[15%] sm:right-auto w-4 sm:w-5 h-4 sm:h-5 twinkle opacity-60 sm:opacity-100 pointer-events-none z-0" viewBox="0 0 20 20" fill="#FF3B30" aria-hidden="true">
       <polygon points="10,0 12,7 20,7 14,12 16,20 10,15 4,20 6,12 0,7 8,7"/>
     </svg>
-    <svg class="absolute top-[60%] right-[12%] w-4 h-4 twinkle-delay" viewBox="0 0 20 20" fill="#00FFB2" aria-hidden="true">
+    <svg class="absolute top-[58%] right-[8%] sm:right-[12%] w-3 sm:w-4 h-3 sm:h-4 twinkle-delay" viewBox="0 0 20 20" fill="#00FFB2" aria-hidden="true">
       <polygon points="10,0 12,7 20,7 14,12 16,20 10,15 4,20 6,12 0,7 8,7"/>
     </svg>
-    <svg class="absolute bottom-32 left-[8%] w-3 h-3 twinkle-delay-2" viewBox="0 0 20 20" fill="#FF3B30" aria-hidden="true">
+    <svg class="hero-star-aux absolute bottom-24 left-[5%] sm:left-[8%] w-2.5 sm:w-3 h-2.5 sm:h-3 twinkle-delay-2 hidden sm:block pointer-events-none" viewBox="0 0 20 20" fill="#FF3B30" aria-hidden="true">
       <polygon points="10,0 12,7 20,7 14,12 16,20 10,15 4,20 6,12 0,7 8,7"/>
     </svg>
 
-    <!-- Arrow doodle -->
-    <svg class="absolute bottom-40 right-[20%] w-20 h-20 wiggle opacity-20" viewBox="0 0 80 80" fill="none" stroke="#FF3B30" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-      <path d="M10 70 C 20 30, 50 10, 70 15" class="draw-line"/>
-      <path d="M60 8 L70 15 L62 23" class="draw-line" style="animation-delay: 1s"/>
+    <!-- Accent arrow ornament -->
+    <svg class="absolute bottom-28 sm:bottom-40 right-[8%] sm:right-[20%] w-14 sm:w-20 h-14 sm:h-20 wiggle opacity-14 sm:opacity-20 hidden sm:block" viewBox="0 0 80 80" fill="none" stroke="#FF3B30" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+      <path d="M12 66 C 24 34, 48 16, 67 18" class="draw-line"/>
+      <path d="M57 12 L67 18 L59 26" class="draw-line" style="animation-delay: 1s"/>
+      <path d="M22 58 C 26 56, 30 55, 34 55" class="draw-line" style="animation-delay: 0.7s"/>
     </svg>
 
-    <div class="watermark top-[30%] left-[-5%] -rotate-12">DIGITAL</div>
+    <div class="watermark top-[30%] left-[-5%] -rotate-12 hidden sm:block">DIGITAL</div>
 
-    <div class="max-w-6xl mx-auto text-center relative z-10">
-      <p class="text-sm tracking-[0.4em] uppercase text-white/40 mb-8 font-light">Agencia Digital — Est. MMXXIV</p>
+    <div class="max-w-6xl mx-auto text-center relative z-10 px-1 sm:px-0">
+      <div class="flex flex-col items-center justify-center mb-5 sm:mb-8 mt-8 sm:mt-0">
+        <div class="inline-flex items-end gap-3 mb-3 sm:mb-4">
+          <span class="text-[10px] sm:text-sm tracking-[0.32em] sm:tracking-[0.4em] uppercase text-white/60 sm:text-white/55 font-medium pb-2">Portada</span>
+        </div>
+        <p class="inline-block relative z-10 bg-white/[0.14] border border-white/[0.24] px-3 py-1.5 rounded-full text-[10px] sm:text-sm tracking-[0.32em] sm:tracking-[0.4em] uppercase text-white/95 sm:text-white/85 font-medium shadow-[0_0_28px_rgba(255,255,255,0.05)] backdrop-blur-sm">Sitios vivos — claridad, presencia y conversión</p>
+      </div>
 
-      <h1 class="font-serif text-[clamp(2.8rem,8vw,7.5rem)] leading-[0.9] tracking-tight mb-6">
-        <span class="block">WE BUILD</span>
-        <span class="block italic text-accent">THE FUTURE.</span>
-        <span class="block">ONE LINE</span>
-        <span class="block">AT A <span class="relative inline-block">TIME
-          <svg class="absolute -bottom-2 left-0 w-full h-3" viewBox="0 0 200 12" fill="none" stroke="#FF3B30" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
-            <path d="M5 8 Q 50 2, 100 7 Q 150 12, 195 5" class="draw-line" style="animation-delay: 1.5s"/>
-          </svg>
-        </span><span class="text-accent">.</span></span>
+      <h1 class="font-serif text-[clamp(2.35rem,13vw,7.5rem)] sm:text-[clamp(2.8rem,8vw,7.5rem)] leading-[0.92] sm:leading-[0.9] tracking-tight mb-5 sm:mb-6 max-w-4xl mx-auto">
+        <span class="block">PÁGINAS QUE SE SIENTEN</span>
+        <span class="block italic text-accent">VIVAS.</span>
+        <span class="block">MARCAS QUE SE VEN</span>
+        <span class="block">A LA ALTURA.</span>
       </h1>
 
-      <p class="font-serif italic text-lg md:text-xl text-white/50 mt-8 mb-12">
-        Agencia digital. Santiago → Europa.
+      <p class="font-serif italic text-base sm:text-lg md:text-xl text-white/78 mt-6 sm:mt-8 mb-8 sm:mb-12 max-w-xl mx-auto leading-relaxed">
+        Diseñamos sitios para marcas que necesitan claridad, autoridad y conversión — sin sacrificar elegancia.
       </p>
 
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="#trabajo" class="border border-cream/30 px-8 py-4 text-sm tracking-[0.3em] uppercase hover:bg-cream hover:text-noir transition-all duration-500 group">
-          Ver Trabajo
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 sm:gap-5 mt-10 sm:mt-14 mb-10 sm:mb-16 max-w-md mx-auto">
+        <a href="#trabajo" class="w-full sm:w-auto border border-cream/40 px-8 py-4 text-sm tracking-[0.3em] uppercase hover:bg-cream hover:text-noir transition-all duration-500 group text-center shadow-[0_0_0_1px_rgba(245,240,235,0.06)]">
+          Ver casos
           <span class="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
         </a>
-        <a href="#contacto" role="button" class="border border-accent text-accent px-8 py-4 text-sm tracking-[0.3em] uppercase hover:bg-accent hover:text-cream transition-all duration-500">
-          Hablar Con Nosotros
+        <a href="#contacto" class="w-full sm:w-auto border border-accent/90 text-accent px-8 py-4 text-sm tracking-[0.3em] uppercase hover:bg-accent hover:text-cream transition-all duration-500 text-center shadow-[0_0_28px_rgba(255,59,48,0.14)]">
+          Hablemos de tu sitio
         </a>
       </div>
     </div>
 
-    <!-- Scroll indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/30">
-      <span class="text-[10px] tracking-[0.3em] uppercase">Scroll</span>
-      <div class="w-px h-8 bg-white/20 scroll-bounce"></div>
-    </div>
   </section>
-
-  <!-- Marquee divider -->
-  <div class="border-y border-white/5 py-4 overflow-hidden">
-    <div class="marquee whitespace-nowrap">
-      <span class="inline-block text-sm tracking-[0.5em] uppercase text-white/10 mx-8">Shopify Plus</span>
-      <span class="inline-block text-accent/20 mx-4">✦</span>
-      <span class="inline-block text-sm tracking-[0.5em] uppercase text-white/10 mx-8">Next.js</span>
-      <span class="inline-block text-accent/20 mx-4">✦</span>
-      <span class="inline-block text-sm tracking-[0.5em] uppercase text-white/10 mx-8">AI Integration</span>
-      <span class="inline-block text-accent/20 mx-4">✦</span>
-      <span class="inline-block text-sm tracking-[0.5em] uppercase text-white/10 mx-8">React</span>
-      <span class="inline-block text-accent/20 mx-4">✦</span>
-      <span class="inline-block text-sm tracking-[0.5em] uppercase text-white/10 mx-8">Supabase</span>
-      <span class="inline-block text-accent/20 mx-4">✦</span>
-      <span class="inline-block text-sm tracking-[0.5em] uppercase text-white/10 mx-8">Vercel</span>
-      <span class="inline-block text-accent/20 mx-4">✦</span>
-      <span class="inline-block text-sm tracking-[0.5em] uppercase text-white/10 mx-8">Shopify Plus</span>
-      <span class="inline-block text-accent/20 mx-4">✦</span>
-      <span class="inline-block text-sm tracking-[0.5em] uppercase text-white/10 mx-8">Next.js</span>
-      <span class="inline-block text-accent/20 mx-4">✦</span>
-      <span class="inline-block text-sm tracking-[0.5em] uppercase text-white/10 mx-8">AI Integration</span>
-      <span class="inline-block text-accent/20 mx-4">✦</span>
-      <span class="inline-block text-sm tracking-[0.5em] uppercase text-white/10 mx-8">React</span>
-      <span class="inline-block text-accent/20 mx-4">✦</span>
-      <span class="inline-block text-sm tracking-[0.5em] uppercase text-white/10 mx-8">Supabase</span>
-      <span class="inline-block text-accent/20 mx-4">✦</span>
-      <span class="inline-block text-sm tracking-[0.5em] uppercase text-white/10 mx-8">Vercel</span>
-    </div>
-  </div>
 
   <!-- ============================================ -->
   <!-- 02. MANIFIESTO -->
   <!-- ============================================ -->
-  <section id="manifiesto" class="relative py-32 md:py-44 px-6">
+  <section id="manifiesto" class="relative py-24 sm:py-32 md:py-44 px-4 sm:px-6">
     <div class="watermark bottom-10 right-[-5%] rotate-6">MANIFIESTO</div>
 
-    <!-- Spinning asterisk doodle -->
+    <!-- Accent ornament -->
     <svg class="absolute top-20 right-20 w-16 h-16 spin-slow opacity-20" viewBox="0 0 60 60" fill="none" stroke="#FF3B30" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
       <line x1="30" y1="2" x2="30" y2="58"/>
       <line x1="2" y1="30" x2="58" y2="30"/>
@@ -401,131 +649,267 @@
 
       <div class="fade-up">
         <h2 class="font-serif text-[clamp(2rem,5vw,4.5rem)] leading-[1.05] max-w-4xl mb-20">
-          No hacemos sitios web.<br/>
-          <span class="italic text-accent">Construimos sistemas que venden.</span>
+          No hacemos páginas para impresionar.<br/>
+          <span class="italic text-accent">Hacemos sitios que ordenan, convencen y convierten.</span>
         </h2>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-12 md:gap-16 fade-up" style="transition-delay: 0.2s">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12 md:gap-16 fade-up" style="transition-delay: 0.2s">
         <div class="border-t border-white/10 pt-6">
-          <h3 class="text-xs tracking-[0.3em] uppercase text-white/50 mb-4">Obsesión por el detalle</h3>
-          <p class="text-sm leading-relaxed text-white/40">Cada píxel tiene un propósito. Cada interacción está diseñada para convertir. No decoramos — ingeniamos experiencias que generan resultados medibles.</p>
+          <h3 class="text-xs tracking-[0.3em] uppercase text-white/70 mb-4">Presencia con criterio</h3>
+          <p class="text-sm leading-relaxed text-white/72">Tu web se ve importante, ordenada y confiable desde el primer pantallazo. Sin exceso, sin ruido, sin perder personalidad.</p>
         </div>
         <div class="border-t border-white/10 pt-6">
-          <h3 class="text-xs tracking-[0.3em] uppercase text-white/50 mb-4">Tecnología como ventaja</h3>
-          <p class="text-sm leading-relaxed text-white/40">Usamos el stack más avanzado del mercado. Next.js, AI, edge computing. Tu competencia aún no sabe que esto existe. Tú ya lo tienes.</p>
+          <h3 class="text-xs tracking-[0.3em] uppercase text-white/70 mb-4">Claridad comercial</h3>
+          <p class="text-sm leading-relaxed text-white/72">Explicamos tu oferta sin enredos, para que el cliente entienda qué haces, por qué importa y cuál es el siguiente paso.</p>
         </div>
         <div class="border-t border-white/10 pt-6">
-          <h3 class="text-xs tracking-[0.3em] uppercase text-white/50 mb-4">Resultados, no promesas</h3>
-          <p class="text-sm leading-relaxed text-white/40">Cada proyecto viene con métricas de éxito claras. Si no podemos moverlas, no lo tomamos. Así de simple. Así de honesto.</p>
+          <h3 class="text-xs tracking-[0.3em] uppercase text-white/70 mb-4">Conversión elegante</h3>
+          <p class="text-sm leading-relaxed text-white/72">Diseño sobrio, recorrido simple y llamados a la acción que empujan sin ruido. La venta ocurre por confianza, no por presión.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ============================================ -->
-  <!-- 03. SERVICIOS -->
+  <!-- 02B. PRUEBAS VISUALES + BAR -->
   <!-- ============================================ -->
-  <section id="servicios" class="relative py-32 md:py-44 px-6 border-t border-white/5">
+  <section class="relative px-4 sm:px-6 pb-10 sm:pb-14">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex items-center justify-between gap-4 mb-5 sm:mb-7">
+        <div>
+          <p class="text-[10px] sm:text-xs tracking-[0.45em] uppercase text-accent mb-2">01 · prueba visual</p>
+          <h3 class="font-serif text-2xl sm:text-3xl leading-tight">Mostrar el trabajo, no el stack.</h3>
+        </div>
+        <p class="text-xs sm:text-sm text-white/56 max-w-xs text-right hidden sm:block">Cuatro pruebas vivas para que el sitio se sienta más real, más atractivo y más vendible.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+        <article class="couture-card overflow-hidden bg-white/[0.02] border border-white/10">
+          <div class="relative aspect-[4/5] overflow-hidden bg-noir">
+            <img src="assets/gifs/tribuimpulsa-scroll.gif" alt="Preview animado de Tribu Impulsa" class="absolute inset-0 h-full w-full object-cover object-top" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-noir via-noir/10 to-transparent"></div>
+            <div class="absolute top-4 left-4 text-[9px] tracking-[0.3em] uppercase text-white/65 border border-white/10 px-3 py-1 bg-noir/30 backdrop-blur-sm">Más comunidad</div>
+          </div>
+          <div class="p-5">
+            <h4 class="text-sm tracking-[0.28em] uppercase text-neon mb-2">Retención</h4>
+            <p class="text-sm text-white/72 leading-relaxed">Para marcas que necesitan que la gente vuelva, participe y recomiende.</p>
+          </div>
+        </article>
+
+        <article class="couture-card overflow-hidden bg-white/[0.02] border border-white/10">
+          <div class="relative aspect-[4/5] overflow-hidden bg-noir">
+            <img src="assets/gifs/rey-scroll.gif" alt="Preview animado de El Rey de las Páginas" class="absolute inset-0 h-full w-full object-cover object-top" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-noir via-noir/10 to-transparent"></div>
+            <div class="absolute top-4 left-4 text-[9px] tracking-[0.3em] uppercase text-white/65 border border-white/10 px-3 py-1 bg-noir/30 backdrop-blur-sm">Más claridad</div>
+          </div>
+          <div class="p-5">
+            <h4 class="text-sm tracking-[0.28em] uppercase text-accent mb-2">Oferta entendible</h4>
+            <p class="text-sm text-white/72 leading-relaxed">Decimos qué haces, por qué importa y cómo comprar sin dar vueltas.</p>
+          </div>
+        </article>
+
+        <article class="couture-card overflow-hidden bg-white/[0.02] border border-white/10">
+          <div class="relative aspect-[4/5] overflow-hidden bg-noir">
+            <img src="assets/gifs/cultimed-scroll.gif" alt="Preview animado de Cultimed" class="absolute inset-0 h-full w-full object-cover object-top" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-noir via-noir/10 to-transparent"></div>
+            <div class="absolute top-4 left-4 text-[9px] tracking-[0.3em] uppercase text-white/65 border border-white/10 px-3 py-1 bg-noir/30 backdrop-blur-sm">Menos fricción</div>
+          </div>
+          <div class="p-5">
+            <h4 class="text-sm tracking-[0.28em] uppercase text-white/80 mb-2">Procesos simples</h4>
+            <p class="text-sm text-white/72 leading-relaxed">Automatizamos lo pesado para que vender y atender sea más fácil.</p>
+          </div>
+        </article>
+
+        <article class="couture-card overflow-hidden bg-white/[0.02] border border-white/10">
+          <div class="relative aspect-[4/5] overflow-hidden bg-noir">
+            <img src="assets/gifs/titansoul-scroll.gif" alt="Preview animado de Titan Soul" class="absolute inset-0 h-full w-full object-cover object-top" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-noir via-noir/10 to-transparent"></div>
+            <div class="absolute top-4 left-4 text-[9px] tracking-[0.3em] uppercase text-white/65 border border-white/10 px-3 py-1 bg-noir/30 backdrop-blur-sm">Más confianza</div>
+          </div>
+          <div class="p-5">
+            <h4 class="text-sm tracking-[0.28em] uppercase text-neon mb-2">Marca que vende</h4>
+            <p class="text-sm text-white/72 leading-relaxed">Subimos percepción, claridad y conversión desde el primer vistazo.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marquee divider -->
+  <div class="border-y border-white/10 py-6 sm:py-7 overflow-hidden bg-white/[0.015]">
+    <div class="marquee whitespace-nowrap">
+      <span class="inline-block text-sm sm:text-[0.95rem] tracking-[0.35em] uppercase text-white/18 sm:text-white/22 mx-8 font-medium">Más leads</span>
+      <span class="inline-block text-accent/35 mx-4">✦</span>
+      <span class="inline-block text-sm sm:text-[0.95rem] tracking-[0.35em] uppercase text-white/18 sm:text-white/22 mx-8 font-medium">Más ventas</span>
+      <span class="inline-block text-accent/35 mx-4">✦</span>
+      <span class="inline-block text-sm sm:text-[0.95rem] tracking-[0.35em] uppercase text-white/18 sm:text-white/22 mx-8 font-medium">Menos fricción</span>
+      <span class="inline-block text-accent/35 mx-4">✦</span>
+      <span class="inline-block text-sm sm:text-[0.95rem] tracking-[0.35em] uppercase text-white/18 sm:text-white/22 mx-8 font-medium">Más confianza</span>
+      <span class="inline-block text-accent/35 mx-4">✦</span>
+      <span class="inline-block text-sm sm:text-[0.95rem] tracking-[0.35em] uppercase text-white/18 sm:text-white/22 mx-8 font-medium">Más claridad</span>
+      <span class="inline-block text-accent/35 mx-4">✦</span>
+      <span class="inline-block text-sm sm:text-[0.95rem] tracking-[0.35em] uppercase text-white/18 sm:text-white/22 mx-8 font-medium">Mejor percepción</span>
+      <span class="inline-block text-accent/35 mx-4">✦</span>
+      <span class="inline-block text-sm sm:text-[0.95rem] tracking-[0.35em] uppercase text-white/18 sm:text-white/22 mx-8 font-medium">Más leads</span>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <section id="quienes-somos" class="relative py-24 sm:py-32 md:py-44 px-4 sm:px-6 border-t border-white/5">
+    <div class="watermark bottom-10 left-[-6%] -rotate-6">EQUIPO</div>
+
+    <div class="max-w-6xl mx-auto">
+      <div class="flex items-start gap-6 mb-16">
+        <span class="editorial-num">03</span>
+        <div class="pt-4">
+          <p class="text-xs tracking-[0.4em] uppercase text-accent mb-2">Quiénes somos</p>
+          <div class="w-12 h-px bg-accent/40"></div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-16 items-start fade-up">
+        <div>
+          <h2 class="font-serif text-[clamp(2.2rem,5vw,4.5rem)] leading-[1.02] max-w-3xl mb-8">
+            Somos un equipo joven, experto en distintas áreas.<br/>
+            <span class="italic text-accent">Obsesionados con el futuro y con hacerlo bien.</span>
+          </h2>
+          <p class="text-sm sm:text-base text-white/72 leading-relaxed max-w-xl mb-8">
+            No armamos páginas por cumplir. Diseñamos marcas que se ven vivas, se entienden rápido y empujan a la acción sin ruido. Nos importa la estética, pero más aún la claridad, la velocidad y que el negocio sienta el efecto.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <span class="text-[10px] tracking-[0.35em] uppercase border border-white/10 px-3 py-1 text-white/68">Diseño</span>
+            <span class="text-[10px] tracking-[0.35em] uppercase border border-white/10 px-3 py-1 text-white/68">Código</span>
+            <span class="text-[10px] tracking-[0.35em] uppercase border border-white/10 px-3 py-1 text-white/68">Estrategia</span>
+            <span class="text-[10px] tracking-[0.35em] uppercase border border-white/10 px-3 py-1 text-white/68">AI</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4">
+          <div class="couture-card p-6 sm:p-8 bg-white/[0.02]">
+            <p class="text-[10px] tracking-[0.35em] uppercase text-accent/70 mb-3">01 · criterio</p>
+            <p class="text-sm text-white/76 leading-relaxed">Leemos el negocio antes de diseñar. Si la web no ordena la propuesta, no sirve.</p>
+          </div>
+          <div class="couture-card p-6 sm:p-8 bg-white/[0.02]">
+            <p class="text-[10px] tracking-[0.35em] uppercase text-neon/70 mb-3">02 · oficio</p>
+            <p class="text-sm text-white/76 leading-relaxed">Combinamos producto, código y narrativa para construir algo que se sienta premium de verdad.</p>
+          </div>
+          <div class="couture-card p-6 sm:p-8 bg-white/[0.02]">
+            <p class="text-[10px] tracking-[0.35em] uppercase text-white/70 mb-3">03 · ambición</p>
+            <p class="text-sm text-white/76 leading-relaxed">No hacemos “sitios bonitos”; hacemos activos digitales que eleven percepción y conviertan mejor.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 04. SERVICIOS -->
+  <!-- ============================================ -->
+  <section id="servicios" class="relative py-24 sm:py-32 md:py-44 px-4 sm:px-6 border-t border-white/5">
     <div class="max-w-6xl mx-auto">
       <div class="flex items-start gap-6 mb-20">
-        <span class="editorial-num">03</span>
+        <span class="editorial-num">04</span>
         <div class="pt-4">
           <p class="text-xs tracking-[0.4em] uppercase text-accent mb-2">Servicios</p>
           <div class="w-12 h-px bg-accent/40"></div>
         </div>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         <!-- Card 01 -->
-        <div class="couture-card p-8 md:p-10 fade-up">
-          <div class="flex items-start justify-between mb-8">
-            <span class="font-serif italic text-5xl text-white/[0.06]">01</span>
-            <!-- Doodle: shopping bag -->
-            <svg class="w-10 h-10 float opacity-30" viewBox="0 0 40 40" fill="none" stroke="#FF3B30" stroke-width="1.2" stroke-linecap="round" aria-hidden="true">
-              <rect x="6" y="14" width="28" height="22" rx="2"/>
-              <path d="M14 14 V10 C14 6, 26 6, 26 10 V14"/>
-              <circle cx="16" cy="22" r="1.5" fill="#FF3B30"/>
-              <circle cx="24" cy="22" r="1.5" fill="#FF3B30"/>
-            </svg>
+        <div class="couture-card p-6 sm:p-8 md:p-10 fade-up bg-white/[0.02]">
+          <div class="mb-6 overflow-hidden rounded-sm border border-white/10 bg-noir shadow-[0_0_0_1px_rgba(255,255,255,0.02),0_18px_48px_rgba(0,0,0,0.24)]">
+            <img src="assets/gifs/titansoul-scroll.gif" alt="Preview animado de una tienda ecommerce" class="h-44 sm:h-52 w-full object-cover object-top" loading="lazy" />
+            <div class="flex items-center justify-between border-t border-white/10 px-4 py-3">
+              <span class="text-[10px] tracking-[0.35em] uppercase text-white/65">Live preview</span>
+              <span class="text-[10px] tracking-[0.35em] uppercase text-accent">01</span>
+            </div>
           </div>
-          <p class="text-xs tracking-[0.4em] uppercase text-accent/70 mb-2">Shopify Plus</p>
-          <h3 class="font-serif text-2xl md:text-3xl mb-3">El ecommerce que convierte</h3>
-          <p class="text-sm text-white/40 leading-relaxed">Tiendas Shopify Plus que no solo se ven premium — venden premium. Checkout optimizado, headless si lo necesitas, integraciones que escalan.</p>
+          <div class="flex items-start justify-between mb-6">
+            <div>
+              <p class="text-xs tracking-[0.4em] uppercase text-accent/70 mb-2">Ecommerce</p>
+              <h3 class="font-serif text-2xl md:text-3xl mb-3">Tiendas que inspiran confianza</h3>
+            </div>
+            <div class="px-3 py-1 border border-accent/20 text-[10px] tracking-[0.35em] uppercase text-accent/80 rounded-full bg-accent/5">Retail</div>
+          </div>
+          <p class="text-sm text-white/78 leading-relaxed">Ordenamos catálogo, producto y checkout para que vender se sienta natural, confiable y claro.</p>
           <div class="mt-6 flex flex-wrap gap-2">
-            <span class="text-[10px] tracking-wider uppercase border border-white/10 px-3 py-1 text-white/30">Headless</span>
-            <span class="text-[10px] tracking-wider uppercase border border-white/10 px-3 py-1 text-white/30">Custom Theme</span>
-            <span class="text-[10px] tracking-wider uppercase border border-white/10 px-3 py-1 text-white/30">Checkout+</span>
+            <span class="text-[10px] tracking-wider uppercase border border-white/10 px-3 py-1 text-white/68">Catálogo</span>
+            <span class="text-[10px] tracking-wider uppercase border border-white/10 px-3 py-1 text-white/68">Diseño a medida</span>
+            <span class="text-[10px] tracking-wider uppercase border border-white/10 px-3 py-1 text-white/68">Checkout</span>
           </div>
         </div>
 
         <!-- Card 02 -->
-        <div class="couture-card p-8 md:p-10 fade-up" style="transition-delay: 0.1s">
-          <div class="flex items-start justify-between mb-8">
-            <span class="font-serif italic text-5xl text-white/[0.06]">02</span>
-            <!-- Doodle: lightning bolt -->
-            <svg class="w-10 h-10 float opacity-30" style="animation-delay: 0.3s" viewBox="0 0 40 40" fill="none" stroke="#00FFB2" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M22 4 L10 22 H20 L18 36 L30 18 H20 Z"/>
-            </svg>
+        <div class="couture-card p-6 sm:p-8 md:p-10 fade-up bg-white/[0.02]" style="transition-delay: 0.1s">
+          <div class="mb-6 overflow-hidden rounded-sm border border-white/10 bg-noir shadow-[0_0_0_1px_rgba(255,255,255,0.02),0_18px_48px_rgba(0,0,0,0.24)]">
+            <img src="assets/gifs/rey-scroll.gif" alt="Preview animado de un sitio corporativo" class="h-44 sm:h-52 w-full object-cover object-top" loading="lazy" />
+            <div class="flex items-center justify-between border-t border-white/10 px-4 py-3">
+              <span class="text-[10px] tracking-[0.35em] uppercase text-white/65">Live preview</span>
+              <span class="text-[10px] tracking-[0.35em] uppercase text-neon">02</span>
+            </div>
           </div>
-          <p class="text-xs tracking-[0.4em] uppercase text-neon/70 mb-2">Next.js Experiences</p>
-          <h3 class="font-serif text-2xl md:text-3xl mb-3">Velocidad como feature</h3>
-          <p class="text-sm text-white/40 leading-relaxed">Aplicaciones web que cargan antes de que pestañees. Server Components, edge rendering, streaming. La velocidad no es un extra — es el producto.</p>
+          <div class="flex items-start justify-between mb-6">
+            <div>
+              <p class="text-xs tracking-[0.4em] uppercase text-neon/70 mb-2">Web corporativa</p>
+              <h3 class="font-serif text-2xl md:text-3xl mb-3">Sitios que explican mejor</h3>
+            </div>
+            <div class="px-3 py-1 border border-neon/20 text-[10px] tracking-[0.35em] uppercase text-neon/80 rounded-full bg-neon/5">Brand</div>
+          </div>
+          <p class="text-sm text-white/78 leading-relaxed">Tu propuesta se entiende rápido, sin fricción y con una experiencia limpia en cualquier pantalla.</p>
           <div class="mt-6 flex flex-wrap gap-2">
-            <span class="text-[10px] tracking-wider uppercase border border-white/10 px-3 py-1 text-white/30">App Router</span>
-            <span class="text-[10px] tracking-wider uppercase border border-white/10 px-3 py-1 text-white/30">SSR/SSG</span>
-            <span class="text-[10px] tracking-wider uppercase border border-white/10 px-3 py-1 text-white/30">Edge</span>
+            <span class="text-[10px] tracking-wider uppercase border border-white/10 px-3 py-1 text-white/68">App Router</span>
+            <span class="text-[10px] tracking-wider uppercase border border-white/10 px-3 py-1 text-white/68">SSR/SSG</span>
+            <span class="text-[10px] tracking-wider uppercase border border-white/10 px-3 py-1 text-white/68">Edge</span>
           </div>
         </div>
 
         <!-- Card 03 -->
-        <div class="couture-card p-8 md:p-10 fade-up" style="transition-delay: 0.2s">
-          <div class="flex items-start justify-between mb-8">
-            <span class="font-serif italic text-5xl text-white/[0.06]">03</span>
-            <!-- Doodle: brain/AI -->
-            <svg class="w-10 h-10 float opacity-30" style="animation-delay: 0.6s" viewBox="0 0 40 40" fill="none" stroke="#FF3B30" stroke-width="1.2" stroke-linecap="round" aria-hidden="true">
-              <circle cx="20" cy="20" r="12"/>
-              <path d="M14 16 Q 17 12, 20 16 Q 23 12, 26 16"/>
-              <path d="M14 24 Q 17 20, 20 24 Q 23 20, 26 24"/>
-              <circle cx="15" cy="20" r="1" fill="#FF3B30"/>
-              <circle cx="25" cy="20" r="1" fill="#FF3B30"/>
-              <circle cx="20" cy="14" r="1" fill="#FF3B30"/>
-              <circle cx="20" cy="26" r="1" fill="#FF3B30"/>
-            </svg>
+        <div class="couture-card p-6 sm:p-8 md:p-10 fade-up bg-white/[0.02]" style="transition-delay: 0.2s">
+          <div class="mb-6 overflow-hidden rounded-sm border border-white/10 bg-noir shadow-[0_0_0_1px_rgba(255,255,255,0.02),0_18px_48px_rgba(0,0,0,0.24)]">
+            <img src="assets/gifs/cultimed-scroll.gif" alt="Preview animado de una plataforma con automatización" class="h-44 sm:h-52 w-full object-cover object-top" loading="lazy" />
+            <div class="flex items-center justify-between border-t border-white/10 px-4 py-3">
+              <span class="text-[10px] tracking-[0.35em] uppercase text-white/65">Live preview</span>
+              <span class="text-[10px] tracking-[0.35em] uppercase text-accent">03</span>
+            </div>
           </div>
-          <p class="text-xs tracking-[0.4em] uppercase text-accent/70 mb-2">AI Integration</p>
-          <h3 class="font-serif text-2xl md:text-3xl mb-3">Tu competencia aún no tiene esto</h3>
-          <p class="text-sm text-white/40 leading-relaxed">Chatbots inteligentes, búsqueda semántica, automatización con LLMs. Integramos AI donde realmente mueve la aguja de tu negocio.</p>
+          <div class="flex items-start justify-between mb-6">
+            <div>
+              <p class="text-xs tracking-[0.4em] uppercase text-accent/70 mb-2">Automatización inteligente</p>
+              <h3 class="font-serif text-2xl md:text-3xl mb-3">AI que realmente suma</h3>
+            </div>
+            <div class="px-3 py-1 border border-accent/20 text-[10px] tracking-[0.35em] uppercase text-accent/80 rounded-full bg-accent/5">Ops</div>
+          </div>
+          <p class="text-sm text-white/78 leading-relaxed">Usamos AI para reducir fricción, ordenar procesos y responder mejor — no para meter humo decorativo.</p>
           <div class="mt-6 flex flex-wrap gap-2">
-            <span class="text-[10px] tracking-wider uppercase border border-white/10 px-3 py-1 text-white/30">ChatBots</span>
-            <span class="text-[10px] tracking-wider uppercase border border-white/10 px-3 py-1 text-white/30">RAG</span>
-            <span class="text-[10px] tracking-wider uppercase border border-white/10 px-3 py-1 text-white/30">Agents</span>
+            <span class="text-[10px] tracking-wider uppercase border border-white/10 px-3 py-1 text-white/68">ChatBots</span>
+            <span class="text-[10px] tracking-wider uppercase border border-white/10 px-3 py-1 text-white/68">RAG</span>
+            <span class="text-[10px] tracking-wider uppercase border border-white/10 px-3 py-1 text-white/68">Agents</span>
           </div>
         </div>
 
         <!-- Card 04 -->
-        <div class="couture-card p-8 md:p-10 fade-up" style="transition-delay: 0.3s">
-          <div class="flex items-start justify-between mb-8">
-            <span class="font-serif italic text-5xl text-white/[0.06]">04</span>
-            <!-- Doodle: people/community -->
-            <svg class="w-10 h-10 float opacity-30" style="animation-delay: 0.9s" viewBox="0 0 40 40" fill="none" stroke="#00FFB2" stroke-width="1.2" stroke-linecap="round" aria-hidden="true">
-              <circle cx="14" cy="14" r="4"/>
-              <circle cx="26" cy="14" r="4"/>
-              <circle cx="20" cy="24" r="4"/>
-              <path d="M14 18 Q 14 22, 17 24"/>
-              <path d="M26 18 Q 26 22, 23 24"/>
-              <path d="M8 30 Q 8 24, 14 22"/>
-              <path d="M32 30 Q 32 24, 26 22"/>
-              <path d="M14 34 Q 14 28, 20 28 Q 26 28, 26 34"/>
-            </svg>
+        <div class="couture-card p-6 sm:p-8 md:p-10 fade-up bg-white/[0.02]" style="transition-delay: 0.3s">
+          <div class="mb-6 overflow-hidden rounded-sm border border-white/10 bg-noir shadow-[0_0_0_1px_rgba(255,255,255,0.02),0_18px_48px_rgba(0,0,0,0.24)]">
+            <img src="assets/gifs/tribuimpulsa-scroll.gif" alt="Preview animado de una microcomunidad activa" class="h-44 sm:h-52 w-full object-cover object-top" loading="lazy" />
+            <div class="flex items-center justify-between border-t border-white/10 px-4 py-3">
+              <span class="text-[10px] tracking-[0.35em] uppercase text-white/65">Live preview</span>
+              <span class="text-[10px] tracking-[0.35em] uppercase text-neon">04</span>
+            </div>
           </div>
-          <p class="text-xs tracking-[0.4em] uppercase text-neon/70 mb-2">Tribu Impulsa</p>
-          <h3 class="font-serif text-2xl md:text-3xl mb-3">Community platforms que conectan</h3>
-          <p class="text-sm text-white/40 leading-relaxed">Plataformas de comunidad que retienen, enganchan y monetizan. Gamificación, contenido exclusivo, analytics avanzados. Tu tribu, tus reglas.</p>
+          <div class="flex items-start justify-between mb-6">
+            <div>
+              <p class="text-xs tracking-[0.4em] uppercase text-neon/70 mb-2">Microcomunidades</p>
+              <h3 class="font-serif text-2xl md:text-3xl mb-3">Plataformas que retienen</h3>
+            </div>
+            <div class="px-3 py-1 border border-neon/20 text-[10px] tracking-[0.35em] uppercase text-neon/80 rounded-full bg-neon/5">Community</div>
+          </div>
+          <p class="text-sm text-white/78 leading-relaxed">Diseñamos comunidad, participación y monetización para que la tribu no solo llegue: se quede.</p>
           <div class="mt-6 flex flex-wrap gap-2">
-            <span class="text-[10px] tracking-wider uppercase border border-white/10 px-3 py-1 text-white/30">Community</span>
-            <span class="text-[10px] tracking-wider uppercase border border-white/10 px-3 py-1 text-white/30">Gamification</span>
-            <span class="text-[10px] tracking-wider uppercase border border-white/10 px-3 py-1 text-white/30">Analytics</span>
+            <span class="text-[10px] tracking-wider uppercase border border-white/10 px-3 py-1 text-white/68">Community</span>
+            <span class="text-[10px] tracking-wider uppercase border border-white/10 px-3 py-1 text-white/68">Gamification</span>
+            <span class="text-[10px] tracking-wider uppercase border border-white/10 px-3 py-1 text-white/68">Analytics</span>
           </div>
         </div>
       </div>
@@ -533,63 +917,60 @@
   </section>
 
   <!-- ============================================ -->
-  <!-- 04. CASE STUDY — TRIBU IMPULSA -->
+  <!-- 05. CASO REAL — TRIBU IMPULSA -->
   <!-- ============================================ -->
-  <section id="trabajo" class="relative py-32 md:py-44 px-6 border-t border-white/5">
-    <div class="watermark top-20 left-[-3%] -rotate-3">CASE STUDY</div>
+  <section id="trabajo" class="relative py-24 sm:py-32 md:py-44 px-4 sm:px-6 border-t border-white/5">
+    <div class="watermark top-20 left-[-3%] -rotate-3">CASO REAL</div>
 
     <div class="max-w-6xl mx-auto">
       <div class="flex items-start gap-6 mb-20">
-        <span class="editorial-num">04</span>
+        <span class="editorial-num">05</span>
         <div class="pt-4">
-          <p class="text-xs tracking-[0.4em] uppercase text-accent mb-2">Case Study</p>
+          <p class="text-xs tracking-[0.4em] uppercase text-accent mb-2">Caso real</p>
           <div class="w-12 h-px bg-accent/40"></div>
         </div>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-16 items-center fade-up">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-16 items-center fade-up">
         <div>
           <p class="text-xs tracking-[0.4em] uppercase text-neon/60 mb-6">Tribu Impulsa</p>
           <h3 class="font-serif text-[clamp(3rem,7vw,5.5rem)] leading-[0.9] mb-6">
-            <span class="text-accent">+340%</span><br/>
-            <span class="font-serif italic text-3xl text-white/60">en conversión</span>
+            <span class="text-accent">+300%</span><br/>
+            <span class="font-serif italic text-3xl text-white/78">en visibilidad</span>
           </h3>
-          <p class="text-sm text-white/40 leading-relaxed mb-8 max-w-md">
-            Transformamos una idea de comunidad en una plataforma que conecta a miles. Sistema de membresías, contenido exclusivo, gamificación y analytics en tiempo real. Todo construido sobre Next.js con Supabase.
+          <p class="text-sm text-white/72 leading-relaxed mb-8 max-w-md">
+            Partimos con un proyecto casi invisible y hoy está llenando teatros municipales, moviendo gente real y ganando presencia en eventos. Sistema de membresías, contenido exclusivo, gamificación y analytics en tiempo real. Todo construido sobre Next.js con Supabase.
           </p>
 
-          <div class="grid grid-cols-3 gap-6 mb-8">
+          <div class="grid grid-cols-3 gap-4 sm:gap-6 mb-8">
             <div>
               <p class="font-serif text-3xl text-accent">12k</p>
-              <p class="text-[10px] tracking-wider uppercase text-white/30 mt-1">Usuarios activos</p>
+              <p class="text-[10px] tracking-wider uppercase text-white/68 mt-1">Usuarios activos</p>
             </div>
             <div>
               <p class="font-serif text-3xl text-neon">98%</p>
-              <p class="text-[10px] tracking-wider uppercase text-white/30 mt-1">Uptime</p>
+              <p class="text-[10px] tracking-wider uppercase text-white/68 mt-1">Uptime</p>
             </div>
             <div>
               <p class="font-serif text-3xl text-accent">2.1s</p>
-              <p class="text-[10px] tracking-wider uppercase text-white/30 mt-1">Load time</p>
+              <p class="text-[10px] tracking-wider uppercase text-white/68 mt-1">Load time</p>
             </div>
           </div>
 
-          <a href="#" class="inline-flex items-center text-sm tracking-[0.2em] uppercase text-accent hover:text-cream transition-colors group">
-            Ver caso completo
+          <a href="#contacto" class="inline-flex items-center text-sm tracking-[0.2em] uppercase text-accent hover:text-cream transition-colors group">
+            Pedir el caso
             <span class="ml-2 group-hover:translate-x-1 transition-transform">→</span>
           </a>
         </div>
 
-        <!-- Mockup placeholder -->
+        <!-- Visual del caso -->
         <div class="relative">
-          <div class="aspect-[4/3] bg-gradient-to-br from-white/[0.03] to-transparent border border-white/10 rounded-sm flex items-center justify-center overflow-hidden">
-            <div class="text-center">
-              <div class="w-16 h-16 border border-accent/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg class="w-6 h-6 text-accent pulse-glow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-              </div>
-              <p class="text-[10px] tracking-[0.3em] uppercase text-white/20">Preview del proyecto</p>
-            </div>
-            <!-- Corner label -->
-            <div class="absolute top-4 left-4 text-[9px] tracking-[0.3em] uppercase text-white/15 border border-white/10 px-3 py-1">Live Project</div>
+          <div class="aspect-[4/3] bg-gradient-to-br from-white/[0.03] via-white/[0.015] to-transparent border border-white/10 rounded-sm overflow-hidden shadow-[0_0_0_1px_rgba(255,255,255,0.02),0_28px_60px_rgba(0,0,0,0.28)]">
+            <img src="assets/gifs/tribuimpulsa-scroll.gif" alt="Ultra soft scroll del proyecto Tribu Impulsa" class="scroll-reel absolute inset-0 h-full w-full object-cover object-top" loading="eager" />
+            <div class="absolute inset-0 bg-gradient-to-t from-noir via-noir/10 to-transparent pointer-events-none"></div>
+            <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent"></div>
+            <div class="absolute top-4 left-4 text-[9px] tracking-[0.3em] uppercase text-white/58 border border-white/10 px-3 py-1 bg-noir/30 backdrop-blur-sm">En producción</div>
+            <div class="absolute bottom-4 right-4 text-[9px] tracking-[0.3em] uppercase text-white/70 border border-white/10 px-3 py-1 bg-noir/30 backdrop-blur-sm">Ultra soft scroll</div>
           </div>
           <!-- Doodle arrow pointing to mockup -->
           <svg class="absolute -top-10 -left-10 w-16 h-16 wiggle opacity-20" viewBox="0 0 60 60" fill="none" stroke="#00FFB2" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
@@ -602,63 +983,62 @@
   </section>
 
   <!-- ============================================ -->
-  <!-- 05. CASE STUDY — CULTISOFT -->
+  <!-- 06. CASO REAL — CULTISOFT -->
   <!-- ============================================ -->
-  <section class="relative py-32 md:py-44 px-6 border-t border-white/5">
+  <section class="relative py-24 sm:py-32 md:py-44 px-4 sm:px-6 border-t border-white/5">
     <div class="max-w-6xl mx-auto">
       <div class="flex items-start gap-6 mb-20">
-        <span class="editorial-num">05</span>
+        <span class="editorial-num">06</span>
         <div class="pt-4">
-          <p class="text-xs tracking-[0.4em] uppercase text-accent mb-2">Case Study</p>
+          <p class="text-xs tracking-[0.4em] uppercase text-accent mb-2">Caso real</p>
           <div class="w-12 h-px bg-accent/40"></div>
         </div>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-16 items-center fade-up">
-        <!-- Mockup placeholder -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-16 items-center fade-up">
+        <!-- Visual del caso -->
         <div class="relative order-2 md:order-1">
-          <div class="aspect-[4/3] bg-gradient-to-bl from-white/[0.03] to-transparent border border-white/10 rounded-sm flex items-center justify-center">
-            <div class="grid grid-cols-3 gap-3 p-8 w-full">
-              <div class="h-20 bg-white/[0.03] border border-white/5 rounded-sm"></div>
-              <div class="h-20 bg-white/[0.03] border border-white/5 rounded-sm col-span-2"></div>
-              <div class="h-20 bg-white/[0.03] border border-white/5 rounded-sm col-span-2"></div>
-              <div class="h-20 bg-white/[0.03] border border-white/5 rounded-sm"></div>
-              <div class="h-8 bg-accent/10 border border-accent/20 rounded-sm col-span-3"></div>
+          <div class="aspect-[4/3] rounded-sm overflow-hidden border border-[#d4af37]/18 bg-[radial-gradient(circle_at_50%_30%,rgba(212,175,55,0.16),transparent_42%),linear-gradient(135deg,#15110c_0%,#0c0b0a_45%,#090909_100%)] shadow-[0_0_0_1px_rgba(255,255,255,0.02),0_28px_60px_rgba(0,0,0,0.28)] flex items-center justify-center text-center px-6 sm:px-8">
+            <div class="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.05),transparent_50%)]"></div>
+            <div class="relative">
+              <p class="text-[10px] tracking-[0.45em] uppercase text-[#d4af37]/75 mb-5 sm:mb-6">Plataforma médica</p>
+              <h4 class="font-serif text-[clamp(2.9rem,8vw,5.8rem)] leading-none tracking-[0.18em] bg-clip-text text-transparent bg-gradient-to-b from-[#f9e8b4] via-[#d4af37] to-[#8f6a12] drop-shadow-[0_0_18px_rgba(212,175,55,0.16)]">CULTIMED</h4>
+              <p class="mt-4 text-[10px] tracking-[0.32em] uppercase text-white/50">Medical luxury / compliance-first</p>
             </div>
           </div>
-          <div class="absolute top-4 right-4 text-[9px] tracking-[0.3em] uppercase text-white/15 border border-white/10 px-3 py-1">SaaS Platform</div>
+          <div class="absolute top-4 right-4 text-[9px] tracking-[0.3em] uppercase text-[#d4af37]/70 border border-[#d4af37]/18 px-3 py-1 bg-black/20 backdrop-blur-sm">Plataforma</div>
         </div>
 
         <div class="order-1 md:order-2">
-          <p class="text-xs tracking-[0.4em] uppercase text-accent/60 mb-6">Cultisoft</p>
+          <p class="text-xs tracking-[0.4em] uppercase text-accent/60 mb-6">Plataforma médica</p>
           <h3 class="font-serif text-[clamp(2rem,4vw,3.5rem)] leading-[1.05] mb-6">
-            SaaS médico de<br/>
-            <span class="italic text-accent">clase mundial</span>
+            Software clínico de<br/>
+            <span class="italic text-accent">nivel serio</span>
           </h3>
-          <p class="text-sm text-white/40 leading-relaxed mb-8 max-w-md">
-            Plataforma de gestión médica que maneja miles de consultas diarias. Dashboard en tiempo real, sistema de agendamiento inteligente, historiales clínicos digitales y reportería avanzada.
+          <p class="text-sm text-white/72 leading-relaxed mb-8 max-w-md">
+            Plataforma de gestión médica pensada para operar con orden, rapidez y trazabilidad. Agenda, historial, dashboards y reportería en un solo flujo.
           </p>
 
           <!-- Tech stack -->
           <div class="mb-8">
-            <p class="text-[10px] tracking-[0.3em] uppercase text-white/20 mb-3">Tech Stack</p>
+            <p class="text-[10px] tracking-[0.3em] uppercase text-white/62 mb-3">Tecnología</p>
             <div class="flex flex-wrap gap-2">
               <span class="text-xs border border-accent/20 text-accent/70 px-3 py-1.5">Next.js</span>
               <span class="text-xs border border-neon/20 text-neon/70 px-3 py-1.5">Supabase</span>
-              <span class="text-xs border border-white/10 text-white/40 px-3 py-1.5">Prisma</span>
-              <span class="text-xs border border-white/10 text-white/40 px-3 py-1.5">Tailwind</span>
-              <span class="text-xs border border-white/10 text-white/40 px-3 py-1.5">Vercel</span>
+              <span class="text-xs border border-white/10 text-white/72 px-3 py-1.5">Prisma</span>
+              <span class="text-xs border border-white/10 text-white/72 px-3 py-1.5">Tailwind</span>
+              <span class="text-xs border border-white/10 text-white/72 px-3 py-1.5">Vercel</span>
             </div>
           </div>
 
-          <div class="grid grid-cols-2 gap-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <div>
               <p class="font-serif text-3xl text-accent">50k+</p>
-              <p class="text-[10px] tracking-wider uppercase text-white/30 mt-1">Consultas/mes</p>
+              <p class="text-[10px] tracking-wider uppercase text-white/68 mt-1">Consultas/mes</p>
             </div>
             <div>
               <p class="font-serif text-3xl text-neon">0.3s</p>
-              <p class="text-[10px] tracking-wider uppercase text-white/30 mt-1">Tiempo de respuesta</p>
+              <p class="text-[10px] tracking-wider uppercase text-white/68 mt-1">Tiempo de respuesta</p>
             </div>
           </div>
         </div>
@@ -667,30 +1047,121 @@
   </section>
 
   <!-- ============================================ -->
-  <!-- 06. PROCESO -->
+  <!-- 05B. SITIOS VIVOS -->
   <!-- ============================================ -->
-  <section class="relative py-32 md:py-44 px-6 border-t border-white/5 overflow-hidden">
+  <section id="sitios" class="relative py-28 sm:py-36 md:py-48 px-4 sm:px-6 border-t border-white/5">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex items-center gap-4 mb-12">
+        <p class="text-xs tracking-[0.4em] uppercase text-accent">Sitios en vivo</p>
+        <div class="w-12 h-px bg-accent/40"></div>
+      </div>
+
+      <div class="fade-up">
+        <h3 class="font-serif text-[clamp(2rem,4vw,4rem)] leading-[1.05] mb-8 sm:mb-10 max-w-3xl">
+          Sitios activos ahora mismo.
+        </h3>
+        <p class="text-sm text-white/74 leading-relaxed max-w-2xl mb-12 sm:mb-14">
+          Las marcas y productos que ya están en producción y podís revisar al tiro desde acá.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        <a href="https://www.tribuimpulsa.cl" target="_blank" rel="noopener noreferrer" class="couture-card block p-5 sm:p-6 group fade-up overflow-hidden bg-white/[0.025]">
+          <div class="relative aspect-[16/10] rounded-sm overflow-hidden border border-white/15 mb-5 bg-noir shadow-[0_0_0_1px_rgba(255,255,255,0.02),0_28px_60px_rgba(0,0,0,0.28)]">
+            <img src="assets/gifs/tribuimpulsa-scroll.gif" alt="Scroll GIF de Tribu Impulsa" class="absolute inset-0 h-full w-full object-cover object-top" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-noir via-noir/10 to-transparent pointer-events-none"></div>
+          </div>
+          <div class="flex items-start justify-between gap-4 mb-3">
+            <div>
+              <p class="text-[10px] tracking-[0.4em] uppercase text-neon/100 mb-2">Tribu Impulsa</p>
+              <h4 class="font-serif text-xl sm:text-2xl text-cream">www.tribuimpulsa.cl</h4>
+            </div>
+          </div>
+          <p class="text-sm text-white/86 leading-relaxed">Comunidad, networking y colaboración real entre emprendedores.</p>
+          <div class="mt-6 inline-flex items-center text-xs tracking-[0.2em] uppercase text-white/80 group-hover:text-accent transition-colors">
+            Ver GIF <span class="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+          </div>
+        </a>
+
+        <a href="https://dispensariocultimed.cl" target="_blank" rel="noopener noreferrer" class="couture-card block p-5 sm:p-6 group fade-up overflow-hidden bg-white/[0.025]" style="transition-delay: 0.05s">
+          <div class="relative aspect-[16/10] rounded-sm overflow-hidden border border-white/15 mb-5 bg-noir shadow-[0_0_0_1px_rgba(255,255,255,0.02),0_28px_60px_rgba(0,0,0,0.28)]">
+            <img src="assets/gifs/cultimed-scroll.gif" alt="Scroll GIF de Dispensario Cultimed" class="absolute inset-0 h-full w-full object-cover object-top" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-noir via-noir/10 to-transparent pointer-events-none"></div>
+          </div>
+          <div class="flex items-start justify-between gap-4 mb-3">
+            <div>
+              <p class="text-[10px] tracking-[0.4em] uppercase text-accent/100 mb-2">Cultimed</p>
+              <h4 class="font-serif text-xl sm:text-2xl text-cream">dispensariocultimed.cl</h4>
+            </div>
+          </div>
+          <p class="text-sm text-white/86 leading-relaxed">Dispensario y operación medicinal con foco en compliance, confianza y conversión.</p>
+          <div class="mt-6 inline-flex items-center text-xs tracking-[0.2em] uppercase text-white/80 group-hover:text-accent transition-colors">
+            Ver GIF <span class="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+          </div>
+        </a>
+
+        <a href="https://bananacompany.cl" target="_blank" rel="noopener noreferrer" class="couture-card block p-5 sm:p-6 group fade-up overflow-hidden bg-white/[0.025]" style="transition-delay: 0.1s">
+          <div class="relative aspect-[16/10] rounded-sm overflow-hidden border border-white/15 mb-5 bg-noir shadow-[0_0_0_1px_rgba(255,255,255,0.02),0_28px_60px_rgba(0,0,0,0.28)]">
+            <img src="assets/gifs/banana-scroll.gif" alt="Scroll GIF de Banana Company" class="absolute inset-0 h-full w-full object-cover object-top" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-noir via-noir/10 to-transparent pointer-events-none"></div>
+          </div>
+          <div class="flex items-start justify-between gap-4 mb-3">
+            <div>
+              <p class="text-[10px] tracking-[0.4em] uppercase text-neon/100 mb-2">Banana Company</p>
+              <h4 class="font-serif text-xl sm:text-2xl text-cream">bananacompany.cl</h4>
+            </div>
+          </div>
+          <p class="text-sm text-white/86 leading-relaxed">Exploración de producto con foco en velocidad, experimentación y marca.</p>
+          <div class="mt-6 inline-flex items-center text-xs tracking-[0.2em] uppercase text-white/80 group-hover:text-accent transition-colors">
+            Ver GIF <span class="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+          </div>
+        </a>
+
+        <a href="https://www.titansoul.cl" target="_blank" rel="noopener noreferrer" class="couture-card block p-5 sm:p-6 group fade-up overflow-hidden bg-white/[0.025]" style="transition-delay: 0.15s">
+          <div class="relative aspect-[16/10] rounded-sm overflow-hidden border border-white/15 mb-5 bg-noir shadow-[0_0_0_1px_rgba(255,255,255,0.02),0_28px_60px_rgba(0,0,0,0.28)]">
+            <img src="assets/gifs/titansoul-scroll.gif" alt="Scroll GIF de Titan Soul" class="absolute inset-0 h-full w-full object-cover object-top" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-noir via-noir/10 to-transparent pointer-events-none"></div>
+          </div>
+          <div class="flex items-start justify-between gap-4 mb-3">
+            <div>
+              <p class="text-[10px] tracking-[0.4em] uppercase text-accent/100 mb-2">Titan Soul</p>
+              <h4 class="font-serif text-xl sm:text-2xl text-cream">www.titansoul.cl</h4>
+            </div>
+          </div>
+          <p class="text-sm text-white/86 leading-relaxed">Billeteras inteligentes y accesorios con estilo, enfocado en marca y producto.</p>
+          <div class="mt-6 inline-flex items-center text-xs tracking-[0.2em] uppercase text-white/80 group-hover:text-accent transition-colors">
+            Ver GIF <span class="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 07. PROCESO -->
+  <!-- ============================================ -->
+  <section class="relative py-24 sm:py-32 md:py-44 px-4 sm:px-6 border-t border-white/5 overflow-hidden">
     <div class="watermark top-[40%] right-[-8%] rotate-12">PROCESO</div>
 
     <div class="max-w-6xl mx-auto">
       <div class="flex items-start gap-6 mb-20">
-        <span class="editorial-num">06</span>
+        <span class="editorial-num">07</span>
         <div class="pt-4">
           <p class="text-xs tracking-[0.4em] uppercase text-accent mb-2">Proceso</p>
           <div class="w-12 h-px bg-accent/40"></div>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 fade-up">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 fade-up" role="list" aria-label="Proceso de trabajo">
         <!-- Phase 1 -->
-        <div class="relative group">
+        <div class="relative group" role="listitem">
           <div class="mb-6 flex items-center gap-4">
             <div class="timeline-dot group-hover:bg-accent transition-colors"></div>
             <div class="hidden md:block flex-1 h-px bg-gradient-to-r from-accent/30 to-transparent"></div>
           </div>
           <span class="font-serif italic text-4xl text-white/[0.06] block mb-3">01</span>
-          <h4 class="text-sm tracking-[0.2em] uppercase mb-3">Discovery</h4>
-          <p class="text-xs text-white/30 leading-relaxed">Entendemos tu negocio, tus usuarios, tu competencia. Research profundo antes de tocar una línea de código.</p>
+          <h4 class="text-sm tracking-[0.2em] uppercase mb-3">Entender</h4>
+          <p class="text-xs text-white/68 leading-relaxed">Entendemos tu negocio, tus usuarios, tu competencia. Research profundo antes de tocar una línea de código.</p>
           <!-- Doodle: magnifying glass -->
           <svg class="absolute top-0 right-0 w-8 h-8 opacity-10 group-hover:opacity-30 transition-opacity" viewBox="0 0 30 30" fill="none" stroke="#FF3B30" stroke-width="1.2" stroke-linecap="round" aria-hidden="true">
             <circle cx="13" cy="13" r="8"/>
@@ -699,14 +1170,14 @@
         </div>
 
         <!-- Phase 2 -->
-        <div class="relative group">
+        <div class="relative group" role="listitem">
           <div class="mb-6 flex items-center gap-4">
             <div class="timeline-dot group-hover:bg-accent transition-colors"></div>
             <div class="hidden md:block flex-1 h-px bg-gradient-to-r from-accent/30 to-transparent"></div>
           </div>
           <span class="font-serif italic text-4xl text-white/[0.06] block mb-3">02</span>
-          <h4 class="text-sm tracking-[0.2em] uppercase mb-3">Design</h4>
-          <p class="text-xs text-white/30 leading-relaxed">Wireframes, prototipos, design system. Iteramos contigo hasta que cada pantalla sea perfecta.</p>
+          <h4 class="text-sm tracking-[0.2em] uppercase mb-3">Diseñar</h4>
+          <p class="text-xs text-white/68 leading-relaxed">Wireframes, prototipos, design system. Iteramos contigo hasta que cada pantalla sea perfecta.</p>
           <!-- Doodle: pen -->
           <svg class="absolute top-0 right-0 w-8 h-8 opacity-10 group-hover:opacity-30 transition-opacity" viewBox="0 0 30 30" fill="none" stroke="#00FFB2" stroke-width="1.2" stroke-linecap="round" aria-hidden="true">
             <path d="M20 4 L26 10 L10 26 L4 26 L4 20 Z"/>
@@ -715,14 +1186,14 @@
         </div>
 
         <!-- Phase 3 -->
-        <div class="relative group">
+        <div class="relative group" role="listitem">
           <div class="mb-6 flex items-center gap-4">
             <div class="timeline-dot group-hover:bg-accent transition-colors"></div>
             <div class="hidden md:block flex-1 h-px bg-gradient-to-r from-accent/30 to-transparent"></div>
           </div>
           <span class="font-serif italic text-4xl text-white/[0.06] block mb-3">03</span>
-          <h4 class="text-sm tracking-[0.2em] uppercase mb-3">Build</h4>
-          <p class="text-xs text-white/30 leading-relaxed">Código limpio, arquitectura sólida, CI/CD desde el día uno. Sprints de 2 semanas con demos reales.</p>
+          <h4 class="text-sm tracking-[0.2em] uppercase mb-3">Construir</h4>
+          <p class="text-xs text-white/68 leading-relaxed">Código limpio, arquitectura sólida, CI/CD desde el día uno. Sprints de 2 semanas con demos reales.</p>
           <!-- Doodle: code brackets -->
           <svg class="absolute top-0 right-0 w-8 h-8 opacity-10 group-hover:opacity-30 transition-opacity" viewBox="0 0 30 30" fill="none" stroke="#FF3B30" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <polyline points="10,6 4,15 10,24"/>
@@ -731,13 +1202,13 @@
         </div>
 
         <!-- Phase 4 -->
-        <div class="relative group">
+        <div class="relative group" role="listitem">
           <div class="mb-6 flex items-center gap-4">
             <div class="timeline-dot group-hover:bg-accent transition-colors"></div>
           </div>
           <span class="font-serif italic text-4xl text-white/[0.06] block mb-3">04</span>
-          <h4 class="text-sm tracking-[0.2em] uppercase mb-3">Launch</h4>
-          <p class="text-xs text-white/30 leading-relaxed">Deploy, monitoring, optimización post-launch. No desaparecemos — somos tu equipo técnico extendido.</p>
+          <h4 class="text-sm tracking-[0.2em] uppercase mb-3">Publicar</h4>
+          <p class="text-xs text-white/68 leading-relaxed">Deploy, monitoring, optimización post-launch. No desaparecemos — somos tu equipo técnico extendido.</p>
           <!-- Doodle: rocket -->
           <svg class="absolute top-0 right-0 w-8 h-8 opacity-10 group-hover:opacity-30 transition-opacity" viewBox="0 0 30 30" fill="none" stroke="#00FFB2" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M15 2 C 15 2, 26 8, 26 18 L20 24 L15 20 L10 24 L4 18 C 4 8, 15 2, 15 2Z"/>
@@ -749,115 +1220,115 @@
   </section>
 
   <!-- ============================================ -->
-  <!-- 07. PRICING -->
+  <!-- 08. PRICING -->
   <!-- ============================================ -->
-  <section id="pricing" class="relative py-32 md:py-44 px-6 border-t border-white/5">
+  <section id="pricing" class="relative py-24 sm:py-32 md:py-44 px-4 sm:px-6 border-t border-white/5">
     <div class="max-w-6xl mx-auto">
       <div class="flex items-start gap-6 mb-8">
-        <span class="editorial-num">07</span>
+        <span class="editorial-num">08</span>
         <div class="pt-4">
-          <p class="text-xs tracking-[0.4em] uppercase text-accent mb-2">Pricing</p>
+          <p class="text-xs tracking-[0.4em] uppercase text-accent mb-2">Planes</p>
           <div class="w-12 h-px bg-accent/40"></div>
         </div>
       </div>
 
-      <p class="font-serif italic text-xl text-white/40 mb-16 max-w-lg">Transparencia total. Sin costos ocultos. Sin sorpresas.</p>
+      <p class="font-serif italic text-xl text-white/68 mb-16 max-w-lg">Precios claros. Alcance claro. Sin humo.</p>
 
-      <div class="grid md:grid-cols-3 gap-6 fade-up">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 fade-up">
         <!-- Starter -->
-        <div class="couture-card p-8 md:p-10">
-          <p class="text-[10px] tracking-[0.4em] uppercase text-white/30 mb-6">Starter</p>
+        <div class="couture-card p-6 sm:p-8 md:p-10">
+          <p class="text-[10px] tracking-[0.4em] uppercase text-white/68 mb-6">Starter</p>
           <div class="mb-6">
             <span class="font-serif text-5xl">80</span>
-            <span class="text-sm text-white/40 ml-1">UF</span>
+            <span class="text-sm text-white/72 ml-1">UF</span>
           </div>
           <div class="w-full h-px bg-white/10 mb-6"></div>
           <ul class="space-y-3 mb-8">
-            <li class="text-sm text-white/40 flex items-start gap-2">
-              <span class="text-accent mt-0.5">+</span>Landing page o sitio web básico
+            <li class="text-sm text-white/72 flex items-start gap-2">
+              <span class="text-accent mt-0.5">+</span>Landing page o sitio base
             </li>
-            <li class="text-sm text-white/40 flex items-start gap-2">
-              <span class="text-accent mt-0.5">+</span>Diseño responsive premium
+            <li class="text-sm text-white/72 flex items-start gap-2">
+              <span class="text-accent mt-0.5">+</span>Diseño responsive cuidado
             </li>
-            <li class="text-sm text-white/40 flex items-start gap-2">
-              <span class="text-accent mt-0.5">+</span>SEO técnico incluido
+            <li class="text-sm text-white/72 flex items-start gap-2">
+              <span class="text-accent mt-0.5">+</span>SEO técnico esencial
             </li>
-            <li class="text-sm text-white/40 flex items-start gap-2">
-              <span class="text-accent mt-0.5">+</span>2 semanas de delivery
+            <li class="text-sm text-white/72 flex items-start gap-2">
+              <span class="text-accent mt-0.5">+</span>Entrega rápida
             </li>
-            <li class="text-sm text-white/40 flex items-start gap-2">
-              <span class="text-accent mt-0.5">+</span>1 mes de soporte post-launch
+            <li class="text-sm text-white/72 flex items-start gap-2">
+              <span class="text-accent mt-0.5">+</span>1 mes de soporte
             </li>
           </ul>
           <a href="#contacto" class="block text-center border border-white/20 py-3 text-sm tracking-[0.2em] uppercase hover:bg-white/5 transition-colors">
-            Empezar
+            Partir
           </a>
         </div>
 
-        <!-- Growth (featured) -->
-        <div class="couture-card p-8 md:p-10 border-accent/30 relative">
+        <!-- Crecimiento (featured) -->
+        <div class="couture-card p-6 sm:p-8 md:p-10 border-accent/30 relative">
           <div class="absolute -top-px left-0 right-0 h-px bg-accent"></div>
-          <div class="absolute top-4 right-4 text-[9px] tracking-[0.3em] uppercase text-accent border border-accent/30 px-2 py-0.5">Popular</div>
-          <p class="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">Growth</p>
+          <div class="absolute top-4 right-4 text-[9px] tracking-[0.3em] uppercase text-accent border border-accent/30 px-2 py-0.5">Más pedido</div>
+          <p class="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">Crecimiento</p>
           <div class="mb-6">
             <span class="font-serif text-5xl">250</span>
-            <span class="text-sm text-white/40 ml-1">UF</span>
+            <span class="text-sm text-white/72 ml-1">UF</span>
           </div>
           <div class="w-full h-px bg-white/10 mb-6"></div>
           <ul class="space-y-3 mb-8">
-            <li class="text-sm text-white/40 flex items-start gap-2">
+            <li class="text-sm text-white/72 flex items-start gap-2">
               <span class="text-accent mt-0.5">+</span>Aplicación web full-stack
             </li>
-            <li class="text-sm text-white/40 flex items-start gap-2">
-              <span class="text-accent mt-0.5">+</span>E-commerce Shopify Plus
+            <li class="text-sm text-white/72 flex items-start gap-2">
+              <span class="text-accent mt-0.5">+</span>Ecommerce Shopify Plus
             </li>
-            <li class="text-sm text-white/40 flex items-start gap-2">
-              <span class="text-accent mt-0.5">+</span>Integraciones de terceros
+            <li class="text-sm text-white/72 flex items-start gap-2">
+              <span class="text-accent mt-0.5">+</span>Integraciones externas
             </li>
-            <li class="text-sm text-white/40 flex items-start gap-2">
-              <span class="text-accent mt-0.5">+</span>Dashboard de analytics
+            <li class="text-sm text-white/72 flex items-start gap-2">
+              <span class="text-accent mt-0.5">+</span>Dashboard de analítica
             </li>
-            <li class="text-sm text-white/40 flex items-start gap-2">
-              <span class="text-accent mt-0.5">+</span>4-6 semanas de delivery
+            <li class="text-sm text-white/72 flex items-start gap-2">
+              <span class="text-accent mt-0.5">+</span>4 a 6 semanas
             </li>
-            <li class="text-sm text-white/40 flex items-start gap-2">
+            <li class="text-sm text-white/72 flex items-start gap-2">
               <span class="text-accent mt-0.5">+</span>3 meses de soporte
             </li>
           </ul>
           <a href="#contacto" class="block text-center bg-accent text-cream py-3 text-sm tracking-[0.2em] uppercase hover:bg-accent/80 transition-colors">
-            Empezar
+            Partir
           </a>
         </div>
 
         <!-- Enterprise -->
-        <div class="couture-card p-8 md:p-10">
-          <p class="text-[10px] tracking-[0.4em] uppercase text-white/30 mb-6">Enterprise</p>
+        <div class="couture-card p-6 sm:p-8 md:p-10">
+          <p class="text-[10px] tracking-[0.4em] uppercase text-white/68 mb-6">Custom</p>
           <div class="mb-6">
-            <span class="font-serif text-3xl text-white/60">Conversemos</span>
+            <span class="font-serif text-3xl text-white/78">Conversemos</span>
           </div>
           <div class="w-full h-px bg-white/10 mb-6"></div>
           <ul class="space-y-3 mb-8">
-            <li class="text-sm text-white/40 flex items-start gap-2">
-              <span class="text-neon mt-0.5">+</span>SaaS completo o plataforma
+            <li class="text-sm text-white/72 flex items-start gap-2">
+              <span class="text-neon mt-0.5">+</span>Plataforma completa o producto digital
             </li>
-            <li class="text-sm text-white/40 flex items-start gap-2">
-              <span class="text-neon mt-0.5">+</span>AI integration avanzada
+            <li class="text-sm text-white/72 flex items-start gap-2">
+              <span class="text-neon mt-0.5">+</span>Integración AI avanzada
             </li>
-            <li class="text-sm text-white/40 flex items-start gap-2">
+            <li class="text-sm text-white/72 flex items-start gap-2">
               <span class="text-neon mt-0.5">+</span>Arquitectura escalable
             </li>
-            <li class="text-sm text-white/40 flex items-start gap-2">
-              <span class="text-neon mt-0.5">+</span>Equipo dedicado
+            <li class="text-sm text-white/72 flex items-start gap-2">
+              <span class="text-neon mt-0.5">+</span>Acompañamiento dedicado
             </li>
-            <li class="text-sm text-white/40 flex items-start gap-2">
-              <span class="text-neon mt-0.5">+</span>Timeline personalizado
+            <li class="text-sm text-white/72 flex items-start gap-2">
+              <span class="text-neon mt-0.5">+</span>Timeline a medida
             </li>
-            <li class="text-sm text-white/40 flex items-start gap-2">
-              <span class="text-neon mt-0.5">+</span>Soporte continuo ilimitado
+            <li class="text-sm text-white/72 flex items-start gap-2">
+              <span class="text-neon mt-0.5">+</span>Soporte continuo
             </li>
           </ul>
           <a href="#contacto" class="block text-center border border-neon/30 text-neon py-3 text-sm tracking-[0.2em] uppercase hover:bg-neon/5 transition-colors">
-            Agendar Call
+            Agendar llamada
           </a>
         </div>
       </div>
@@ -865,11 +1336,11 @@
   </section>
 
   <!-- ============================================ -->
-  <!-- 08. FOOTER -->
+  <!-- 09. FOOTER -->
   <!-- ============================================ -->
   <footer id="contacto" class="relative py-32 md:py-44 px-6 border-t border-white/5 bg-noir">
     <!-- Spinning asterisk -->
-    <svg class="absolute top-16 left-16 w-12 h-12 spin-slow opacity-10" viewBox="0 0 60 60" fill="none" stroke="#FF3B30" stroke-width="1" stroke-linecap="round" aria-hidden="true">
+    <svg class="absolute top-16 left-16 w-12 h-12 spin-slow opacity-8" viewBox="0 0 60 60" fill="none" stroke="#FF3B30" stroke-width="1" stroke-linecap="round" aria-hidden="true">
       <line x1="30" y1="2" x2="30" y2="58"/>
       <line x1="2" y1="30" x2="58" y2="30"/>
       <line x1="10" y1="10" x2="50" y2="50"/>
@@ -878,7 +1349,7 @@
 
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-20 fade-up">
-        <p class="text-xs tracking-[0.4em] uppercase text-white/20 mb-8">¿Listo para construir algo extraordinario?</p>
+        <p class="text-xs tracking-[0.4em] uppercase text-white/62 mb-8">¿Listo para una web que se vea a la altura?</p>
         <a href="mailto:hola@elreydelaspaginas.cl" class="font-serif italic text-[clamp(1.5rem,4vw,3rem)] text-accent hover:text-cream transition-colors duration-500 border-b border-accent/30 hover:border-cream/30 pb-2">
           hola@elreydelaspaginas.cl
         </a>
@@ -886,50 +1357,52 @@
 
       <!-- Giant footer text -->
       <div class="mb-20 overflow-hidden">
-        <h2 class="font-serif text-[clamp(3rem,12vw,10rem)] leading-[0.85] tracking-tight text-center text-white/[0.03]">
+        <h2 class="font-serif text-[clamp(3rem,12vw,10rem)] leading-[0.85] tracking-tight text-center text-white/[0.025]">
           EL REY DE<br/>LAS PÁGINAS™
         </h2>
       </div>
 
-      <div class="grid md:grid-cols-4 gap-12 mb-16">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 mb-16">
         <div>
-          <p class="text-[10px] tracking-[0.4em] uppercase text-white/20 mb-4">Navegación</p>
+          <p class="text-[10px] tracking-[0.4em] uppercase text-white/62 mb-4">Navegación</p>
           <ul class="space-y-2">
-            <li><a href="#manifiesto" class="text-sm text-white/30 hover:text-white transition-colors">Manifiesto</a></li>
-            <li><a href="#servicios" class="text-sm text-white/30 hover:text-white transition-colors">Servicios</a></li>
-            <li><a href="#trabajo" class="text-sm text-white/30 hover:text-white transition-colors">Trabajo</a></li>
-            <li><a href="#pricing" class="text-sm text-white/30 hover:text-white transition-colors">Pricing</a></li>
+            <li><a href="#manifiesto" class="text-sm text-white/68 hover:text-white transition-colors">Manifiesto</a></li>
+            <li><a href="#quienes-somos" class="text-sm text-white/68 hover:text-white transition-colors">Quiénes somos</a></li>
+            <li><a href="#servicios" class="text-sm text-white/68 hover:text-white transition-colors">Servicios</a></li>
+            <li><a href="#trabajo" class="text-sm text-white/68 hover:text-white transition-colors">Trabajo</a></li>
+            <li><a href="#sitios" class="text-sm text-white/68 hover:text-white transition-colors">Sitios</a></li>
+            <li><a href="#pricing" class="text-sm text-white/68 hover:text-white transition-colors">Planes</a></li>
           </ul>
         </div>
         <div>
-          <p class="text-[10px] tracking-[0.4em] uppercase text-white/20 mb-4">Social</p>
+          <p class="text-[10px] tracking-[0.4em] uppercase text-white/62 mb-4">Contacto</p>
           <ul class="space-y-2">
-            <li><a href="#" class="text-sm text-white/30 hover:text-white transition-colors">Instagram</a></li>
-            <li><a href="#" class="text-sm text-white/30 hover:text-white transition-colors">LinkedIn</a></li>
-            <li><a href="#" class="text-sm text-white/30 hover:text-white transition-colors">GitHub</a></li>
-            <li><a href="#" class="text-sm text-white/30 hover:text-white transition-colors">Dribbble</a></li>
+            <li><a href="mailto:hola@elreydelaspaginas.cl" class="text-sm text-white/68 hover:text-white transition-colors">Email</a></li>
+            <li><a href="https://www.linkedin.com/company/elreydelaspaginas" target="_blank" rel="noopener noreferrer" class="text-sm text-white/68 hover:text-white transition-colors">LinkedIn</a></li>
+            <li><a href="https://github.com/elreydelaspaginas" target="_blank" rel="noopener noreferrer" class="text-sm text-white/68 hover:text-white transition-colors">GitHub</a></li>
+            <li><a href="https://calendly.com/elreydelaspaginas" target="_blank" rel="noopener noreferrer" class="text-sm text-white/68 hover:text-white transition-colors">Agenda</a></li>
           </ul>
         </div>
         <div>
-          <p class="text-[10px] tracking-[0.4em] uppercase text-white/20 mb-4">Legal</p>
+          <p class="text-[10px] tracking-[0.4em] uppercase text-white/62 mb-4">Legal</p>
           <ul class="space-y-2">
-            <li><a href="#" class="text-sm text-white/30 hover:text-white transition-colors">Términos</a></li>
-            <li><a href="#" class="text-sm text-white/30 hover:text-white transition-colors">Privacidad</a></li>
+            <li><span class="text-sm text-white/68">Términos bajo solicitud</span></li>
+            <li><span class="text-sm text-white/68">Privacidad y tratamiento de datos</span></li>
           </ul>
         </div>
         <div>
-          <p class="text-[10px] tracking-[0.4em] uppercase text-white/20 mb-4">Ubicación</p>
-          <p class="text-sm text-white/30">Santiago, Chile</p>
-          <p class="font-serif italic text-sm text-white/20 mt-1">MMXXVI</p>
+          <p class="text-[10px] tracking-[0.4em] uppercase text-white/62 mb-4">Ubicación</p>
+          <p class="text-sm text-white/68">Santiago, Chile</p>
+          <p class="font-serif italic text-sm text-white/62 mt-1">MMXXVI</p>
         </div>
       </div>
 
       <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-        <p class="text-[10px] tracking-[0.3em] uppercase text-white/15">
+        <p class="text-[10px] tracking-[0.3em] uppercase text-white/58">
           &copy; 2026 El Rey de las Páginas. Todos los derechos reservados.
         </p>
-        <p class="text-[10px] tracking-[0.3em] uppercase text-white/15">
-          Diseñado con obsesión en Santiago
+        <p class="text-[10px] tracking-[0.3em] uppercase text-white/58">
+          Diseñado con criterio en Santiago
         </p>
       </div>
     </div>
@@ -956,35 +1429,59 @@
     // Mobile menu toggle
     const menuBtn = document.getElementById('menuBtn');
     let menuOpen = false;
+
+    const closeMobileMenu = () => {
+      const mobileMenu = document.getElementById('mobileMenu');
+      mobileMenu?.remove();
+      menuOpen = false;
+      menuBtn?.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    };
+
+    menuBtn?.setAttribute('aria-expanded', 'false');
     menuBtn?.addEventListener('click', () => {
       menuOpen = !menuOpen;
-      const nav = menuBtn.closest('nav');
       let mobileMenu = document.getElementById('mobileMenu');
 
       if (menuOpen) {
+        menuBtn.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
         if (!mobileMenu) {
           mobileMenu = document.createElement('div');
           mobileMenu.id = 'mobileMenu';
-          mobileMenu.className = 'fixed inset-0 bg-noir/95 backdrop-blur-sm z-40 flex flex-col items-center justify-center gap-8';
+          mobileMenu.className = 'fixed inset-0 bg-noir/90 backdrop-blur-3xl z-40 flex flex-col items-center justify-center gap-6 px-6';
           mobileMenu.innerHTML = `
-            <a href="#manifiesto" class="text-2xl tracking-[0.3em] uppercase text-white/70 hover:text-white transition-colors">Manifiesto</a>
-            <a href="#servicios" class="text-2xl tracking-[0.3em] uppercase text-white/70 hover:text-white transition-colors">Servicios</a>
-            <a href="#trabajo" class="text-2xl tracking-[0.3em] uppercase text-white/70 hover:text-white transition-colors">Trabajo</a>
-            <a href="#pricing" class="text-2xl tracking-[0.3em] uppercase text-white/70 hover:text-white transition-colors">Pricing</a>
-            <a href="#contacto" class="text-2xl tracking-[0.3em] uppercase text-accent hover:text-white transition-colors">Contacto</a>
+            <a href="#manifiesto" class="text-xl tracking-[0.25em] uppercase text-cream/90 hover:text-white transition-colors">Manifiesto</a>
+            <a href="#servicios" class="text-xl tracking-[0.25em] uppercase text-cream/90 hover:text-white transition-colors">Servicios</a>
+            <a href="#trabajo" class="text-xl tracking-[0.25em] uppercase text-cream/90 hover:text-white transition-colors">Trabajo</a>
+            <a href="#sitios" class="text-xl tracking-[0.25em] uppercase text-cream/90 hover:text-white transition-colors">Sitios</a>
+            <a href="#pricing" class="text-xl tracking-[0.25em] uppercase text-cream/90 hover:text-white transition-colors">Planes</a>
+            <a href="#contacto" class="text-xl tracking-[0.25em] uppercase text-accent hover:text-white transition-colors">Contacto</a>
           `;
           document.body.appendChild(mobileMenu);
           mobileMenu.querySelectorAll('a').forEach((a) => {
-            a.addEventListener('click', () => {
-              menuOpen = false;
-              mobileMenu.remove();
-            });
+            a.addEventListener('click', closeMobileMenu);
           });
         }
       } else {
-        mobileMenu?.remove();
+        closeMobileMenu();
       }
     });
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeMobileMenu();
+    });
+
+    const siteNav = document.getElementById('siteNav');
+    const updateNavFrost = () => {
+      if (!siteNav) return;
+      const y = window.scrollY || document.documentElement.scrollTop || 0;
+      const frost = Math.max(0, Math.min(1, y / 80));
+      siteNav.style.setProperty('--nav-frost', frost.toFixed(3));
+      siteNav.classList.toggle('is-frosted', y > 0);
+    };
+    updateNavFrost();
+    window.addEventListener('scroll', updateNavFrost, { passive: true });
 
     // Smooth parallax on scroll for editorial numbers
     window.addEventListener('scroll', () => {
@@ -1010,6 +1507,46 @@
     });
   </script>
 
+
+  <!-- FLOATING ACTIONS: WhatsApp + Agenda -->
+  <div class="floating-actions" role="complementary" aria-label="Contacto rápido">
+
+    <!-- Floating action ornament -->
+    <svg class="float-doodle wiggle" width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="#FF3B30" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="22" cy="22" r="10" opacity="0.55"/>
+      <path d="M22 7V13M22 31V37M7 22H13M31 22H37"/>
+      <path d="M12 12L16 16M28 28L32 32M28 12L32 16M12 28L16 32"/>
+      <circle cx="22" cy="22" r="2.8" fill="currentColor" stroke="none"/>
+    </svg>
+
+    <!-- Agendar reunión -->
+    <button type="button" class="float-btn-wrap" onclick="window.open('https://calendly.com/elreydelaspaginas', '_blank')" aria-label="Agendar reunión">
+      <span class="float-label">AGENDAR REUNIÓN</span>
+      <div class="float-btn float-btn-agenda">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <rect x="3" y="4" width="18" height="18" rx="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+          <line x1="8" y1="14" x2="10" y2="14"/>
+          <line x1="12" y1="14" x2="16" y2="14"/>
+          <line x1="8" y1="17" x2="10" y2="17"/>
+        </svg>
+      </div>
+    </button>
+
+    <!-- WhatsApp -->
+    <button type="button" class="float-btn-wrap" onclick="window.open('https://wa.me/56981734039?text=Hola%2C%20me%20interesa%20cotizar%20un%20proyecto%20con%20El%20Rey%20de%20las%20P%C3%A1ginas', '_blank')" aria-label="Contactar por WhatsApp">
+      <span class="float-label">ESCRIBIR POR WSP</span>
+      <div class="float-btn float-btn-wsp">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+      </div>
+    </button>
+  </div>
+
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -1018,7 +1555,7 @@
     "alternateName": "ERDLP",
     "url": "https://elreydelaspaginas.cl",
     "logo": "https://elreydelaspaginas.cl/logo.png",
-    "description": "Agencia digital premium en Santiago, Chile. Especialistas en Shopify Plus, Next.js, integración de IA y community platforms.",
+    "description": "Diseñamos páginas vivas, elegantes y claras para marcas que necesitan autoridad, confianza y conversión. Shopify, Next.js y AI.",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Santiago",
@@ -1034,7 +1571,7 @@
       {"@type": "Country", "name": "Chile"},
       {"@type": "Continent", "name": "South America"}
     ],
-    "serviceType": ["Desarrollo Web", "Shopify Plus", "Next.js", "Inteligencia Artificial", "Community Platforms"],
+    "serviceType": ["Desarrollo Web", "Shopify Plus", "Next.js", "Inteligencia Artificial", "Plataformas Digitales"],
     "priceRange": "$$$$",
     "currenciesAccepted": "CLP, USD",
     "paymentAccepted": "Transferencia bancaria, Tarjeta de crédito",
@@ -1049,7 +1586,7 @@
       "https://github.com/elreydelaspaginas"
     ],
     "foundingDate": "2022",
-    "knowsAbout": ["Shopify Plus", "Next.js", "React", "TypeScript", "AI Integration", "E-commerce", "Community Platforms"]
+    "knowsAbout": ["Shopify Plus", "Next.js", "React", "TypeScript", "AI Integration", "E-commerce", "Plataformas Digitales"]
   }
   </script>
 
