@@ -67,7 +67,7 @@ Mientras, puedes ver nuestro catálogo acá: [link]
 - **Descripción**: Beneficio + característica + precio. Sin novelas.
 - **Link**: Si tienes web, lleva a la página del producto
 
-💡 **¿Necesitas una tienda online profesional conectada a tu WhatsApp?** En **El Rey de las Páginas** creamos tiendas y catálogos web que se integran con WhatsApp Business, para que tus clientes compren fácil y tú vendas más. [Conversemos](https://wa.me/56981734039).
+💡 **¿Necesitas una tienda online profesional conectada a tu WhatsApp?** En **El Rey de las Páginas** creamos tiendas y catálogos web que se integran con WhatsApp Business, para que tus clientes compren fácil y tú vendas más. [Conversemos](https://wa.me/56993553554).
 
 ### Paso 5: Organiza con etiquetas
 
@@ -294,7 +294,7 @@ El **80% de las ventas** se cierran entre el 2do y 5to contacto. La mayoría de 
 - Escala Meta Ads con el mensaje que mejor convierte
 - Crea contenido UGC (tus clientes mostrando tu producto)
 
-💡 **¿Quieres una web que convierta ese tráfico de WhatsApp en ventas automáticas?** En **El Rey de las Páginas** diseñamos sitios web y tiendas online optimizadas para conversión, con botones de WhatsApp integrados y flujos de compra que funcionan solos. [Hablemos](https://wa.me/56981734039).
+💡 **¿Quieres una web que convierta ese tráfico de WhatsApp en ventas automáticas?** En **El Rey de las Páginas** diseñamos sitios web y tiendas online optimizadas para conversión, con botones de WhatsApp integrados y flujos de compra que funcionan solos. [Hablemos](https://wa.me/56993553554).
 
 ### Bonus: Truco del "Click to WhatsApp"
 
@@ -342,4 +342,4 @@ Ponlo en: bio de Instagram, landing page, posts, tarjetas de presentación, TODO
 
 ---
 
-¿Quieres implementar esto? → [Habla con nosotros](https://wa.me/56981734039)
+¿Quieres implementar esto? → [Habla con nosotros](https://wa.me/56993553554)

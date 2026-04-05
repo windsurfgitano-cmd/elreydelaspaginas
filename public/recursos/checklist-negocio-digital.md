@@ -42,7 +42,7 @@ Para ti que tenés una idea dando vueltas en la cabeza hace rato y no has dado e
 - [ ] **Compra tu dominio** (.cl en NIC Chile o .com) — aunque no tengas web todavía
 - [ ] **Crea una landing page simple** → Carrd.co (gratis) o Google Sites
 
-💡 **¿Necesitas una web profesional desde el día 1?** En **El Rey de las Páginas** diseñamos landing pages y sitios web que convierten visitantes en clientes. Una buena presencia digital puede marcar la diferencia entre un hobby y un negocio real. Si quieres partir con el pie derecho, [conversemos](https://wa.me/56981734039).
+💡 **¿Necesitas una web profesional desde el día 1?** En **El Rey de las Páginas** diseñamos landing pages y sitios web que convierten visitantes en clientes. Una buena presencia digital puede marcar la diferencia entre un hobby y un negocio real. Si quieres partir con el pie derecho, [conversemos](https://wa.me/56993553554).
 
 > 🆓 **Recurso gratuito**: [Carrd.co](https://carrd.co) — Landing pages profesionales en 30 minutos, plan gratis disponible.
 
@@ -129,4 +129,4 @@ Para ti que tenés una idea dando vueltas en la cabeza hace rato y no has dado e
 
 ---
 
-¿Quieres implementar esto? → [Habla con nosotros](https://wa.me/56981734039)
+¿Quieres implementar esto? → [Habla con nosotros](https://wa.me/56993553554)

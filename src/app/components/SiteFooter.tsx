@@ -9,7 +9,7 @@ export default function SiteFooter() {
             <div className="flex flex-col gap-1">
               <p className="font-semibold text-white">EL REY DE LAS PÁGINAS</p>
               <p>Santiago, Chile — Servicio remoto Chile &amp; LATAM</p>
-              <p>Contacto: hola@elreydelaspaginas.com · +56981734039</p>
+              <p>Contacto: hola@elreydelaspaginas.com · +56993553554</p>
             </div>
             {/* Redes sociales */}
             <div className="flex items-center gap-4">
@@ -46,7 +46,7 @@ export default function SiteFooter() {
 
       {/* WhatsApp flotante — siempre visible en todas las páginas */}
       <Link
-        href="https://wa.me/56981734039?text=Hablar%20con%20el%20Rey%20de%20las%20Paginas"
+        href="https://wa.me/56993553554?text=Hablar%20con%20el%20Rey%20de%20las%20Paginas"
         className="fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-full bg-[#25D366] px-5 py-4 font-bold text-white shadow-[0_8px_30px_rgba(37,211,102,0.4)] transition-all duration-300 hover:scale-110 hover:shadow-[0_8px_40px_rgba(37,211,102,0.6)] md:bottom-8 md:right-8"
         aria-label="Contactar por WhatsApp"
       >

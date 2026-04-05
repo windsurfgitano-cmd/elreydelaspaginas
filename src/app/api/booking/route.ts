@@ -256,7 +256,7 @@ async function createCalendarEvent(
     `https://calendar.google.com/calendar/render?action=TEMPLATE` +
     `&text=${encodeURIComponent(`Llamada con El Rey de las Páginas`)}` +
     `&dates=${fmt(start)}/${fmt(end)}` +
-    `&details=${encodeURIComponent(`Tu llamada de 15 minutos con El Rey de las Páginas está confirmada.\n\nNos vemos pronto! 👑\n\nContacto: hola@elreydelaspaginas.com | +56981734039`)}` +
+    `&details=${encodeURIComponent(`Tu llamada de 15 minutos con El Rey de las Páginas está confirmada.\n\nNos vemos pronto! 👑\n\nContacto: hola@elreydelaspaginas.com | +56993553554`)}` +
     `&location=${encodeURIComponent("Videollamada (link se enviará por WhatsApp)")}`;
 
   return {

@@ -136,7 +136,7 @@ export default function RootLayout({
                   "@id": "https://www.elreydelaspaginas.com/#business",
                   name: "El Rey de las Páginas",
                   url: "https://www.elreydelaspaginas.com",
-                  telephone: "+56981734039",
+                  telephone: "+56993553554",
                   email: "soporte@elreydelaspaginas.com",
                   description:
                     "Agencia web en Santiago especializada en Shopify 2.0, AI-Ready Store, Agent Optimization (AO), branding y marketing digital premium.",
@@ -167,7 +167,7 @@ export default function RootLayout({
                     longitude: -70.6693,
                   },
                   sameAs: [
-                    "https://wa.me/56981734039",
+                    "https://wa.me/56993553554",
                     "https://www.instagram.com/elreydelaspaginas",
                     "https://www.linkedin.com/company/elreydelaspaginas",
                     "https://www.tiktok.com/@elreydelaspaginas",
@@ -226,7 +226,7 @@ export default function RootLayout({
               <div className="flex flex-col gap-1">
                 <p className="font-semibold text-white">EL REY DE LAS PÁGINAS</p>
                 <p>Santiago, Chile — Servicio remoto Chile &amp; LATAM</p>
-                <p>Contacto: hola@elreydelaspaginas.com · +56981734039</p>
+                <p>Contacto: hola@elreydelaspaginas.com · +56993553554</p>
               </div>
               <div className="flex items-center gap-4">
                 <a href="https://www.instagram.com/elreydelaspaginas" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
@@ -256,7 +256,7 @@ export default function RootLayout({
 
         {/* WhatsApp flotante — todas las páginas */}
         <Link
-          href="https://wa.me/56981734039?text=Hablar%20con%20el%20Rey%20de%20las%20Paginas"
+          href="https://wa.me/56993553554?text=Hablar%20con%20el%20Rey%20de%20las%20Paginas"
           className="fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-full bg-[#25D366] px-5 py-4 font-bold text-white shadow-[0_8px_30px_rgba(37,211,102,0.4)] transition-all duration-300 hover:scale-110 md:bottom-8 md:right-8"
           aria-label="Contactar por WhatsApp"
         >

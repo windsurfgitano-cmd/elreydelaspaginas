@@ -46,7 +46,7 @@ export default function SiteNav() {
             </Link>
           )}
           <Link
-            href="https://wa.me/56981734039?text=Hablar%20con%20el%20Rey%20de%20las%20Paginas"
+            href="https://wa.me/56993553554?text=Hablar%20con%20el%20Rey%20de%20las%20Paginas"
             className="hidden rounded-full bg-gold px-4 py-2 text-xs font-semibold text-black sm:inline-flex"
           >
             WhatsApp
@@ -81,7 +81,7 @@ export default function SiteNav() {
               </Link>
             ))}
             <Link
-              href="https://wa.me/56981734039?text=Hablar%20con%20el%20Rey%20de%20las%20Paginas"
+              href="https://wa.me/56993553554?text=Hablar%20con%20el%20Rey%20de%20las%20Paginas"
               className="rounded-full bg-gold px-4 py-2 text-center font-semibold text-black"
               onClick={() => setOpen(false)}
             >

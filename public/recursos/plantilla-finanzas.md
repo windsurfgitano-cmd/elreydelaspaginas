@@ -188,7 +188,7 @@ Punto de equilibrio = $160.000 ÷ ($25.990 - $10.950) = $160.000 ÷ $15.040 = 10
 3. ✅ Invertir más en Ads ($40.000 → $80.000) — su CAC es bajo
 4. ✅ Agregar producto premium (torta para 30 personas = $45.990)
 
-💡 **¿Sabías que una tienda online puede automatizar tus ventas y cobros?** En **El Rey de las Páginas** creamos tiendas web con pasarela de pagos integrada (Flow, Mercado Pago, transferencia), para que tus clientes compren y paguen sin que tú tengas que hacer nada manual. Menos pega administrativa, más tiempo para crear. [Conversemos](https://wa.me/56981734039).
+💡 **¿Sabías que una tienda online puede automatizar tus ventas y cobros?** En **El Rey de las Páginas** creamos tiendas web con pasarela de pagos integrada (Flow, Mercado Pago, transferencia), para que tus clientes compren y paguen sin que tú tengas que hacer nada manual. Menos pega administrativa, más tiempo para crear. [Conversemos](https://wa.me/56993553554).
 
 ---
 
@@ -251,4 +251,4 @@ Punto de equilibrio = $160.000 ÷ ($25.990 - $10.950) = $160.000 ÷ $15.040 = 10
 
 ---
 
-¿Quieres implementar esto? → [Habla con nosotros](https://wa.me/56981734039)
+¿Quieres implementar esto? → [Habla con nosotros](https://wa.me/56993553554)

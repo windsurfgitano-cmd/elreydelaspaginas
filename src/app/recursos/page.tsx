@@ -152,7 +152,7 @@ export default function RecursosPage() {
             web que generan resultados reales.
           </p>
           <Link
-            href="https://wa.me/56981734039?text=Hola%2C%20vi%20los%20recursos%20y%20quiero%20saber%20más%20sobre%20sus%20servicios"
+            href="https://wa.me/56993553554?text=Hola%2C%20vi%20los%20recursos%20y%20quiero%20saber%20más%20sobre%20sus%20servicios"
             className="inline-flex items-center gap-2 rounded-full bg-[#D4AF37] px-8 py-4 text-sm font-bold text-black transition hover:brightness-110"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">

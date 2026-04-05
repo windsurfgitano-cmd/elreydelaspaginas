@@ -137,7 +137,7 @@ export default async function BlogPostPage({ params }: Props) {
               <p className="text-lg font-bold text-white">¿Quieres aplicar esto en tu negocio?</p>
               <p className="mt-2 text-sm text-white/50">Nuestro equipo en Santiago lo implementa por ti</p>
               <Link
-                href="https://wa.me/56981734039?text=Vi%20el%20blog%20y%20quiero%20una%20asesor%C3%ADa"
+                href="https://wa.me/56993553554?text=Vi%20el%20blog%20y%20quiero%20una%20asesor%C3%ADa"
                 className="mt-5 inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 text-sm font-bold text-black hover:scale-105 transition-transform shadow-[0_0_30px_rgba(212,175,55,0.35)]"
               >
                 <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">

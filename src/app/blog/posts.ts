@@ -80,7 +80,7 @@ La oportunidad real está en rediseñar el orgánico como un sistema de demanda 
 
 Quedarse en la lógica antigua es caro. Llegar tarde lo es más.
 
-Si quieres evaluar esto para tu marca, [escríbenos directamente](https://wa.me/56981734039)
+Si quieres evaluar esto para tu marca, [escríbenos directamente](https://wa.me/56993553554)
     `.trim(),
   },
   {
@@ -161,7 +161,7 @@ La oportunidad no está solo en grandes retailers. Marcas medianas, DTC, servici
 
 La conversación de fondo no es si ChatGPT o los agentes de IA “van a vender”. La pregunta correcta es cuáles marcas estarán listas cuando eso ocurra de forma masiva. Y esa respuesta depende menos de la moda tecnológica que de la madurez digital del negocio.
 
-Si quieres evaluar esto para tu marca, [escríbenos directamente](https://wa.me/56981734039)
+Si quieres evaluar esto para tu marca, [escríbenos directamente](https://wa.me/56993553554)
     `.trim(),
   },
   {
@@ -263,7 +263,7 @@ Si tu empresa está creciendo, si el e-commerce ya dejó de ser un canal accesor
 
 Custom sigue siendo una opción válida, pero solo cuando la complejidad del negocio lo exige de verdad. Para la mayoría de las marcas chilenas serias, la ventaja no está en construir más, sino en construir mejor y salir antes.
 
-Si quieres evaluar esto para tu marca, [escríbenos directamente](https://wa.me/56981734039)
+Si quieres evaluar esto para tu marca, [escríbenos directamente](https://wa.me/56993553554)
     `.trim(),
   },
   {
@@ -347,7 +347,7 @@ Las marcas que entienden esto no compiten solo por catálogo o por descuento. Co
 
 La pregunta correcta no es si tu checkout funciona. La pregunta es cuántas ventas estás perdiendo por cada fricción invisible que hoy consideras normal.
 
-Si quieres evaluar esto para tu marca, [escríbenos directamente](https://wa.me/56981734039)
+Si quieres evaluar esto para tu marca, [escríbenos directamente](https://wa.me/56993553554)
     `.trim(),
   },
   {
@@ -430,7 +430,7 @@ Ese es el estándar que deberían buscar las marcas chilenas que compiten en ser
 
 Si una web no mejora negocio, probablemente fue contratada desde la lógica equivocada. Evitar ese error no depende de tener más presupuesto, sino de elegir mejor el marco de decisión.
 
-Si quieres evaluar esto para tu marca, [escríbenos directamente](https://wa.me/56981734039)
+Si quieres evaluar esto para tu marca, [escríbenos directamente](https://wa.me/56993553554)
     `.trim(),
   },
 ];

@@ -87,7 +87,7 @@ export default function ConcursoShopifyPage({
           </Link>
           <a
             className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-white/90"
-            href="https://wa.me/56981734039?text=Hablar%20con%20el%20Rey%20de%20las%20Paginas"
+            href="https://wa.me/56993553554?text=Hablar%20con%20el%20Rey%20de%20las%20Paginas"
             target="_blank"
             rel="noreferrer"
           >
@@ -149,7 +149,7 @@ export default function ConcursoShopifyPage({
               <div className="mt-6 rounded-2xl border border-white/10 bg-black/30 p-4">
                 <p className="text-sm font-semibold text-white">Contacto directo</p>
                 <p className="mt-2 text-sm text-white/70">
-                  +56981734039 · soporte@elreydelaspaginas.com
+                  +56993553554 · soporte@elreydelaspaginas.com
                 </p>
               </div>
             </div>

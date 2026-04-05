@@ -118,7 +118,7 @@ export default function BlogPage() {
           <p className="font-bold text-white">¿Quieres aplicar esto en tu negocio?</p>
           <p className="mt-2 text-sm text-white/50">Cotización sin compromiso en 24h</p>
           <Link
-            href="https://wa.me/56981734039?text=Vi%20el%20blog%20y%20quiero%20una%20asesor%C3%ADa"
+            href="https://wa.me/56993553554?text=Vi%20el%20blog%20y%20quiero%20una%20asesor%C3%ADa"
             className="mt-4 inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-bold text-black hover:scale-105 transition-transform"
           >
             Hablar con el Rey →

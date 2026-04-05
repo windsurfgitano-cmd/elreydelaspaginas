@@ -105,7 +105,7 @@ export default function ContestLeadForm({ initialMeta, extraMeta }: Props) {
         </p>
         <a
           className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-gold px-6 py-3 text-sm font-semibold text-black"
-          href="https://wa.me/56981734039?text=Hablar%20con%20el%20Rey%20de%20las%20Paginas"
+          href="https://wa.me/56993553554?text=Hablar%20con%20el%20Rey%20de%20las%20Paginas"
           target="_blank"
           rel="noreferrer"
         >
